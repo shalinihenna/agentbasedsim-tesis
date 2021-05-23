@@ -22,6 +22,10 @@ global{
 	     'passwd'::'password'
 	];	
 	
+	//shp files
+	file hortalizas_shapefile <- file("../includes/cc_horta.shp");
+	geometry shape <- envelope(hortalizas_shapefile);
+	//TODO:  archivo tuberculos y archivo frutas
 	
 	//Cantidad de agentes
 	int number_of_farmers <- 20;
@@ -38,7 +42,6 @@ global{
 	//float  
 	
 	/*Creación e inicialización de los agentes en la simulación */
-	
 	init{
 		write "Inicializando agentes";
 	 	/*create farmers number:number_of_farmers;
@@ -48,31 +51,63 @@ global{
 		write "Conectando DB";
 		create agentDB;
 		
+		map<string, unknown> selected_veg <- user_input([enter("hortaliza",'')]); 
+		string veg <- selected_veg["hortaliza"];
+		write "probando input de user";
+		write selected_veg["hortaliza"];
+		
+		create hortalizas from: hortalizas_shapefile with: [type::float(get(veg))]{
+			//write "a" + type;
+			if (type > 0){
+				color <- #brown;
+				border <- #black ;
+			}
+		}
+		
 	}
 
 }
 
-species agentDB skills:[SQLSKILL]{
+/*They are not agents, its just for display */
+species hortalizas {
+	string name;
+	float type;
+	rgb color <- #white;
+	rgb border <- #white;
 	
+	aspect base {
+		draw shape color: color border: #black;
+	}
+}
+
+
+species agentDB skills:[SQLSKILL]{
 	list<list> vegetables <- [];
 	
 	init{
-		if(!testConnection(POSTGRES)){
+		if(testConnection(POSTGRES)){
 			vegetables <- list<list> (select(POSTGRES, "SELECT * FROM vegetables ;"));
 			vegetables <- vegetables[2];
 			write "aver en que quedó" + vegetables; 
 		}else{
 			write "Problemas de conexión con la BD.";
 		}
-		 
 	}
-	      
-	      // select
-		/*list <list> vegetables <- list <list> ( self select (
-		select :" SELECT * FROM vegetables ;") ) ;
-		
-		write "seleccionando vegetales " + vegetables;*/
-	
 }
 
-experiment default_expr type: gui {}  
+/*TODO: Revisar como hacer panel de usuario (sin seguir arquitetcura propiamente tal */
+/*user_panel default initial:true{
+	
+}*/
+
+experiment agriculture_world type: gui {
+	    parameter "Shapefile for the vegetables:" var: hortalizas_shapefile category: "GIS";
+	    
+	   output{
+	   		display map type: opengl{
+		        species hortalizas aspect:base;      
+		    }
+	   	} /*https://gama-platform.github.io/wiki/LuneraysFlu_step3 VER ESTE EJEMPLOOOOO */
+	    
+	
+}  
