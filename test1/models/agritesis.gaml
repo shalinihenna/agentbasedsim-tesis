@@ -24,6 +24,8 @@ global{
 	
 	//shp files
 	file hortalizas_shapefile <- file("../includes/cc_horta.shp");
+	geometry shape <- envelope(hortalizas_shapefile);
+	//TODO:  archivo tuberculos y archivo frutas
 	
 	//Cantidad de agentes
 	int number_of_farmers <- 20;
@@ -40,7 +42,6 @@ global{
 	//float  
 	
 	/*Creación e inicialización de los agentes en la simulación */
-	
 	init{
 		write "Inicializando agentes";
 	 	/*create farmers number:number_of_farmers;
@@ -50,7 +51,18 @@ global{
 		write "Conectando DB";
 		create agentDB;
 		
-		create hortalizas from: hortalizas_shapefile with: [type::read("GEOM")];
+		map<string, unknown> selected_veg <- user_input([enter("hortaliza",'')]); 
+		string veg <- selected_veg["hortaliza"];
+		write "probando input de user";
+		write selected_veg["hortaliza"];
+		
+		create hortalizas from: hortalizas_shapefile with: [type::float(get(veg)), region::string((get("nom_reg")))]{
+			if (type > 0 and region = "Región Metropolitana de Santiago"){
+				color <- #brown;
+			}if(region = "Región Metropolitana de Santiago"){
+				border <- #black; 
+			}
+		}
 		
 	}
 
@@ -58,9 +70,13 @@ global{
 
 /*They are not agents, its just for display */
 species hortalizas {
-	string type;
+	string region;
+	float type;
+	rgb color <- #white;
+	rgb border <- #white;
+	
 	aspect base {
-		draw shape color: #black;
+		draw shape color: color border: border;
 	}
 }
 
@@ -69,9 +85,6 @@ species agentDB skills:[SQLSKILL]{
 	list<list> vegetables <- [];
 	
 	init{
-		map<string, unknown> selected_veg <- user_input([enter("hortaliza",'')]); 
-		write "probando input de user";
-		write selected_veg["hortaliza"];
 		if(testConnection(POSTGRES)){
 			vegetables <- list<list> (select(POSTGRES, "SELECT * FROM vegetables ;"));
 			vegetables <- vegetables[2];
@@ -87,8 +100,8 @@ species agentDB skills:[SQLSKILL]{
 	
 }*/
 
-experiment default_expr type: gui {
-	    parameter "Shapefile for the prueba:" var: hortalizas_shapefile category: "GIS";
+experiment agriculture_world type: gui {
+	    parameter "Shapefile for the vegetables:" var: hortalizas_shapefile category: "GIS";
 	    
 	   output{
 	   		display map type: opengl{

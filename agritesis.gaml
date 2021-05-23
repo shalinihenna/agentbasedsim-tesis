@@ -56,11 +56,11 @@ global{
 		write "probando input de user";
 		write selected_veg["hortaliza"];
 		
-		create hortalizas from: hortalizas_shapefile with: [type::float(get(veg))]{
-			//write "a" + type;
-			if (type > 0){
+		create hortalizas from: hortalizas_shapefile with: [type::float(get(veg)), region::string((get("nom_reg")))]{
+			if (type > 0 and region = "Región Metropolitana de Santiago"){
 				color <- #brown;
-				border <- #black ;
+			}if(region = "Región Metropolitana de Santiago"){
+				border <- #black; 
 			}
 		}
 		
@@ -70,13 +70,13 @@ global{
 
 /*They are not agents, its just for display */
 species hortalizas {
-	string name;
+	string region;
 	float type;
 	rgb color <- #white;
 	rgb border <- #white;
 	
 	aspect base {
-		draw shape color: color border: #black;
+		draw shape color: color border: border;
 	}
 }
 
