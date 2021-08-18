@@ -1,0 +1,619 @@
+﻿Mes/Año;Producto;Variedad;Calidad;Unidad;Precio mínimo;Precio máximo;Precio promedio
+mar-19;Ajo;Chino;Primera;$/unidad;100;350;191
+mar-19;Ajo;Chino;Segunda;$/unidad;100;200;115
+abr-19;Ajo;Chino;Primera;$/unidad;100;350;183
+abr-19;Ajo;Chino;Segunda;$/unidad;100;150;109
+may-19;Ajo;Chino;Primera;$/unidad;100;350;173
+may-19;Ajo;Chino;Segunda;$/unidad;70;166;113
+jun-19;Ajo;Chino;Primera;$/unidad;100;400;186
+jun-19;Ajo;Chino;Segunda;$/unidad;100;300;122
+jul-19;Ajo;Chino;Primera;$/unidad;100;400;200
+jul-19;Ajo;Chino;Segunda;$/unidad;100;166;125
+ago-19;Ajo;Chino;Primera;$/unidad;150;350;215
+ago-19;Ajo;Chino;Segunda;$/unidad;100;200;134
+sept-19;Ajo;Chino;Primera;$/unidad;150;400;218
+sept-19;Ajo;Chino;Segunda;$/unidad;100;300;146
+oct-19;Ajo;Chino;Primera;$/unidad;150;400;216
+oct-19;Ajo;Chino;Segunda;$/unidad;100;200;140
+nov-19;Ajo;Chino;Primera;$/unidad;100;400;214
+nov-19;Ajo;Chino;Segunda;$/unidad;100;200;133
+dic-19;Ajo;Chino;Primera;$/unidad;100;400;208
+dic-19;Ajo;Chino;Segunda;$/unidad;70;200;137
+ene-20;Ajo;Chino;Primera;$/unidad;150;400;224
+ene-20;Ajo;Chino;Segunda;$/unidad;100;250;148
+feb-20;Ajo;Chino;Primera;$/unidad;166;400;251
+feb-20;Ajo;Chino;Segunda;$/unidad;100;250;167
+mar-20;Ajo;Chino;Primera;$/unidad;150;450;282
+mar-20;Ajo;Chino;Segunda;$/unidad;150;250;177
+may-19;Alcachofa;Española;Primera;$/unidad;200;900;466
+may-19;Alcachofa;Española;Segunda;$/unidad;400;1.000;650
+jun-19;Alcachofa;Española;Primera;$/unidad;200;800;433
+jun-19;Alcachofa;Española;Segunda;$/unidad;150;400;320
+jul-19;Alcachofa;Española;Primera;$/unidad;250;800;450
+jul-19;Alcachofa;Española;Segunda;$/unidad;200;600;325
+ago-19;Alcachofa;Española;Primera;$/unidad;200;700;454
+ago-19;Alcachofa;Española;Segunda;$/unidad;200;400;346
+sept-19;Alcachofa;Española;Primera;$/unidad;200;700;368
+sept-19;Alcachofa;Española;Segunda;$/unidad;166;400;281
+oct-19;Alcachofa;Española;Primera;$/unidad;166;700;296
+oct-19;Alcachofa;Española;Segunda;$/unidad;130;600;233
+nov-19;Alcachofa;Española;Primera;$/unidad;125;600;225
+nov-19;Alcachofa;Española;Segunda;$/unidad;100;300;155
+mar-19;Apio;Americana (o);Primera;$/unidad;600;1.500;935
+mar-19;Apio;Americana (o);Segunda;$/unidad;500;1.000;719
+abr-19;Apio;Americana (o);Primera;$/unidad;600;1.500;955
+abr-19;Apio;Americana (o);Segunda;$/unidad;400;1.000;746
+may-19;Apio;Americana (o);Primera;$/unidad;600;1.500;895
+may-19;Apio;Americana (o);Segunda;$/unidad;400;1.200;659
+jun-19;Apio;Americana (o);Primera;$/unidad;600;1.500;918
+jun-19;Apio;Americana (o);Segunda;$/unidad;500;1.000;646
+jul-19;Apio;Americana (o);Primera;$/unidad;600;1.500;914
+jul-19;Apio;Americana (o);Segunda;$/unidad;500;1.000;665
+ago-19;Apio;Americana (o);Primera;$/unidad;600;1.500;959
+ago-19;Apio;Americana (o);Segunda;$/unidad;500;1.000;736
+sept-19;Apio;Americana (o);Primera;$/unidad;600;1.500;875
+sept-19;Apio;Americana (o);Segunda;$/unidad;500;1.000;641
+oct-19;Apio;Americana (o);Primera;$/unidad;500;1.500;875
+oct-19;Apio;Americana (o);Segunda;$/unidad;400;800;624
+nov-19;Apio;Americana (o);Primera;$/unidad;500;1.500;900
+nov-19;Apio;Americana (o);Segunda;$/unidad;500;900;673
+dic-19;Apio;Americana (o);Primera;$/unidad;600;2.000;1.035
+dic-19;Apio;Americana (o);Segunda;$/unidad;600;1.000;763
+ene-20;Apio;Americana (o);Primera;$/unidad;700;2.000;1.203
+ene-20;Apio;Americana (o);Segunda;$/unidad;600;1.200;911
+feb-20;Apio;Americana (o);Primera;$/unidad;1.000;1.800;1.236
+feb-20;Apio;Americana (o);Segunda;$/unidad;800;1.500;976
+mar-20;Apio;Americana (o);Primera;$/unidad;700;2.000;1.070
+mar-20;Apio;Americana (o);Segunda;$/unidad;500;1.400;813
+mar-19;Arveja Verde;Sin especificar;Primera;$/kilo;800;1.600;1.083
+mar-19;Arveja Verde;Sin especificar;Segunda;$/kilo;800;800;800
+abr-19;Arveja Verde;Sin especificar;Primera;$/kilo;800;1.400;1.060
+abr-19;Arveja Verde;Sin especificar;Segunda;$/kilo;800;900;833
+may-19;Arveja Verde;Sin especificar;Primera;$/kilo;800;1.500;1.145
+may-19;Arveja Verde;Sin especificar;Segunda;$/kilo;800;1.000;933
+jun-19;Arveja Verde;Sin especificar;Primera;$/kilo;800;1.600;1.141
+jun-19;Arveja Verde;Sin especificar;Segunda;$/kilo;750;1.000;883
+jul-19;Arveja Verde;Sin especificar;Primera;$/kilo;700;1.600;1.117
+jul-19;Arveja Verde;Sin especificar;Segunda;$/kilo;600;1.200;985
+ago-19;Arveja Verde;Sin especificar;Primera;$/kilo;700;1.600;1.139
+ago-19;Arveja Verde;Sin especificar;Segunda;$/kilo;1.000;1.200;1.014
+sept-19;Arveja Verde;Sin especificar;Primera;$/kilo;700;1.600;1.089
+sept-19;Arveja Verde;Sin especificar;Segunda;$/kilo;800;1.200;943
+oct-19;Arveja Verde;Sin especificar;Primera;$/kilo;700;1.500;1.028
+oct-19;Arveja Verde;Sin especificar;Segunda;$/kilo;500;1.200;861
+nov-19;Arveja Verde;Sin especificar;Primera;$/kilo;600;1.500;942
+nov-19;Arveja Verde;Sin especificar;Segunda;$/kilo;500;1.000;700
+dic-19;Arveja Verde;Sin especificar;Primera;$/kilo;500;1.500;933
+dic-19;Arveja Verde;Sin especificar;Segunda;$/kilo;600;1.000;679
+ene-20;Arveja Verde;Sin especificar;Primera;$/kilo;700;1.800;1.020
+ene-20;Arveja Verde;Sin especificar;Segunda;$/kilo;700;800;756
+feb-20;Arveja Verde;Sin especificar;Primera;$/kilo;800;1.600;1.111
+feb-20;Arveja Verde;Sin especificar;Segunda;$/kilo;700;1.200;943
+mar-20;Arveja Verde;Sin especificar;Primera;$/kilo;700;1.400;1.030
+mar-20;Arveja Verde;Sin especificar;Segunda;$/kilo;800;1.000;858
+mar-19;Brócoli;Sin especificar;Primera;$/unidad;500;2.600;808
+mar-19;Brócoli;Sin especificar;Segunda;$/unidad;400;1.000;571
+abr-19;Brócoli;Sin especificar;Primera;$/unidad;600;1.500;973
+abr-19;Brócoli;Sin especificar;Segunda;$/unidad;500;1.000;704
+may-19;Brócoli;Sin especificar;Primera;$/unidad;600;1.400;893
+may-19;Brócoli;Sin especificar;Segunda;$/unidad;500;800;683
+jun-19;Brócoli;Sin especificar;Primera;$/unidad;600;1.400;842
+jun-19;Brócoli;Sin especificar;Segunda;$/unidad;400;1.000;631
+jul-19;Brócoli;Sin especificar;Primera;$/unidad;500;1.200;821
+jul-19;Brócoli;Sin especificar;Segunda;$/unidad;300;800;611
+ago-19;Brócoli;Sin especificar;Primera;$/unidad;450;1.200;727
+ago-19;Brócoli;Sin especificar;Segunda;$/unidad;250;700;488
+sept-19;Brócoli;Sin especificar;Primera;$/unidad;400;1.000;737
+sept-19;Brócoli;Sin especificar;Segunda;$/unidad;300;700;533
+oct-19;Brócoli;Sin especificar;Primera;$/unidad;400;1.200;728
+oct-19;Brócoli;Sin especificar;Segunda;$/unidad;250;800;524
+nov-19;Brócoli;Sin especificar;Primera;$/unidad;500;1.000;673
+nov-19;Brócoli;Sin especificar;Segunda;$/unidad;300;700;483
+dic-19;Brócoli;Sin especificar;Primera;$/unidad;500;1.200;694
+dic-19;Brócoli;Sin especificar;Segunda;$/unidad;350;800;515
+ene-20;Brócoli;Sin especificar;Primera;$/unidad;600;1.600;869
+ene-20;Brócoli;Sin especificar;Segunda;$/unidad;350;1.000;642
+feb-20;Brócoli;Sin especificar;Primera;$/unidad;650;1.500;1.115
+feb-20;Brócoli;Sin especificar;Segunda;$/unidad;500;1.300;847
+mar-20;Brócoli;Sin especificar;Primera;$/unidad;800;2.500;1.317
+mar-20;Brócoli;Sin especificar;Segunda;$/unidad;700;2.000;972
+mar-19;Cebolla;Sin especificar;1a (cosecha);$/kilo;250;700;481
+mar-19;Cebolla;Sin especificar;1a (cosecha);$/unidad;100;500;176
+mar-19;Cebolla;Sin especificar;2a (cosecha);$/kilo;200;450;383
+mar-19;Cebolla;Sin especificar;2a (cosecha);$/unidad;70;300;120
+abr-19;Cebolla;Sin especificar;1a (cosecha);$/kilo;450;500;475
+abr-19;Cebolla;Sin especificar;1a (cosecha);$/unidad;100;400;176
+abr-19;Cebolla;Sin especificar;2a (cosecha);$/kilo;400;450;413
+abr-19;Cebolla;Sin especificar;2a (cosecha);$/unidad;70;300;113
+may-19;Cebolla;Sin especificar;1a (guarda);$/kilo;450;1.000;590
+may-19;Cebolla;Sin especificar;1a (guarda);$/unidad;100;400;182
+may-19;Cebolla;Sin especificar;2a (guarda);$/kilo;400;700;536
+may-19;Cebolla;Sin especificar;2a (guarda);$/unidad;80;250;124
+jun-19;Cebolla;Sin especificar;1a (guarda);$/kilo;400;800;623
+jun-19;Cebolla;Sin especificar;1a (guarda);$/unidad;100;500;186
+jun-19;Cebolla;Sin especificar;2a (guarda);$/kilo;350;700;550
+jun-19;Cebolla;Sin especificar;2a (guarda);$/unidad;80;150;123
+jul-19;Cebolla;Sin especificar;1a (guarda);$/kilo;400;700;535
+jul-19;Cebolla;Sin especificar;1a (guarda);$/unidad;100;500;185
+jul-19;Cebolla;Sin especificar;2a (guarda);$/kilo;400;600;472
+jul-19;Cebolla;Sin especificar;2a (guarda);$/unidad;75;300;123
+ago-19;Cebolla;Sin especificar;1a (guarda);$/kilo;400;800;643
+ago-19;Cebolla;Sin especificar;1a (guarda);$/unidad;100;400;207
+ago-19;Cebolla;Sin especificar;2a (guarda);$/kilo;400;700;530
+ago-19;Cebolla;Sin especificar;2a (guarda);$/unidad;70;250;136
+sept-19;Cebolla;Sin especificar;1a (guarda);$/kilo;400;1.000;729
+sept-19;Cebolla;Sin especificar;1a (guarda);$/unidad;150;500;223
+sept-19;Cebolla;Sin especificar;2a (guarda);$/kilo;500;700;608
+sept-19;Cebolla;Sin especificar;2a (guarda);$/unidad;100;350;150
+oct-19;Cebolla;Sin especificar;1a (guarda);$/kilo;500;1.000;795
+oct-19;Cebolla;Sin especificar;1a (guarda);$/unidad;100;500;220
+oct-19;Cebolla;Sin especificar;1a nueva(o);$/kilo;150;1.000;632
+oct-19;Cebolla;Sin especificar;1a nueva(o);$/unidad;100;450;169
+oct-19;Cebolla;Sin especificar;2a (guarda);$/kilo;100;700;456
+oct-19;Cebolla;Sin especificar;2a (guarda);$/unidad;100;350;146
+oct-19;Cebolla;Sin especificar;2a nueva(o);$/kilo;300;400;344
+oct-19;Cebolla;Sin especificar;2a nueva(o);$/unidad;60;250;104
+nov-19;Cebolla;Sin especificar;1a (guarda);$/kilo;1.000;1.000;1.000
+nov-19;Cebolla;Sin especificar;1a (guarda);$/unidad;125;500;206
+nov-19;Cebolla;Sin especificar;1a nueva(o);$/kilo;399;1.000;606
+nov-19;Cebolla;Sin especificar;1a nueva(o);$/unidad;90;450;161
+nov-19;Cebolla;Sin especificar;2a (guarda);$/unidad;80;150;132
+nov-19;Cebolla;Sin especificar;2a nueva(o);$/kilo;60;400;286
+nov-19;Cebolla;Sin especificar;2a nueva(o);$/unidad;50;250;101
+dic-19;Cebolla;Sin especificar;1a (guarda);$/unidad;80;200;143
+dic-19;Cebolla;Sin especificar;1a nueva(o);$/kilo;400;600;500
+dic-19;Cebolla;Sin especificar;1a nueva(o);$/unidad;75;500;137
+dic-19;Cebolla;Sin especificar;2a (guarda);$/unidad;125;125;125
+dic-19;Cebolla;Sin especificar;2a nueva(o);$/kilo;400;500;450
+dic-19;Cebolla;Sin especificar;2a nueva(o);$/unidad;40;200;85
+ene-20;Cebolla;Sin especificar;1a nueva(o);$/kilo;400;450;433
+ene-20;Cebolla;Sin especificar;1a nueva(o);$/unidad;80;400;162
+ene-20;Cebolla;Sin especificar;2a nueva(o);$/kilo;400;450;408
+ene-20;Cebolla;Sin especificar;2a nueva(o);$/unidad;50;250;102
+feb-20;Cebolla;Sin especificar;1a nueva(o);$/kilo;450;600;550
+feb-20;Cebolla;Sin especificar;1a nueva(o);$/unidad;100;400;174
+feb-20;Cebolla;Sin especificar;2a nueva(o);$/kilo;400;500;470
+feb-20;Cebolla;Sin especificar;2a nueva(o);$/unidad;70;250;120
+mar-20;Cebolla;Sin especificar;1a (cosecha);$/kilo;390;450;420
+mar-20;Cebolla;Sin especificar;1a (cosecha);$/unidad;90;400;184
+mar-20;Cebolla;Sin especificar;1a nueva(o);$/unidad;100;200;129
+mar-20;Cebolla;Sin especificar;2a (cosecha);$/kilo;100;390;245
+mar-20;Cebolla;Sin especificar;2a (cosecha);$/unidad;60;300;122
+mar-19;Choclo;Dulce o Americano;Primera;$/unidad;150;500;253
+mar-19;Choclo;Dulce o Americano;Segunda;$/unidad;100;400;210
+abr-19;Choclo;Dulce o Americano;Primera;$/unidad;150;400;244
+abr-19;Choclo;Dulce o Americano;Segunda;$/unidad;100;200;169
+may-19;Choclo;Dulce o Americano;Primera;$/unidad;100;450;239
+may-19;Choclo;Dulce o Americano;Segunda;$/unidad;100;200;166
+jun-19;Choclo;Dulce o Americano;Primera;$/unidad;150;500;319
+jun-19;Choclo;Dulce o Americano;Segunda;$/unidad;100;300;210
+jul-19;Choclo;Dulce o Americano;Primera;$/unidad;230;800;425
+jul-19;Choclo;Dulce o Americano;Segunda;$/unidad;150;600;336
+ago-19;Choclo;Dulce o Americano;Primera;$/unidad;400;800;602
+ago-19;Choclo;Dulce o Americano;Segunda;$/unidad;300;600;461
+sept-19;Choclo;Dulce o Americano;Primera;$/unidad;200;900;599
+sept-19;Choclo;Dulce o Americano;Segunda;$/unidad;300;650;437
+oct-19;Choclo;Dulce o Americano;Primera;$/unidad;400;800;633
+oct-19;Choclo;Dulce o Americano;Segunda;$/unidad;300;600;483
+nov-19;Choclo;Dulce o Americano;Primera;$/unidad;200;800;533
+nov-19;Choclo;Dulce o Americano;Segunda;$/unidad;200;500;406
+dic-19;Choclo;Dulce o Americano;Primera;$/unidad;200;600;344
+dic-19;Choclo;Dulce o Americano;Segunda;$/unidad;200;350;247
+ene-20;Choclo;Dulce o Americano;Primera;$/unidad;180;500;312
+ene-20;Choclo;Dulce o Americano;Segunda;$/unidad;120;350;220
+feb-20;Choclo;Dulce o Americano;Primera;$/unidad;200;500;304
+feb-20;Choclo;Dulce o Americano;Segunda;$/unidad;100;300;224
+mar-20;Choclo;Dulce o Americano;Primera;$/unidad;200;450;306
+mar-20;Choclo;Dulce o Americano;Segunda;$/unidad;200;250;218
+mar-19;Coliflor;Sin especificar;Primera;$/unidad;500;1.300;846
+mar-19;Coliflor;Sin especificar;Segunda;$/unidad;400;1.000;621
+abr-19;Coliflor;Sin especificar;Primera;$/unidad;700;1.500;1.115
+abr-19;Coliflor;Sin especificar;Segunda;$/unidad;500;1.200;811
+may-19;Coliflor;Sin especificar;Primera;$/unidad;500;1.400;980
+may-19;Coliflor;Sin especificar;Segunda;$/unidad;500;900;721
+jun-19;Coliflor;Sin especificar;Primera;$/unidad;700;1.400;922
+jun-19;Coliflor;Sin especificar;Segunda;$/unidad;400;900;677
+jul-19;Coliflor;Sin especificar;Primera;$/unidad;500;1.500;876
+jul-19;Coliflor;Sin especificar;Segunda;$/unidad;400;900;664
+ago-19;Coliflor;Sin especificar;Primera;$/unidad;600;1.700;1.050
+ago-19;Coliflor;Sin especificar;Segunda;$/unidad;400;1.300;722
+sept-19;Coliflor;Sin especificar;Primera;$/unidad;500;1.200;787
+sept-19;Coliflor;Sin especificar;Segunda;$/unidad;400;800;568
+oct-19;Coliflor;Sin especificar;Primera;$/unidad;500;1.200;797
+oct-19;Coliflor;Sin especificar;Segunda;$/unidad;400;800;580
+nov-19;Coliflor;Sin especificar;Primera;$/unidad;500;1.200;720
+nov-19;Coliflor;Sin especificar;Segunda;$/unidad;350;700;525
+dic-19;Coliflor;Sin especificar;Primera;$/unidad;500;1.200;768
+dic-19;Coliflor;Sin especificar;Segunda;$/unidad;300;800;564
+ene-20;Coliflor;Sin especificar;Primera;$/unidad;600;1.700;939
+ene-20;Coliflor;Sin especificar;Segunda;$/unidad;400;1.000;675
+feb-20;Coliflor;Sin especificar;Primera;$/unidad;650;2.000;1.213
+feb-20;Coliflor;Sin especificar;Segunda;$/unidad;500;1.300;886
+mar-20;Coliflor;Sin especificar;Primera;$/unidad;800;2.500;1.410
+mar-20;Coliflor;Sin especificar;Segunda;$/unidad;600;2.000;1.069
+mar-19;Espinaca;Sin especificar;Primera;$/kilo;1.200;2.800;1.793
+mar-19;Espinaca;Sin especificar;Segunda;$/kilo;1.000;1.800;1.332
+abr-19;Espinaca;Sin especificar;Primera;$/kilo;800;2.000;1.435
+abr-19;Espinaca;Sin especificar;Segunda;$/kilo;600;1.400;1.067
+may-19;Espinaca;Sin especificar;Primera;$/kilo;800;2.000;1.356
+may-19;Espinaca;Sin especificar;Segunda;$/kilo;700;1.200;1.019
+jun-19;Espinaca;Sin especificar;Primera;$/kilo;800;2.000;1.295
+jun-19;Espinaca;Sin especificar;Segunda;$/kilo;800;1.400;1.032
+jul-19;Espinaca;Sin especificar;Primera;$/kilo;1.000;2.000;1.391
+jul-19;Espinaca;Sin especificar;Segunda;$/kilo;800;1.400;1.046
+ago-19;Espinaca;Sin especificar;Primera;$/kilo;800;2.000;1.394
+ago-19;Espinaca;Sin especificar;Segunda;$/kilo;700;1.400;1.005
+sept-19;Espinaca;Sin especificar;Primera;$/kilo;1.000;2.000;1.329
+sept-19;Espinaca;Sin especificar;Segunda;$/kilo;500;1.200;999
+oct-19;Espinaca;Sin especificar;Primera;$/kilo;800;2.000;1.311
+oct-19;Espinaca;Sin especificar;Segunda;$/kilo;700;1.200;1.011
+nov-19;Espinaca;Sin especificar;Primera;$/kilo;800;2.000;1.264
+nov-19;Espinaca;Sin especificar;Segunda;$/kilo;800;1.200;945
+dic-19;Espinaca;Sin especificar;Primera;$/kilo;700;2.000;1.319
+dic-19;Espinaca;Sin especificar;Segunda;$/kilo;800;1.200;995
+ene-20;Espinaca;Sin especificar;Primera;$/kilo;1.000;2.800;1.745
+ene-20;Espinaca;Sin especificar;Segunda;$/kilo;800;1.600;1.221
+feb-20;Espinaca;Sin especificar;Primera;$/kilo;1.200;3.200;2.111
+feb-20;Espinaca;Sin especificar;Segunda;$/kilo;1.000;2.400;1.834
+mar-20;Espinaca;Sin especificar;Primera;$/kilo;1.200;3.200;1.887
+mar-20;Espinaca;Sin especificar;Segunda;$/kilo;1.000;2.000;1.567
+may-19;Haba;Sin especificar;Primera;$/kilo;350;1.500;586
+may-19;Haba;Sin especificar;Segunda;$/kilo;400;500;464
+jun-19;Haba;Sin especificar;Primera;$/kilo;400;1.200;535
+jun-19;Haba;Sin especificar;Segunda;$/kilo;300;450;387
+jul-19;Haba;Sin especificar;Primera;$/kilo;350;1.000;518
+jul-19;Haba;Sin especificar;Segunda;$/kilo;300;450;390
+ago-19;Haba;Sin especificar;Primera;$/kilo;350;1.000;547
+ago-19;Haba;Sin especificar;Segunda;$/kilo;300;500;396
+sept-19;Haba;Sin especificar;Primera;$/kilo;300;1.000;486
+sept-19;Haba;Sin especificar;Segunda;$/kilo;250;600;377
+oct-19;Haba;Sin especificar;Primera;$/kilo;200;900;378
+oct-19;Haba;Sin especificar;Segunda;$/kilo;200;400;299
+nov-19;Haba;Sin especificar;Primera;$/kilo;300;800;498
+nov-19;Haba;Sin especificar;Segunda;$/kilo;250;400;346
+dic-19;Haba;Sin especificar;Primera;$/kilo;300;900;606
+dic-19;Haba;Sin especificar;Segunda;$/kilo;300;600;412
+ene-20;Haba;Sin especificar;Primera;$/kilo;400;1.000;593
+mar-19;Lechuga;Escarola;Primera;$/unidad;500;1.000;740
+mar-19;Lechuga;Escarola;Segunda;$/unidad;350;700;555
+abr-19;Lechuga;Escarola;Primera;$/unidad;400;1.000;633
+abr-19;Lechuga;Escarola;Segunda;$/unidad;250;600;465
+may-19;Lechuga;Escarola;Primera;$/unidad;400;1.000;579
+may-19;Lechuga;Escarola;Segunda;$/unidad;300;600;413
+jun-19;Lechuga;Escarola;Primera;$/unidad;300;1.000;579
+jun-19;Lechuga;Escarola;Segunda;$/unidad;250;600;408
+jul-19;Lechuga;Escarola;Primera;$/unidad;400;1.000;572
+jul-19;Lechuga;Escarola;Segunda;$/unidad;250;700;400
+ago-19;Lechuga;Escarola;Primera;$/unidad;333;1.000;551
+ago-19;Lechuga;Escarola;Segunda;$/unidad;250;550;380
+sept-19;Lechuga;Escarola;Primera;$/unidad;300;1.000;545
+sept-19;Lechuga;Escarola;Segunda;$/unidad;200;600;372
+oct-19;Lechuga;Escarola;Primera;$/unidad;300;1.000;538
+oct-19;Lechuga;Escarola;Segunda;$/unidad;200;500;357
+nov-19;Lechuga;Escarola;Primera;$/unidad;300;1.000;530
+nov-19;Lechuga;Escarola;Segunda;$/unidad;200;500;367
+dic-19;Lechuga;Escarola;Primera;$/unidad;333;1.000;570
+dic-19;Lechuga;Escarola;Segunda;$/unidad;250;600;419
+ene-20;Lechuga;Escarola;Primera;$/unidad;300;1.000;601
+ene-20;Lechuga;Escarola;Segunda;$/unidad;250;600;441
+feb-20;Lechuga;Escarola;Primera;$/unidad;400;1.000;733
+feb-20;Lechuga;Escarola;Segunda;$/unidad;300;800;542
+mar-20;Lechuga;Escarola;Primera;$/unidad;500;1.000;764
+mar-20;Lechuga;Escarola;Segunda;$/unidad;300;700;573
+mar-19;Melón;Tuna;Primera;$/unidad;500;1.200;810
+mar-19;Melón;Tuna;Segunda;$/unidad;400;600;514
+dic-19;Melón;Tuna;Primera;$/unidad;500;1.500;805
+dic-19;Melón;Tuna;Segunda;$/unidad;333;800;569
+ene-20;Melón;Tuna;Primera;$/unidad;500;1.700;842
+ene-20;Melón;Tuna;Segunda;$/unidad;400;1.000;605
+feb-20;Melón;Tuna;Primera;$/unidad;500;1.800;848
+feb-20;Melón;Tuna;Segunda;$/unidad;400;800;622
+mar-20;Melón;Tuna;Primera;$/unidad;500;1.700;901
+mar-20;Melón;Tuna;Segunda;$/unidad;400;900;626
+mar-19;Papa;Patagonia;Primera;$/kilo;350;700;469
+mar-19;Papa;Patagonia;Segunda;$/kilo;300;450;354
+abr-19;Papa;Patagonia;Primera;$/kilo;350;600;450
+abr-19;Papa;Patagonia;Segunda;$/kilo;250;400;335
+may-19;Papa;Patagonia;Primera;$/kilo;300;600;463
+may-19;Papa;Patagonia;Segunda;$/kilo;250;450;350
+jun-19;Papa;Patagonia;Primera;$/kilo;333;700;474
+jun-19;Papa;Patagonia;Segunda;$/kilo;300;450;358
+jul-19;Papa;Patagonia;Primera;$/kilo;350;600;472
+jul-19;Papa;Patagonia;Segunda;$/kilo;250;450;356
+ago-19;Papa;Patagonia;Primera;$/kilo;350;600;467
+ago-19;Papa;Patagonia;Segunda;$/kilo;250;450;355
+sept-19;Papa;Patagonia;Primera;$/kilo;350;600;492
+sept-19;Papa;Patagonia;Segunda;$/kilo;300;450;365
+oct-19;Papa;Patagonia;Primera;$/kilo;400;700;540
+oct-19;Papa;Patagonia;Segunda;$/kilo;300;600;409
+nov-19;Papa;Patagonia;Primera;$/kilo;400;700;508
+nov-19;Papa;Patagonia;Segunda;$/kilo;300;450;364
+dic-19;Papa;Patagonia;Primera;$/kilo;333;600;436
+dic-19;Papa;Patagonia;Segunda;$/kilo;250;450;347
+ene-20;Papa;Patagonia;Primera;$/kilo;250;650;487
+ene-20;Papa;Patagonia;Segunda;$/kilo;250;450;359
+feb-20;Papa;Patagonia;Primera;$/kilo;300;750;497
+feb-20;Papa;Patagonia;Segunda;$/kilo;250;450;369
+mar-20;Papa;Patagonia;Primera;$/kilo;350;700;516
+mar-20;Papa;Patagonia;Segunda;$/kilo;300;500;389
+mar-19;Pepino ensalada;Sin especificar;Primera;$/unidad;200;600;336
+mar-19;Pepino ensalada;Sin especificar;Segunda;$/unidad;150;450;232
+abr-19;Pepino ensalada;Sin especificar;Primera;$/unidad;150;600;275
+abr-19;Pepino ensalada;Sin especificar;Segunda;$/unidad;100;300;185
+may-19;Pepino ensalada;Sin especificar;Primera;$/unidad;180;500;281
+may-19;Pepino ensalada;Sin especificar;Segunda;$/unidad;100;300;202
+jun-19;Pepino ensalada;Sin especificar;Primera;$/unidad;150;500;290
+jun-19;Pepino ensalada;Sin especificar;Segunda;$/unidad;100;300;203
+jul-19;Pepino ensalada;Sin especificar;Primera;$/unidad;166;600;282
+jul-19;Pepino ensalada;Sin especificar;Segunda;$/unidad;100;400;204
+ago-19;Pepino ensalada;Sin especificar;Primera;$/unidad;200;600;363
+ago-19;Pepino ensalada;Sin especificar;Segunda;$/unidad;100;300;233
+sept-19;Pepino ensalada;Sin especificar;Primera;$/unidad;200;600;340
+sept-19;Pepino ensalada;Sin especificar;Segunda;$/unidad;100;400;238
+oct-19;Pepino ensalada;Sin especificar;Primera;$/unidad;200;700;345
+oct-19;Pepino ensalada;Sin especificar;Segunda;$/unidad;166;500;251
+nov-19;Pepino ensalada;Sin especificar;Primera;$/unidad;150;500;263
+nov-19;Pepino ensalada;Sin especificar;Segunda;$/unidad;100;250;166
+dic-19;Pepino ensalada;Sin especificar;Primera;$/unidad;180;600;272
+dic-19;Pepino ensalada;Sin especificar;Segunda;$/unidad;100;350;182
+ene-20;Pepino ensalada;Sin especificar;Primera;$/unidad;150;600;283
+ene-20;Pepino ensalada;Sin especificar;Segunda;$/unidad;100;300;195
+feb-20;Pepino ensalada;Sin especificar;Primera;$/unidad;200;600;280
+feb-20;Pepino ensalada;Sin especificar;Segunda;$/unidad;100;400;204
+mar-20;Pepino ensalada;Sin especificar;Primera;$/unidad;200;600;301
+mar-20;Pepino ensalada;Sin especificar;Segunda;$/unidad;150;400;206
+mar-19;Pimiento;Cuatro cascos verde;Primera;$/unidad;200;700;321
+mar-19;Pimiento;Cuatro cascos verde;Segunda;$/unidad;100;350;213
+mar-19;Pimiento;Zafiro rojo;Primera;$/unidad;200;800;390
+mar-19;Pimiento;Zafiro rojo;Segunda;$/unidad;150;500;254
+abr-19;Pimiento;Cuatro cascos verde;Primera;$/unidad;166;700;310
+abr-19;Pimiento;Cuatro cascos verde;Segunda;$/unidad;100;300;194
+abr-19;Pimiento;Zafiro rojo;Primera;$/unidad;200;800;392
+abr-19;Pimiento;Zafiro rojo;Segunda;$/unidad;100;450;248
+may-19;Pimiento;Cuatro cascos verde;Primera;$/unidad;150;700;294
+may-19;Pimiento;Cuatro cascos verde;Segunda;$/unidad;100;500;192
+may-19;Pimiento;Zafiro rojo;Primera;$/unidad;200;800;392
+may-19;Pimiento;Zafiro rojo;Segunda;$/unidad;150;600;264
+jun-19;Pimiento;Cuatro cascos verde;Primera;$/unidad;166;600;285
+jun-19;Pimiento;Cuatro cascos verde;Segunda;$/unidad;100;500;200
+jun-19;Pimiento;Zafiro rojo;Primera;$/unidad;200;800;385
+jun-19;Pimiento;Zafiro rojo;Segunda;$/unidad;125;600;273
+jul-19;Pimiento;Cuatro cascos verde;Primera;$/unidad;166;500;300
+jul-19;Pimiento;Cuatro cascos verde;Segunda;$/unidad;125;350;213
+jul-19;Pimiento;Zafiro rojo;Primera;$/unidad;200;800;397
+jul-19;Pimiento;Zafiro rojo;Segunda;$/unidad;100;500;262
+ago-19;Pimiento;Cuatro cascos verde;Primera;$/unidad;200;700;344
+ago-19;Pimiento;Cuatro cascos verde;Segunda;$/unidad;150;300;240
+ago-19;Pimiento;Zafiro rojo;Primera;$/unidad;200;800;461
+ago-19;Pimiento;Zafiro rojo;Segunda;$/unidad;200;400;303
+sept-19;Pimiento;Cuatro cascos verde;Primera;$/unidad;200;600;392
+sept-19;Pimiento;Cuatro cascos verde;Segunda;$/unidad;150;400;272
+sept-19;Pimiento;Zafiro rojo;Primera;$/unidad;300;800;472
+sept-19;Pimiento;Zafiro rojo;Segunda;$/unidad;200;600;319
+oct-19;Pimiento;Cuatro cascos verde;Primera;$/unidad;300;500;405
+oct-19;Pimiento;Cuatro cascos verde;Segunda;$/unidad;200;350;284
+oct-19;Pimiento;Zafiro rojo;Primera;$/unidad;300;1.000;498
+oct-19;Pimiento;Zafiro rojo;Segunda;$/unidad;200;700;337
+nov-19;Pimiento;Zafiro rojo;Primera;$/unidad;250;700;448
+nov-19;Pimiento;Zafiro rojo;Segunda;$/unidad;150;500;307
+dic-19;Pimiento;Zafiro rojo;Primera;$/unidad;50;900;426
+dic-19;Pimiento;Zafiro rojo;Segunda;$/unidad;100;450;283
+ene-20;Pimiento;Cuatro cascos verde;Primera;$/unidad;200;900;332
+ene-20;Pimiento;Cuatro cascos verde;Segunda;$/unidad;100;350;213
+ene-20;Pimiento;Zafiro rojo;Primera;$/unidad;250;900;456
+ene-20;Pimiento;Zafiro rojo;Segunda;$/unidad;150;500;298
+feb-20;Pimiento;Cuatro cascos verde;Primera;$/unidad;166;600;335
+feb-20;Pimiento;Cuatro cascos verde;Segunda;$/unidad;100;300;215
+feb-20;Pimiento;Zafiro rojo;Primera;$/unidad;250;800;444
+feb-20;Pimiento;Zafiro rojo;Segunda;$/unidad;170;500;289
+mar-20;Pimiento;Cuatro cascos verde;Primera;$/unidad;200;500;323
+mar-20;Pimiento;Cuatro cascos verde;Segunda;$/unidad;100;350;213
+mar-20;Pimiento;Zafiro rojo;Primera;$/unidad;250;800;429
+mar-20;Pimiento;Zafiro rojo;Segunda;$/unidad;166;500;290
+mar-19;Poroto granado;Sin especificar;Primera;$/kilo;500;1.500;889
+mar-19;Poroto granado;Sin especificar;Segunda;$/kilo;600;1.200;825
+abr-19;Poroto granado;Sin especificar;Primera;$/kilo;600;1.500;845
+abr-19;Poroto granado;Sin especificar;Segunda;$/kilo;500;800;662
+may-19;Poroto granado;Sin especificar;Primera;$/kilo;650;1.500;948
+may-19;Poroto granado;Sin especificar;Segunda;$/kilo;600;1.000;843
+dic-19;Poroto granado;Sin especificar;Primera;$/kilo;1.000;2.500;1.706
+dic-19;Poroto granado;Sin especificar;Segunda;$/kilo;1.000;2.000;1.466
+ene-20;Poroto granado;Sin especificar;Primera;$/kilo;800;2.000;1.165
+ene-20;Poroto granado;Sin especificar;Segunda;$/kilo;750;1.400;1.024
+feb-20;Poroto granado;Sin especificar;Primera;$/kilo;800;2.000;1.255
+feb-20;Poroto granado;Sin especificar;Segunda;$/kilo;700;1.500;1.036
+mar-20;Poroto granado;Sin especificar;Primera;$/kilo;900;2.200;1.293
+mar-20;Poroto granado;Sin especificar;Segunda;$/kilo;800;1.500;1.128
+mar-19;Poroto verde;Sin especificar;Primera;$/kilo;700;2.000;1.104
+mar-19;Poroto verde;Sin especificar;Segunda;$/kilo;700;1.600;900
+abr-19;Poroto verde;Sin especificar;Primera;$/kilo;600;1.900;1.012
+abr-19;Poroto verde;Sin especificar;Segunda;$/kilo;600;1.000;777
+may-19;Poroto verde;Magnum;Primera;$/kilo;700;2.000;1.169
+may-19;Poroto verde;Magnum;Segunda;$/kilo;600;1.200;923
+jun-19;Poroto verde;Magnum;Primera;$/kilo;800;3.000;1.434
+jun-19;Poroto verde;Magnum;Segunda;$/kilo;700;2.000;1.035
+jul-19;Poroto verde;Magnum;Primera;$/kilo;900;3.000;1.393
+jul-19;Poroto verde;Magnum;Segunda;$/kilo;800;2.000;1.279
+ago-19;Poroto verde;Magnum;Primera;$/kilo;1.000;2.400;1.500
+ago-19;Poroto verde;Magnum;Segunda;$/kilo;1.000;1.600;1.295
+sept-19;Poroto verde;Magnum;Primera;$/kilo;1.200;3.600;2.064
+sept-19;Poroto verde;Magnum;Segunda;$/kilo;1.200;2.000;1.807
+oct-19;Poroto verde;Magnum;Primera;$/kilo;1.500;3.000;2.147
+oct-19;Poroto verde;Magnum;Segunda;$/kilo;1.400;2.200;1.826
+nov-19;Poroto verde;Magnum;Primera;$/kilo;1.000;3.000;1.803
+nov-19;Poroto verde;Magnum;Segunda;$/kilo;1.000;2.000;1.463
+dic-19;Poroto verde;Magnum;Primera;$/kilo;800;2.000;1.370
+dic-19;Poroto verde;Magnum;Segunda;$/kilo;600;800;772
+ene-20;Poroto verde;Sin especificar;Primera;$/kilo;700;2.500;1.268
+ene-20;Poroto verde;Sin especificar;Segunda;$/kilo;600;1.500;999
+feb-20;Poroto verde;Sin especificar;Primera;$/kilo;900;2.000;1.272
+feb-20;Poroto verde;Sin especificar;Segunda;$/kilo;750;1.500;1.068
+mar-20;Poroto verde;Sin especificar;Primera;$/kilo;1.000;2.500;1.416
+mar-20;Poroto verde;Sin especificar;Segunda;$/kilo;1.000;1.600;1.197
+mar-19;Repollo;Crespo record;Primera;$/unidad;800;2.000;1.397
+mar-19;Repollo;Crespo record;Segunda;$/unidad;700;1.400;1.059
+abr-19;Repollo;Crespo record;Primera;$/unidad;900;1.600;1.237
+abr-19;Repollo;Crespo record;Segunda;$/unidad;700;1.400;991
+may-19;Repollo;Crespo record;Primera;$/unidad;700;1.600;1.101
+may-19;Repollo;Crespo record;Segunda;$/unidad;600;1.400;873
+jun-19;Repollo;Crespo record;Primera;$/unidad;800;1.600;1.117
+jun-19;Repollo;Crespo record;Segunda;$/unidad;500;1.000;842
+jul-19;Repollo;Crespo record;Primera;$/unidad;700;1.600;1.163
+jul-19;Repollo;Crespo record;Segunda;$/unidad;600;1.200;881
+ago-19;Repollo;Crespo record;Primera;$/unidad;700;1.600;1.205
+ago-19;Repollo;Crespo record;Segunda;$/unidad;500;1.200;864
+sept-19;Repollo;Crespo record;Primera;$/unidad;600;1.600;1.047
+sept-19;Repollo;Crespo record;Segunda;$/unidad;500;1.000;778
+oct-19;Repollo;Crespo record;Primera;$/unidad;700;2.000;1.093
+oct-19;Repollo;Crespo record;Segunda;$/unidad;500;1.600;802
+nov-19;Repollo;Crespo record;Primera;$/unidad;600;1.500;1.028
+nov-19;Repollo;Crespo record;Segunda;$/unidad;500;1.000;783
+dic-19;Repollo;Crespo record;Primera;$/unidad;500;1.500;993
+dic-19;Repollo;Crespo record;Segunda;$/unidad;400;1.000;713
+ene-20;Repollo;Crespo record;Primera;$/unidad;700;2.400;1.253
+ene-20;Repollo;Crespo record;Segunda;$/unidad;500;1.200;824
+feb-20;Repollo;Crespo record;Primera;$/unidad;800;2.400;1.568
+feb-20;Repollo;Crespo record;Segunda;$/unidad;800;2.000;1.223
+mar-20;Repollo;Crespo record;Primera;$/unidad;1.400;3.200;2.224
+mar-20;Repollo;Crespo record;Segunda;$/unidad;1.000;2.200;1.603
+mar-19;Sandia;Sin especificar;Primera;$/unidad;2.000;3.000;2.342
+mar-19;Sandia;Sin especificar;Segunda;$/unidad;1.000;2.500;1.771
+dic-19;Sandia;Sin especificar;Primera;$/unidad;300;5.000;2.891
+dic-19;Sandia;Sin especificar;Segunda;$/unidad;1.000;3.500;2.247
+ene-20;Sandia;Sin especificar;Primera;$/unidad;1.500;4.500;2.837
+ene-20;Sandia;Sin especificar;Segunda;$/unidad;1.200;3.500;2.169
+feb-20;Sandia;Sin especificar;Primera;$/unidad;1.500;3.500;2.535
+feb-20;Sandia;Sin especificar;Segunda;$/unidad;1.000;2.700;1.970
+mar-20;Sandia;Sin especificar;Primera;$/unidad;2.000;3.200;2.547
+mar-20;Sandia;Sin especificar;Segunda;$/unidad;1.200;2.700;1.931
+mar-19;Tomate;Larga vida;Primera;$/kilo;500;1.400;780
+mar-19;Tomate;Larga vida;Segunda;$/kilo;400;800;592
+abr-19;Tomate;Larga vida;Primera;$/kilo;600;1.700;889
+abr-19;Tomate;Larga vida;Segunda;$/kilo;500;1.000;666
+may-19;Tomate;Larga vida;Primera;$/kilo;550;1.300;793
+may-19;Tomate;Larga vida;Segunda;$/kilo;450;1.000;619
+jun-19;Tomate;Larga vida;Primera;$/kilo;500;1.500;829
+jun-19;Tomate;Larga vida;Segunda;$/kilo;400;1.100;647
+jul-19;Tomate;Larga vida;Primera;$/kilo;400;1.200;647
+jul-19;Tomate;Larga vida;Segunda;$/kilo;300;800;472
+ago-19;Tomate;Larga vida;Primera;$/kilo;400;1.000;657
+ago-19;Tomate;Larga vida;Segunda;$/kilo;300;800;494
+sept-19;Tomate;Larga vida;Primera;$/kilo;500;1.200;766
+sept-19;Tomate;Larga vida;Segunda;$/kilo;350;850;574
+oct-19;Tomate;Larga vida;Primera;$/kilo;600;1.500;930
+oct-19;Tomate;Larga vida;Segunda;$/kilo;500;1.000;716
+nov-19;Tomate;Larga vida;Primera;$/kilo;500;1.300;806
+nov-19;Tomate;Larga vida;Segunda;$/kilo;400;1.100;624
+dic-19;Tomate;Larga vida;Primera;$/kilo;400;1.200;777
+dic-19;Tomate;Larga vida;Segunda;$/kilo;300;800;599
+ene-20;Tomate;Larga vida;Primera;$/kilo;450;1.300;720
+ene-20;Tomate;Larga vida;Segunda;$/kilo;350;1.000;559
+feb-20;Tomate;Larga vida;Primera;$/kilo;500;1.200;721
+feb-20;Tomate;Larga vida;Segunda;$/kilo;400;900;533
+mar-20;Tomate;Larga vida;Primera;$/kilo;500;1.400;770
+mar-20;Tomate;Larga vida;Segunda;$/kilo;350;800;585
+mar-19;Zanahoria;Sin especificar;Primera;$/kilo;400;800;571
+mar-19;Zanahoria;Sin especificar;Segunda;$/kilo;350;500;444
+abr-19;Zanahoria;Sin especificar;Primera;$/kilo;450;800;561
+abr-19;Zanahoria;Sin especificar;Segunda;$/kilo;400;500;419
+may-19;Zanahoria;Sin especificar;Primera;$/kilo;450;800;551
+may-19;Zanahoria;Sin especificar;Segunda;$/kilo;350;500;421
+jun-19;Zanahoria;Sin especificar;Primera;$/kilo;400;800;558
+jun-19;Zanahoria;Sin especificar;Segunda;$/kilo;300;600;437
+jul-19;Zanahoria;Sin especificar;Primera;$/kilo;400;800;569
+jul-19;Zanahoria;Sin especificar;Segunda;$/kilo;200;700;434
+ago-19;Zanahoria;Sin especificar;Primera;$/kilo;400;800;568
+ago-19;Zanahoria;Sin especificar;Segunda;$/kilo;300;600;424
+sept-19;Zanahoria;Sin especificar;Primera;$/kilo;500;1.000;617
+sept-19;Zanahoria;Sin especificar;Segunda;$/kilo;350;600;497
+oct-19;Zanahoria;Sin especificar;Primera;$/kilo;450;1.500;697
+oct-19;Zanahoria;Sin especificar;Segunda;$/kilo;300;4.500;601
+nov-19;Zanahoria;Sin especificar;Primera;$/kilo;400;1.000;686
+nov-19;Zanahoria;Sin especificar;Segunda;$/kilo;300;650;506
+dic-19;Zanahoria;Sin especificar;Primera;$/kilo;400;1.000;595
+dic-19;Zanahoria;Sin especificar;Segunda;$/kilo;300;600;433
+ene-20;Zanahoria;Sin especificar;Primera;$/kilo;400;1.200;644
+ene-20;Zanahoria;Sin especificar;Segunda;$/kilo;280;700;488
+feb-20;Zanahoria;Sin especificar;Primera;$/kilo;500;1.000;609
+feb-20;Zanahoria;Sin especificar;Segunda;$/kilo;300;600;464
+mar-20;Zanahoria;Sin especificar;Primera;$/kilo;350;1.200;682
+mar-20;Zanahoria;Sin especificar;Segunda;$/kilo;390;800;518
+mar-19;Zapallo;Camote;1a (cosecha);$/kilo;400;1.000;678
+mar-19;Zapallo;Camote;2a (cosecha);$/kilo;300;700;429
+mar-19;Zapallo;Paine;1a (cosecha);$/kilo;500;700;600
+mar-19;Zapallo;Paine;2a (cosecha);$/kilo;200;250;225
+abr-19;Zapallo;Camote;1a (cosecha);$/kilo;400;1.000;662
+abr-19;Zapallo;Camote;2a (cosecha);$/kilo;300;600;407
+abr-19;Zapallo;Paine;1a (cosecha);$/kilo;400;700;615
+abr-19;Zapallo;Paine;2a (cosecha);$/kilo;250;350;300
+may-19;Zapallo;Camote;1a (guarda);$/kilo;350;1.000;657
+may-19;Zapallo;Camote;2a (guarda);$/kilo;300;1.000;453
+may-19;Zapallo;Paine;1a (guarda);$/kilo;400;800;610
+may-19;Zapallo;Paine;2a (guarda);$/kilo;500;600;520
+jun-19;Zapallo;Camote;1a (guarda);$/kilo;500;1.400;767
+jun-19;Zapallo;Camote;2a (guarda);$/kilo;400;900;550
+jun-19;Zapallo;Paine;1a (guarda);$/kilo;600;700;668
+jun-19;Zapallo;Paine;2a (guarda);$/kilo;500;500;500
+jul-19;Zapallo;Camote;1a (guarda);$/kilo;300;1.200;751
+jul-19;Zapallo;Camote;2a (guarda);$/kilo;200;700;506
+jul-19;Zapallo;Paine;1a (guarda);$/kilo;500;800;650
+jul-19;Zapallo;Paine;2a (guarda);$/kilo;400;600;520
+ago-19;Zapallo;Camote;1a (guarda);$/kilo;300;1.200;819
+ago-19;Zapallo;Camote;2a (guarda);$/kilo;300;1.000;625
+ago-19;Zapallo;Paine;1a (guarda);$/kilo;500;800;710
+ago-19;Zapallo;Paine;2a (guarda);$/kilo;600;600;600
+sept-19;Zapallo;Camote;1a (guarda);$/kilo;300;2.000;995
+sept-19;Zapallo;Camote;2a (guarda);$/kilo;400;1.000;674
+sept-19;Zapallo;Paine;1a (guarda);$/kilo;600;1.200;929
+sept-19;Zapallo;Paine;2a (guarda);$/kilo;700;700;700
+oct-19;Zapallo;Camote;1a (guarda);$/kilo;800;2.000;1.273
+oct-19;Zapallo;Camote;2a (guarda);$/kilo;700;2.000;967
+oct-19;Zapallo;Paine;1a (guarda);$/kilo;500;1.500;1.065
+oct-19;Zapallo;Paine;2a (guarda);$/kilo;400;1.000;888
+nov-19;Zapallo;Camote;1a (guarda);$/kilo;1.000;2.000;1.300
+nov-19;Zapallo;Camote;1a nueva(o);$/kilo;900;1.600;1.151
+nov-19;Zapallo;Camote;2a (guarda);$/kilo;800;1.500;1.069
+nov-19;Zapallo;Camote;2a nueva(o);$/kilo;700;1.000;847
+nov-19;Zapallo;Paine;1a (guarda);$/kilo;700;1.600;1.034
+nov-19;Zapallo;Paine;2a (guarda);$/kilo;800;1.200;933
+dic-19;Zapallo;Camote;1a nueva(o);$/kilo;700;2.000;1.095
+dic-19;Zapallo;Camote;2a nueva(o);$/kilo;600;1.200;859
+dic-19;Zapallo;Paine;1a nueva(o);$/kilo;500;1.000;795
+dic-19;Zapallo;Paine;2a nueva(o);$/kilo;500;800;737
+ene-20;Zapallo;Camote;1a nueva(o);$/kilo;500;2.000;1.080
+ene-20;Zapallo;Camote;2a nueva(o);$/kilo;400;1.200;782
+ene-20;Zapallo;Paine;1a nueva(o);$/kilo;500;1.400;918
+ene-20;Zapallo;Paine;2a nueva(o);$/kilo;600;1.000;812
+feb-20;Zapallo;Camote;1a nueva(o);$/kilo;600;1.600;994
+feb-20;Zapallo;Camote;2a nueva(o);$/kilo;500;1.000;670
+feb-20;Zapallo;Paine;1a nueva(o);$/kilo;500;1.000;850
+feb-20;Zapallo;Paine;2a nueva(o);$/kilo;500;800;725
+mar-20;Zapallo;Camote;1a (cosecha);$/kilo;600;1.800;1.018
+mar-20;Zapallo;Camote;2a (cosecha);$/kilo;500;800;624
+mar-20;Zapallo;Paine;1a (cosecha);$/kilo;800;800;800
+mar-19;Zapallo italiano;Sin especificar;Primera;$/unidad;100;700;275
+mar-19;Zapallo italiano;Sin especificar;Segunda;$/unidad;125;450;191
+abr-19;Zapallo italiano;Sin especificar;Primera;$/unidad;100;400;205
+abr-19;Zapallo italiano;Sin especificar;Segunda;$/unidad;80;200;127
+may-19;Zapallo italiano;Sin especificar;Primera;$/unidad;150;500;243
+may-19;Zapallo italiano;Sin especificar;Segunda;$/unidad;100;300;171
+jun-19;Zapallo italiano;Sin especificar;Primera;$/unidad;150;600;335
+jun-19;Zapallo italiano;Sin especificar;Segunda;$/unidad;100;300;229
+jul-19;Zapallo italiano;Sin especificar;Primera;$/unidad;150;600;303
+jul-19;Zapallo italiano;Sin especificar;Segunda;$/unidad;100;350;203
+ago-19;Zapallo italiano;Sin especificar;Primera;$/unidad;250;600;432
+ago-19;Zapallo italiano;Sin especificar;Segunda;$/unidad;150;400;294
+sept-19;Zapallo italiano;Sin especificar;Primera;$/unidad;250;600;426
+sept-19;Zapallo italiano;Sin especificar;Segunda;$/unidad;200;500;324
+oct-19;Zapallo italiano;Sin especificar;Primera;$/unidad;200;700;401
+oct-19;Zapallo italiano;Sin especificar;Segunda;$/unidad;100;500;305
+nov-19;Zapallo italiano;Sin especificar;Primera;$/unidad;100;600;204
+nov-19;Zapallo italiano;Sin especificar;Segunda;$/unidad;50;200;127
+dic-19;Zapallo italiano;Sin especificar;Primera;$/unidad;100;400;200
+dic-19;Zapallo italiano;Sin especificar;Segunda;$/unidad;60;200;130
+ene-20;Zapallo italiano;Sin especificar;Primera;$/unidad;100;600;253
+ene-20;Zapallo italiano;Sin especificar;Segunda;$/unidad;100;350;183
+feb-20;Zapallo italiano;Sin especificar;Primera;$/unidad;150;500;261
+feb-20;Zapallo italiano;Sin especificar;Segunda;$/unidad;100;300;182
+mar-20;Zapallo italiano;Sin especificar;Primera;$/unidad;150;500;267
+mar-20;Zapallo italiano;Sin especificar;Segunda;$/unidad;100;250;179
