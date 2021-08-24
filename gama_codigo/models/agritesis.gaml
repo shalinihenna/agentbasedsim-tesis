@@ -22,24 +22,33 @@ global{
 	     'passwd'::'secret'
 	];	
 	
-	//shp files //TODO convertir en Map<>
-	file comunas_shp <- file("../includes/limite-comunal.shp");
-	file terrenos_shp <- file("../includes/terrenos-agricolas.shp");
-	file ferias_shp <- file("../includes/ferias-libres.shp");
-	
-	geometry shape <- envelope(comunas_shp);
+	//shp files
+	map<string, file> shpfiles <- [
+		'comunas_shp'::file("../includes/limite-comunal.shp"),
+		'terrenos_shp'::file("../includes/terrenos-agricolas.shp"),
+		'ferias_shp'::file("../includes/ferias-libres.shp")
+	];
+	geometry shape <- envelope(shpfiles['comunas_shp']);
 	
 	list<list> products <- [];
+	date starting_date <- date([2020,3]);
+	date current_date <- date([2020,3]);
+	float step <- 1 #month; 
+	string paso <- 'Septiembre';
 	
-	//Cantidad de agentes //TODO convertir en Map<>
-	int number_of_farmers <- 20;
-	int number_of_feriante <- 20;
-	int number_of_consumer <- 20;
+	//Cantidad de agentes
+	map<string, int> people <- [
+		'number_of_farmers'::20,
+		'number_of_feriantes'::20,
+		'number_of_consumers'::20
+	];
 	
-	//Colores de los agentes //TODO convertir en Map<>
-	string farmer_color <- 'yellow';
-	string feriante_color <- 'green';
-	string consumer_color <- 'blue';
+	//Colores de los agentes
+	map<string, string> colors <- [
+		'farmer_color'::'yellow',
+		'feriante_color'::'green',
+		'consumer_color'::'blue'
+	];
 	
 	//Variables estáticas para cálculos de riesgo (Amenazas x vulnerabilidad, GRD)
 	list<string> threats <- ["Ola de calor", "Helada", "Inundacion","Plaga"];
@@ -61,7 +70,8 @@ global{
 		"Plaga"::[6,8,10]	
 	];
 	map<string, unknown> affect_weight <- user_input([enter("Peso de afectación Ola de calor",''), enter("Peso de afectación Helada",''), enter("Peso de afectación Inundación",''), enter("Peso de afectación Plaga",'')]); 
-	
+	/*write "probando input de user";
+	write affect_weight["Peso de afectación Ola de calor"]  */
 	/*float drought_prob <- 0.1;
 	float frost_prob <- 0.1;*/  
 	
@@ -75,29 +85,24 @@ global{
 		write "Conectando DB";
 		create agentDB;
 		
-		/*map<string, unknown> selected_veg <- user_input([enter("hortaliza",'')]); 
-		string veg <- selected_veg["hortaliza"];
-		write "probando input de user";
-		write selected_veg["hortaliza"];
-		*/
-		
-		create comunas from: comunas_shp;
-		create terrenos from: terrenos_shp; 
-		create ferias from: ferias_shp; /*with: [type::float(get(veg))]{
+		write "Cargando capas de mapas";
+		create comunas from: shpfiles['comunas_shp'];
+		create terrenos from: shpfiles['terrenos_shp']; 
+		create ferias from: shpfiles['ferias_shp']; /*with: [type::float(get(veg))]{
 			if (type > 0){
 				color <- #brown;
 			}
 		}*/
 		
+		write "Fin";
 	}
-
 }
 
 /*They are not agents, its just for display */
 species terrenos {
 	rgb color <- #white;
 	rgb border <- #black;
-	
+	  
 	aspect base {
 		draw shape color: color border: border;
 	}
@@ -105,12 +110,15 @@ species terrenos {
 	
 	//Calcular riesgo en el terreno
 	action getMinRisk{
+		write "date " + current_date;
 		map<string, list<int>> finalRisks <- [];
-		write "productos desde la bd" + products; 
-		/*
-		 * for cada producto
-		 *		push array <- do calculateRisk()
-		  */
+		loop i over: products{
+			string months_siembra <- i[2];
+			if(i[2] != '' and (contains(months_siembra, paso) or contains(months_siembra, 'Todos'))){
+				//write "product -- " + i[0];
+				//push array <- do calculateRisk(i)
+			}
+		}
 	}
 	
 	list<int> calculateRisk{
@@ -120,6 +128,8 @@ species terrenos {
 		 * 		clasificacion_a = ver si la clasificación de a en 
 		 * 			
 		 */	
+		 
+		 
 		list<int> hola;
 		return hola;
 	}
@@ -144,7 +154,7 @@ species comunas {
 	}
 }
 
-
+/*Todas las consultas a la base de datos PostgreSQL */
 species agentDB skills:[SQLSKILL]{
 	
 	init{
@@ -163,10 +173,10 @@ species agentDB skills:[SQLSKILL]{
 }*/
 
 experiment agriculture_world type: gui {
-	    parameter "Shapefile for the terrenos:" var: terrenos_shp category: "GIS";
-	    parameter "Shapefile for the ferias:" var: ferias_shp category: "GIS";
-	    parameter "Shapefile for the comunas:" var: comunas_shp category: "GIS";
-	    
+	    parameter "Shapefiles:" var: shpfiles category: "GIS";
+	    /*parameter "Shapefile for the ferias:" var: shpfiles['ferias_shp'] category: "GIS";
+	    parameter "Shapefile for the comunas:" var: shpfiles['comunas_shp'] category: "GIS";
+*/	    
 	   output{
 	   		display map type: java2D{
 	   			species comunas aspect:base;
