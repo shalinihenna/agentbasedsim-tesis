@@ -5,7 +5,9 @@
 * Tags: 
 */
 
-
+/*TODO:
+ * Borrar todos los write extras.
+ */
 model agritesis
 
 /* Insert your model definition here */
@@ -106,8 +108,10 @@ global{
 		create agentDB;
 		
 		write "Cargando capas de mapas";
+		//TODO: Borrar cantidad de terrenos
+		int number_terrenos <- 1;
 		create comunas from: shpfiles['comunas_shp'];
-		create terrenos from: shpfiles['terrenos_shp']; 
+		create terrenos from: shpfiles['terrenos_shp'] number: number_terrenos; 
 		create ferias from: shpfiles['ferias_shp']; /*with: [type::float(get(veg))]{
 			if (type > 0){
 				color <- #brown;
@@ -131,14 +135,16 @@ species terrenos {
 	//Calcular riesgo en el terreno
 	action getMinRisk{
 		write "month " + current_month;
-		map<string, list<int>> finalRisks <- [];
-		loop i over: products{
+		map<string, list<int>> finalRisks;
+		loop i over: products {
 			string months_siembra <- i[2];
 			if(i[2] != '' and (contains(months_siembra, current_month) or contains(months_siembra, 'Todos'))){
 				write "product -- " + i[0];
-				//push array <- do calculateRisk(i)
+				list<int> risk <- calculateRisk();
+				add risk at: i[0] to: finalRisks;
 			}
 		}
+		write "risks list " + finalRisks;
 	}
 	
 	list<int> calculateRisk{
@@ -150,7 +156,7 @@ species terrenos {
 		 */	
 		 
 		 
-		list<int> hola;
+		list<int> hola <- [1,2];
 		return hola;
 	}
 	
