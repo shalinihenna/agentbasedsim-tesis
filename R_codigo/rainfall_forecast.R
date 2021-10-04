@@ -10,7 +10,7 @@ library(astsa)
 library(dplyr)
 
 # Data imports and converting data to time series
-rainfall <- read_excel("C:/Users/shali/OneDrive/Escritorio/Tesis/agentbasedsim-tesis/Datos/datos_lluvia_forecasting.xlsx", sheet = 'Hoja2', col_types = "numeric")
+rainfall <- read_excel("C:/Users/shali/OneDrive/Escritorio/Tesis/agentbasedsim-tesis/Datos/threat_Precipitaciones/datos_lluvia_forecasting.xlsx", sheet = 'Hoja2', col_types = "numeric")
 rainfall <- rainfall %>% gather(key = "year", value="precipitaciones", -Anio)
 rainfall_ts <- ts(data = rainfall[,3], frequency = 12, start = c(1969,1)) 
 rainfall_ts <- window(rainfall_ts, start=c(1969, 1))
@@ -111,3 +111,42 @@ autoplot(real_forecast) +
   theme_bw() + 
   ggtitle("Pronostico Lluvia 2021-2022 (Modelo ARIMA)")
 
+
+# Save forecast data in a csv and adding rainfall from 2020
+forecast_df <- as.data.frame(real_forecast)
+data_2020 <- window(rainfall_ts, start = c(2020,1), end = c(2020, 12))
+data_2020 <- as.data.frame(data_2020)
+
+#forecast_df <- rbind(data_2020, forecast_df)
+#write.csv(forecast_df, "C:/Users/shali/OneDrive/Escritorio/Tesis/agentbasedsim-tesis/Datos/threat_Precipitaciones/forecast.csv", row.names = TRUE )
+
+
+
+normalized_mse <- function(a,b){
+  #Se buscan los outliers para el set de datos a y el set de datos b
+  outliers_a <- boxplot(a, plot = FALSE)$out
+  outliers_b <- boxplot(b, plot = FALSE)$out
+  aux_a <- a
+  aux_b <- b
+  
+  #De haber outliers, se eliminan
+  if(length(outliers_a)>0){
+    aux_a <- a[-which(a %in% outliers_a)]
+  }
+  if(length(outliers_b)>0){
+    aux_b <- b[-which(b %in% outliers_b)]
+  }
+  
+  #Se obtiene el máximo y el mínimo valor entre los set de datos a y b sin
+  #considerar outliers
+  max_value <- max(c(aux_a,aux_b))
+  min_value <- min(c(aux_a,aux_b))
+  
+  #Se realiza el proceso de normalización de cada conjunto de datos.
+  norm_a <- 2*((a - min_value)/(max_value-min_value))-1
+  norm_b <- 2*((b - min_value)/(max_value-min_value))-1
+  
+  #Se calcula el mse.
+  mse <- sum((norm_a - norm_b)**2)/length(norm_a)
+  return(mse)
+}
