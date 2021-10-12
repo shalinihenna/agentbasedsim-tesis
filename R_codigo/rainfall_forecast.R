@@ -122,31 +122,31 @@ data_2020 <- as.data.frame(data_2020)
 
 
 
-normalized_mse <- function(a,b){
-  #Se buscan los outliers para el set de datos a y el set de datos b
-  outliers_a <- boxplot(a, plot = FALSE)$out
-  outliers_b <- boxplot(b, plot = FALSE)$out
-  aux_a <- a
-  aux_b <- b
-  
-  #De haber outliers, se eliminan
-  if(length(outliers_a)>0){
-    aux_a <- a[-which(a %in% outliers_a)]
-  }
-  if(length(outliers_b)>0){
-    aux_b <- b[-which(b %in% outliers_b)]
-  }
-  
-  #Se obtiene el máximo y el mínimo valor entre los set de datos a y b sin
-  #considerar outliers
-  max_value <- max(c(aux_a,aux_b))
-  min_value <- min(c(aux_a,aux_b))
-  
-  #Se realiza el proceso de normalización de cada conjunto de datos.
-  norm_a <- 2*((a - min_value)/(max_value-min_value))-1
-  norm_b <- 2*((b - min_value)/(max_value-min_value))-1
-  
-  #Se calcula el mse.
-  mse <- sum((norm_a - norm_b)**2)/length(norm_a)
-  return(mse)
-}
+# normalized_mse <- function(a,b){
+#   #Se buscan los outliers para el set de datos a y el set de datos b
+#   outliers_a <- boxplot(a, plot = FALSE)$out
+#   outliers_b <- boxplot(b, plot = FALSE)$out
+#   aux_a <- a
+#   aux_b <- b
+#   
+#   #De haber outliers, se eliminan
+#   if(length(outliers_a)>0){
+#     aux_a <- a[-which(a %in% outliers_a)]
+#   }
+#   if(length(outliers_b)>0){
+#     aux_b <- b[-which(b %in% outliers_b)]
+#   }
+#   
+#   #Se obtiene el máximo y el mínimo valor entre los set de datos a y b sin
+#   #considerar outliers
+#   max_value <- max(c(aux_a,aux_b))
+#   min_value <- min(c(aux_a,aux_b))
+#   
+#   #Se realiza el proceso de normalización de cada conjunto de datos.
+#   norm_a <- 2*((a - min_value)/(max_value-min_value))-1
+#   norm_b <- 2*((b - min_value)/(max_value-min_value))-1
+#   
+#   #Se calcula el mse.
+#   mse <- sum((norm_a - norm_b)**2)/length(norm_a)
+#   return(mse)
+# }
