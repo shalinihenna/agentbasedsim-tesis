@@ -44,7 +44,7 @@ forecast_df <- forecast_df %>% mutate('Date' = str_to_title(format(seq(from = as
 n = nrow(forecast_df)
 a <- c()
 for (i in 1:n) {
-  a = c(a,(runif(1, forecast_df$`Point Forecast`[i]*0.95, forecast_df$`Point Forecast`[i]*1.05)))
+  a = c(a,(runif(1, forecast_df$`Point Forecast`[i]*0.90, forecast_df$`Point Forecast`[i]*1.10)))
 }
 forecast_df$New_Point = a
 
