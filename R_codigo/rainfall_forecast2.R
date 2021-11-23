@@ -21,13 +21,13 @@ fit_arima <- Arima(rainfall_ts, order = c(1,0,2), seasonal = c(1,0,2))
 print(summary(fit_arima))
 checkresiduals(fit_arima)
 
-fit_ets <- ets(rainfall_ts, damped = TRUE) #Exponential smoothing state
-print(summary(fit_ets))
-checkresiduals(fit_ets)
-
-fit_autoarima <- auto.arima(rainfall_ts, d=0, D=0, stepwise = FALSE, approximation = FALSE)
-print(summary(fit_autoarima))
-checkresiduals(fit_autoarima)
+# fit_ets <- ets(rainfall_ts, damped = TRUE) #Exponential smoothing state
+# print(summary(fit_ets))
+# checkresiduals(fit_ets)
+# 
+# fit_autoarima <- auto.arima(rainfall_ts, d=0, D=0, stepwise = FALSE, approximation = FALSE)
+# print(summary(fit_autoarima))
+# checkresiduals(fit_autoarima)
 
 # El mejor modelo es ARIMA, asi que el forecasting contempla el fit arima
 forecast_arima <- forecast(fit_arima, h=24) ########################### Se cambia el h en caso de querer extender fecha de proyeccion y las fechas en mutate (forecast_df)
@@ -44,7 +44,7 @@ n <- nrow(forecast_df)
 a <- c()
 for(i in 1:n){
   if(forecast_df$year[i] != 2021){
-    a = c(a, runif(1, forecast_df$Point.Forecast[i]*0.8, forecast_df$Point.Forecast[i]*1.2))  
+    a = c(a, runif(1, forecast_df$Point.Forecast[i]*0.9, forecast_df$Point.Forecast[i]*1.1))  
   }else{
     a = c(a, forecast_df$Point.Forecast[i])
   }

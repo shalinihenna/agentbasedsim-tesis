@@ -1,0 +1,5 @@
+1. detalle_frutas --> csv precios y demanda frutas
+2. detalle_hortalizas --> csv precios y demanda hortalizas
+3. frost --> csv frost.csv
+4. normal_lluvia --> script sql normal_lluvia.sql
+5. productos --> csv productos

@@ -1,0 +1,17 @@
+create table normal_lluvia (
+	mes varchar,
+	normal float4
+);
+
+insert into public.normal_lluvia values ('Enero',0.6);
+insert into public.normal_lluvia values ('Febrero',1.3);
+insert into public.normal_lluvia values ('Marzo',6.1);
+insert into public.normal_lluvia values ('Abril',16.3);
+insert into public.normal_lluvia values ('Mayo',55.5);
+insert into public.normal_lluvia values ('Junio',83.8);
+insert into public.normal_lluvia values ('Julio',75.9);
+insert into public.normal_lluvia values ('Agosto',55.1);
+insert into public.normal_lluvia values ('Septiembre',27.2);
+insert into public.normal_lluvia values ('Octubre',12.9);
+insert into public.normal_lluvia values ('Noviembre',6.2);
+insert into public.normal_lluvia values ('Diciembre',1.5);
