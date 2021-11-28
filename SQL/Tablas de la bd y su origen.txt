@@ -1,5 +1,17 @@
 1. detalle_frutas --> csv precios y demanda frutas
 2. detalle_hortalizas --> csv precios y demanda hortalizas
 3. frost --> csv frost.csv
+*mes: Mes
+*probabilidad: probabilidad de ocurrencia de heladas ese mes
+*dias_frost: cuantos días en ese mes ocurren heladas
+*mes_frost: conversión de días_frost dividido en la cantidad de días de ese mes, para saber cuanto porcentaje de ese mes estará con heladas
+*rango_x: probabilidad de que una helada sea de ese rango de temperatura. Las temperaturas están en el excel.
 4. normal_lluvia --> script sql normal_lluvia.sql
 5. productos --> csv productos
+6. spi_10 --> valores de SPI con variación en forecasting de 10%
+7. spi_20 --> valores de SPI con variación en forecasting de 20%
+8. heatwave --> olas de calor que ocurren
+* year: año
+* month: mes
+* days: días del mes en el que se estaba en una ola de calor
+* heatwave: cantidad de olas de calor en ese mes
