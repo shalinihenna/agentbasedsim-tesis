@@ -144,7 +144,10 @@ species terrenos {
 		write "month " + current_month;
 		write "year " + current_date.year;
 		map<string, list<int>> finalRisks;
+		//TODO: llamar al calculate frostRisk por step, no por terreno
+		//TODO: cambiar nombre y output de la función
 		list<int> frostRisk <- calculateFrostRisk(); //Riesgo de heladas para el mes
+		write 'risks: ' + frostRisk; 
 		loop i over: products {
 			string months_siembra <- i[2];
 			if(i[2] != '' and (contains(months_siembra, current_month) or contains(months_siembra, 'Todos'))){
@@ -158,19 +161,10 @@ species terrenos {
 	}
 	
 	list<int> calculateFrostRisk{
-		/*
-		 * for cada amenaza:
-		 * 		a = buscar la probabilidad de ocurrencia de ese mes (step)
-		 * 		clasificacion_a = ver si la clasificación de a en 
-		 * 			
-		 */	
-		 
-		
+		 unknown frostRisk;
+		 int droughtRisk;
+		 int heatwaveRisk;	
 		 ask(agentDB){
-		 	unknown frostRisk;
-		 	int droughtRisk;
-		 	int heatwaveRisk;
-		 	
 		 	/*HELADAS */
 		 	list<list> frost <- list<list> (select(params:POSTGRES, 
 		 											select: "SELECT * FROM frost where mes = ? ;",
@@ -180,11 +174,11 @@ species terrenos {
 		 	int days;
 		 	string degree;
 		 	/*borrar */
-		 	write 'prob ' + prob;  
+		 	//write 'prob ' + prob;  
 		 	if(flip(prob)){
 		 		days <- ceil(frost_values[3] as float) as int;
 		 		/*borrar */
-		 		write 'days '+ days;
+		 		//write 'days '+ days;
 		 		map<int, int> sumRisks <- [3::0,2::0,1::0];
 		 		loop times: days {
 		 			degree <- rnd_choice(["rango 1"::frost_values[4], "rango 2"::frost_values[5], "rango 3"::frost_values[6], "rango 4"::frost_values[7], "rango 5"::frost_values[8], "rango 6"::frost_values[9]]);
@@ -196,7 +190,7 @@ species terrenos {
 		 				match_one["rango 5", "rango 6"] {sumRisks[3] <- sumRisks[3]+1;} //Riesgo alto
 		 			}
 		 		}
-		 		write 'riesgosssssssssssss ' + sumRisks;
+		 		//write 'riesgosssssssssssss ' + sumRisks;
 		 		if(sumRisks[2] + sumRisks[3] >= sumRisks[1]){
 		 			frostRisk <- sumRisks index_of max(sumRisks[2], sumRisks[3]); 
 		 		}else{
@@ -211,7 +205,7 @@ species terrenos {
 		 	list<list<list>> spi <- list<list<list>> (select(params:POSTGRES,
 		 										select: "SELECT * FROM spi_10 where month = ? and year = ?;",
 		 										values: [current_month, string(current_date.year)])); 
-		 	write "consulta " + spi[2][0][0] + " " + spi[2][0][2]; 
+		 	//write "consulta " + spi[2][0][0] + " " + spi[2][0][2]; 
 		 	//Rango de spi asociado al riesgo (int)
 		 	switch(spi[2][0][2]){
 		 		match_between[0, #infinity] {droughtRisk <- 0;}
@@ -226,12 +220,21 @@ species terrenos {
 		 	
 		 	/*OLAS DE CALOR */
 		 	//misma logica que SPI
+		 	list<list<list>> heatwaves <- list<list<list>>(select(params:POSTGRES,
+		 											select: "SELECT * FROM heatwave where month = ? and year = ?;",
+		 											values: [current_month, string(current_date.year)]));
+		 	//write "heatwaves " + heatwaves[2][0][2]; 
+		 	switch(heatwaves[2][0][2]){
+		 		match 0{heatwaveRisk <- 0;}
+		 		match_between[1,3]{heatwaveRisk <- 1;}
+		 		match_between[4,7]{heatwaveRisk <- 2;}
+		 		match_between[8,#infinity]{heatwaveRisk <- 3;}
+		 	}
+		 	write "Riesgo de olas de calor: " + heatwaveRisk;	
 		 }
+		 list<int> risks <- [int(frostRisk), droughtRisk, heatwaveRisk];
+		 return risks;
 		 
-		 
-		 
-		list<int> hola <- [1,2];
-		return hola;
 	}
 	
 	reflex prueba_reflex{
