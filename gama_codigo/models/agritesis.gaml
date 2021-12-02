@@ -167,7 +167,7 @@ species terrenos {
 		 
 		
 		 ask(agentDB){
-		 	int frostRisk;
+		 	unknown frostRisk;
 		 	int droughtRisk;
 		 	int heatwaveRisk;
 		 	
@@ -179,28 +179,39 @@ species terrenos {
 		 	float prob <- frost_values[1] as float;
 		 	int days;
 		 	string degree;
-		 	write 'prob' + prob; 
+		 	/*borrar */
+		 	write 'prob ' + prob;  
 		 	if(flip(prob)){
 		 		days <- ceil(frost_values[3] as float) as int;
+		 		/*borrar */
 		 		write 'days '+ days;
+		 		map<int, int> sumRisks <- [3::0,2::0,1::0];
 		 		loop times: days {
 		 			degree <- rnd_choice(["rango 1"::frost_values[4], "rango 2"::frost_values[5], "rango 3"::frost_values[6], "rango 4"::frost_values[7], "rango 5"::frost_values[8], "rango 6"::frost_values[9]]);
-		 			write 'degreeee ' + degree; 
+		 			/*borrar */
+		 			write 'degreeee ' + degree;
+		 			switch (degree) {
+		 				match_one["rango 1", "rango 2"] {sumRisks[1] <- sumRisks[1]+1;} //Riesgo bajo
+		 				match_one["rango 3", "rango 4"] {sumRisks[2] <- sumRisks[2]+1;} //Riesgo medio
+		 				match_one["rango 5", "rango 6"] {sumRisks[3] <- sumRisks[3]+1;} //Riesgo alto
+		 			}
+		 		}
+		 		write 'riesgosssssssssssss ' + sumRisks;
+		 		if(sumRisks[2] + sumRisks[3] >= sumRisks[1]){
+		 			frostRisk <- sumRisks index_of max(sumRisks[2], sumRisks[3]); 
+		 		}else{
+		 			frostRisk <- sumRisks index_of max(sumRisks);
 		 		}
 		 	}else{
-		 		write 'no helada';
-		 		//assign frostRisk = 0;
+		 		frostRisk <- 0; 
 		 	}
+		 	write 'Riesgo de heladas: ' + frostRisk;
 		 	
 		 	/*SEQUIA METEOROLOGICA -- PRECIPITACIONES (SPI) */
 		 	list<list<list>> spi <- list<list<list>> (select(params:POSTGRES,
 		 										select: "SELECT * FROM spi_10 where month = ? and year = ?;",
 		 										values: [current_month, string(current_date.year)])); 
 		 	write "consulta " + spi[2][0][0] + " " + spi[2][0][2]; 
-		 	/*loop i,j over: range_spi2{
-		 		/*colocar if para ver en que rango cae 
-		 		write "hola " + i;
-		 	}*/
 		 	//Rango de spi asociado al riesgo (int)
 		 	switch(spi[2][0][2]){
 		 		match_between[0, #infinity] {droughtRisk <- 0;}
@@ -212,9 +223,6 @@ species terrenos {
 		 	}
 		 	
 		 	write "Riesgo de sequía: " + droughtRisk;
-		 	
-		 	
-		 	//write "riesgo " + range_spi[spi[2][0][2]]; 
 		 	
 		 	/*OLAS DE CALOR */
 		 	//misma logica que SPI

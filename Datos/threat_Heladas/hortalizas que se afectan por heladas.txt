@@ -1,0 +1,33 @@
+Especies de verano:
+Tomate --> no son capaces de tolerar menos de 0°C
+Pepino --> no son capaces de tolerar menos de 0°C
+Sandía --> no son capaces de tolerar menos de 0°C
+Melón --> no son capaces de tolerar menos de 0°C
+Papa --> no son capaces de tolerar menos de 0°C (no toleran heladas)
+Poroto verde --> no son capaces de tolerar menos de 0°C
+Poroto granado --> no son capaces de tolerar menos de 0°C
+Zapallo italiano --> no son capaces de tolerar menos de 0°C
+
+
+Toleran heladas débiles:
+Espinaca
+Brócoli
+Repollo
+Zanahoria
+Especies que se dañan cerca de su madurez: Se dañan cuando se encuentran cerca de su cosecha
+Alcachofa
+Apio
+Arveja
+Coliflor
+Haba
+Lechuga
+--> Si se encuentran en estado de cosecha, puede haber algún deterioro de la calidad del producto, pero normalmente no se va a perder el cultivo.
+
+
+Toleran heladas:
+Ajo
+Cebolla
+
+
+
+
