@@ -53,6 +53,7 @@ global{
 	date current_date <- date([2020,3]);
 	float step update: 1 #month;
 	string current_month update: months_names[current_date.month]; 
+	list<int> generalRisks <- [];
 	
 	//Cantidad de agentes
 	map<string, int> people <- [
@@ -112,7 +113,7 @@ global{
 		
 		write "Cargando capas de mapas";
 		//TODO: Borrar cantidad de terrenos
-		int number_terrenos <- 1;
+		int number_terrenos <- 2;
 		create comunas from: shpfiles['comunas_shp'];
 		create terrenos from: shpfiles['terrenos_shp'] number: number_terrenos; 
 		create ferias from: shpfiles['ferias_shp']; /*with: [type::float(get(veg))]{
@@ -126,6 +127,73 @@ global{
 		}
 		
 		write "Fin";
+		
+	}
+	
+	reflex generalRisk{
+		write "probando reflex riesgo";
+		unknown frostRisk;
+		int droughtRisk;
+		int heatwaveRisk;	
+		ask(agentDB){
+		 	/*HELADAS */
+		 	list<list> frost <- list<list> (select(params:POSTGRES, 
+		 											select: "SELECT * FROM frost where mes = ? ;",
+		 											values: [current_month])); 
+		 	list<unknown> frost_values <- frost[2][0];
+		 	float prob <- frost_values[1] as float;
+		 	int days;
+		 	string degree;
+		 	if(flip(prob)){
+		 		days <- ceil(frost_values[3] as float) as int;
+		 		map<int, int> sumRisks <- [3::0,2::0,1::0];
+		 		loop times: days {
+		 			degree <- rnd_choice(["rango 1"::frost_values[4], "rango 2"::frost_values[5], "rango 3"::frost_values[6], "rango 4"::frost_values[7], "rango 5"::frost_values[8], "rango 6"::frost_values[9]]);
+		 			switch (degree) {
+		 				match_one["rango 1", "rango 2"] {sumRisks[1] <- sumRisks[1]+1;} //Riesgo bajo
+		 				match_one["rango 3", "rango 4"] {sumRisks[2] <- sumRisks[2]+1;} //Riesgo medio
+		 				match_one["rango 5", "rango 6"] {sumRisks[3] <- sumRisks[3]+1;} //Riesgo alto
+		 			}
+		 		}
+		 		if(sumRisks[2] + sumRisks[3] >= sumRisks[1]){
+		 			frostRisk <- sumRisks index_of max(sumRisks[2], sumRisks[3]); 
+		 		}else{
+		 			frostRisk <- sumRisks index_of max(sumRisks);
+		 		}
+		 	}else{
+		 		frostRisk <- 0; 
+		 	}
+		 	write 'Riesgo de heladas: ' + frostRisk;
+		 	
+		 	/*SEQUIA METEOROLOGICA -- PRECIPITACIONES (SPI) */
+		 	list<list<list>> spi <- list<list<list>> (select(params:POSTGRES,
+		 										select: "SELECT * FROM spi_10 where month = ? and year = ?;",
+		 										values: [current_month, string(current_date.year)])); 
+		 	//Rango de spi asociado al riesgo (int)
+		 	switch(spi[2][0][2]){
+		 		match_between[0, #infinity] {droughtRisk <- 0;}
+		 		match_between[-0.5,0]{droughtRisk <- 1;}
+		 		match_between[-1,-0.5]{droughtRisk <- 1;}
+		 		match_between[-1.5,-1]{droughtRisk <- 2;}
+		 		match_between[-2,-1.5]{droughtRisk <- 2;}
+		 		match_between[-#infinity,-2]{droughtRisk <- 3;}
+		 	}
+		 	
+		 	write "Riesgo de sequía: " + droughtRisk;
+		 	
+		 	/*OLAS DE CALOR */
+		 	list<list<list>> heatwaves <- list<list<list>>(select(params:POSTGRES,
+		 											select: "SELECT * FROM heatwave where month = ? and year = ?;",
+		 											values: [current_month, string(current_date.year)]));
+		 	switch(heatwaves[2][0][2]){
+		 		match 0{heatwaveRisk <- 0;}
+		 		match_between[1,3]{heatwaveRisk <- 1;}
+		 		match_between[4,7]{heatwaveRisk <- 2;}
+		 		match_between[8,#infinity]{heatwaveRisk <- 3;}
+		 	}
+		 	write "Riesgo de olas de calor: " + heatwaveRisk;	
+		 }
+		generalRisks <- [int(frostRisk), droughtRisk, heatwaveRisk];
 	}
 }
 
@@ -146,8 +214,8 @@ species terrenos {
 		map<string, list<int>> finalRisks;
 		//TODO: llamar al calculate frostRisk por step, no por terreno
 		//TODO: cambiar nombre y output de la función
-		list<int> frostRisk <- calculateFrostRisk(); //Riesgo de heladas para el mes
-		write 'risks: ' + frostRisk; 
+		//list<int> frostRisk <- calculateFrostRisk(); //Riesgo de heladas para el mes
+		write 'risks: ' + generalRisks; 
 		loop i over: products {
 			string months_siembra <- i[2];
 			if(i[2] != '' and (contains(months_siembra, current_month) or contains(months_siembra, 'Todos'))){
@@ -160,82 +228,9 @@ species terrenos {
 		write "risks list " + finalRisks;
 	}
 	
-	list<int> calculateFrostRisk{
-		 unknown frostRisk;
-		 int droughtRisk;
-		 int heatwaveRisk;	
-		 ask(agentDB){
-		 	/*HELADAS */
-		 	list<list> frost <- list<list> (select(params:POSTGRES, 
-		 											select: "SELECT * FROM frost where mes = ? ;",
-		 											values: [current_month])); 
-		 	list<unknown> frost_values <- frost[2][0];
-		 	float prob <- frost_values[1] as float;
-		 	int days;
-		 	string degree;
-		 	/*borrar */
-		 	//write 'prob ' + prob;  
-		 	if(flip(prob)){
-		 		days <- ceil(frost_values[3] as float) as int;
-		 		/*borrar */
-		 		//write 'days '+ days;
-		 		map<int, int> sumRisks <- [3::0,2::0,1::0];
-		 		loop times: days {
-		 			degree <- rnd_choice(["rango 1"::frost_values[4], "rango 2"::frost_values[5], "rango 3"::frost_values[6], "rango 4"::frost_values[7], "rango 5"::frost_values[8], "rango 6"::frost_values[9]]);
-		 			/*borrar */
-		 			write 'degreeee ' + degree;
-		 			switch (degree) {
-		 				match_one["rango 1", "rango 2"] {sumRisks[1] <- sumRisks[1]+1;} //Riesgo bajo
-		 				match_one["rango 3", "rango 4"] {sumRisks[2] <- sumRisks[2]+1;} //Riesgo medio
-		 				match_one["rango 5", "rango 6"] {sumRisks[3] <- sumRisks[3]+1;} //Riesgo alto
-		 			}
-		 		}
-		 		//write 'riesgosssssssssssss ' + sumRisks;
-		 		if(sumRisks[2] + sumRisks[3] >= sumRisks[1]){
-		 			frostRisk <- sumRisks index_of max(sumRisks[2], sumRisks[3]); 
-		 		}else{
-		 			frostRisk <- sumRisks index_of max(sumRisks);
-		 		}
-		 	}else{
-		 		frostRisk <- 0; 
-		 	}
-		 	write 'Riesgo de heladas: ' + frostRisk;
-		 	
-		 	/*SEQUIA METEOROLOGICA -- PRECIPITACIONES (SPI) */
-		 	list<list<list>> spi <- list<list<list>> (select(params:POSTGRES,
-		 										select: "SELECT * FROM spi_10 where month = ? and year = ?;",
-		 										values: [current_month, string(current_date.year)])); 
-		 	//write "consulta " + spi[2][0][0] + " " + spi[2][0][2]; 
-		 	//Rango de spi asociado al riesgo (int)
-		 	switch(spi[2][0][2]){
-		 		match_between[0, #infinity] {droughtRisk <- 0;}
-		 		match_between[-0.5,0]{droughtRisk <- 1;}
-		 		match_between[-1,-0.5]{droughtRisk <- 1;}
-		 		match_between[-1.5,-1]{droughtRisk <- 2;}
-		 		match_between[-2,-1.5]{droughtRisk <- 2;}
-		 		match_between[-#infinity,-2]{droughtRisk <- 3;}
-		 	}
-		 	
-		 	write "Riesgo de sequía: " + droughtRisk;
-		 	
-		 	/*OLAS DE CALOR */
-		 	//misma logica que SPI
-		 	list<list<list>> heatwaves <- list<list<list>>(select(params:POSTGRES,
-		 											select: "SELECT * FROM heatwave where month = ? and year = ?;",
-		 											values: [current_month, string(current_date.year)]));
-		 	//write "heatwaves " + heatwaves[2][0][2]; 
-		 	switch(heatwaves[2][0][2]){
-		 		match 0{heatwaveRisk <- 0;}
-		 		match_between[1,3]{heatwaveRisk <- 1;}
-		 		match_between[4,7]{heatwaveRisk <- 2;}
-		 		match_between[8,#infinity]{heatwaveRisk <- 3;}
-		 	}
-		 	write "Riesgo de olas de calor: " + heatwaveRisk;	
-		 }
-		 list<int> risks <- [int(frostRisk), droughtRisk, heatwaveRisk];
+	/*list<int> calculateFrostRisk{
 		 return risks;
-		 
-	}
+	}*/
 	
 	reflex prueba_reflex{
 		do getMinRisk;
