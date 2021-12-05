@@ -70,7 +70,7 @@ global{
 	];
 	
 	//Variables estáticas para cálculos de riesgo (Amenazas x vulnerabilidad, GRD)
-	list<string> threats <- ["Ola de calor", "Helada", "Inundacion","Plaga"];
+	list<string> threats <- ["Helada", "Ola de calor", "Sequia","Plaga"];
 	map<string, list<int>> result_risk_scale <- [
 		"Baja"::[1,2],
 		"Media"::[3,4,5],
@@ -89,17 +89,13 @@ global{
 		"Plaga"::[6,8,10]	
 	];
 	
-	/*Input de user
-	 * map<string, unknown> affect_weight <- user_input([
-		enter("Peso de afectación Ola de calor",0), 
-		enter("Peso de afectación Helada",0), 
-		enter("Peso de afectación Inundación",0), 
-		enter("Peso de afectación Plaga",0)
+	//Input de user
+	 map<string, unknown> affect_weight <- user_input([
+	 	enter("Peso de afectación Helada",0.0),
+		enter("Peso de afectación Ola de calor",0.0), 
+		enter("Peso de afectación Sequía",0.0), 
+		enter("Peso de afectación Plaga",0.0)
 	]); 
-	/*write "probando input de user";
-	write affect_weight["Peso de afectación Ola de calor"]  */
-	/*float drought_prob <- 0.1;
-	float frost_prob <- 0.1;*/  
 	
 	/*Creación e inicialización de los agentes en la simulación */
 	init{
@@ -113,7 +109,7 @@ global{
 		
 		write "Cargando capas de mapas";
 		//TODO: Borrar cantidad de terrenos
-		int number_terrenos <- 2;
+		int number_terrenos <- 1;
 		create comunas from: shpfiles['comunas_shp'];
 		create terrenos from: shpfiles['terrenos_shp'] number: number_terrenos; 
 		create ferias from: shpfiles['ferias_shp']; /*with: [type::float(get(veg))]{
@@ -131,7 +127,7 @@ global{
 	}
 	
 	reflex generalRisk{
-		write "probando reflex riesgo";
+		write "Step " + current_month + ' ' + current_date.year;
 		unknown frostRisk;
 		int droughtRisk;
 		int heatwaveRisk;	
@@ -193,7 +189,7 @@ global{
 		 	}
 		 	write "Riesgo de olas de calor: " + heatwaveRisk;	
 		 }
-		generalRisks <- [int(frostRisk), droughtRisk, heatwaveRisk];
+		generalRisks <- [int(frostRisk), heatwaveRisk, droughtRisk, 0];
 	}
 }
 
@@ -206,31 +202,43 @@ species terrenos {
 		draw shape color: color border: border;
 	}
 	
-	
 	//Calcular riesgo en el terreno
 	action getMinRisk{
-		write "month " + current_month;
-		write "year " + current_date.year;
 		map<string, list<int>> finalRisks;
-		//TODO: llamar al calculate frostRisk por step, no por terreno
-		//TODO: cambiar nombre y output de la función
-		//list<int> frostRisk <- calculateFrostRisk(); //Riesgo de heladas para el mes
+		/*Borrar 2 */
 		write 'risks: ' + generalRisks; 
+		write 'productossssssss: ' + products;
 		loop i over: products {
+			float affectionLevel <- 0.0; 
+			list<int> indexes;
 			string months_siembra <- i[2];
 			if(i[2] != '' and (contains(months_siembra, current_month) or contains(months_siembra, 'Todos'))){
+				//Borrar
 				write "product -- " + i[0];
-				//aquí se debe evaluar 
-				//list<int> risk <- calculateFrostRisk();
-				//add risk at: i[0] to: finalRisks;
+				loop j from:0 to:3 step:1 {
+					switch(threats[j]){
+						match 'Helada' { indexes <- [7,8,9]; }
+						match 'Ola de calor' { indexes <- [10,11,12]; }
+						match 'Sequia' { indexes <- [13, 14, 15]; }
+						match 'Plaga' { indexes <- [16,17,18]; }
+					}
+					
+					switch(generalRisks[j]){
+						match 0 {affectionLevel <- affectionLevel + 0;}
+						match 1 {affectionLevel <- affectionLevel + int(i[indexes[0]]) * float(affect_weight["Peso de afectación " + threats[j]]);}
+						match 2 {affectionLevel <- affectionLevel + int(i[indexes[1]]) * float(affect_weight["Peso de afectación " + threats[j]]);}
+						match 3 {affectionLevel <- affectionLevel + int(i[indexes[2]]) * float(affect_weight["Peso de afectación " + threats[j]]);}
+					}
+				}
+				write 'affectionLevel: '+affectionLevel;
+				write '';				
 			}
 		}
+		
+		//aquí se debe evaluar
+		//add risk at: i[0] to: finalRisks;
 		write "risks list " + finalRisks;
 	}
-	
-	/*list<int> calculateFrostRisk{
-		 return risks;
-	}*/
 	
 	reflex prueba_reflex{
 		do getMinRisk;
@@ -267,7 +275,7 @@ species agentDB skills:[SQLSKILL]{
 	
 	init{
 		if(testConnection(POSTGRES)){
-			products <- list<list> (select(POSTGRES,"SELECT * FROM productos ;"));
+			products <- list<list> (select(POSTGRES,"SELECT * FROM productos_respaldo WHERE valid = true;"));
 			products <- products[2];
 		}else{
 			write "Problemas de conexión con la BD.";
@@ -293,6 +301,4 @@ experiment agriculture_world type: gui {
 		        species floods aspect:base;
 		    }
 	   	} /*https://gama-platform.github.io/wiki/LuneraysFlu_step3 VER ESTE EJEMPLOOOOO */
-	    
-	
 }  

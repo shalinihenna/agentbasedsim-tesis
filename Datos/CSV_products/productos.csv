@@ -1,34 +1,34 @@
-﻿nombre;tipo;meses_siembra;meses_venta;dias_cosecha;meses_cosecha
-Ajo;Hortaliza;Abril, Mayo, Junio, Julio, Agosto;Todos;180;6,0
-Alcachofa;Hortaliza;Febrero, Marzo;Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre;90;3,0
-Apio;Hortaliza;Todos;Todos;70;2,3
-Arveja Verde;Hortaliza;Mayo, Junio, Julio, Agosto;Todos;90;3,0
-Brócoli;Hortaliza;Todos;Todos;90;3,0
-Cebolla;Hortaliza;Enero, Febrero, Octubre, Noviembre, Diciembre;Todos;120;4,0
-Choclo;Hortaliza;Septiembre, Octubre, Noviembre, Diciembre;Todos;120;4,0
-Coliflor;Hortaliza;Todos;Todos;130;4,3
-Espinaca;Hortaliza;Todos;Todos;90;3,0
-Haba;Hortaliza;Abril, Mayo, Junio;Enero, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre;90;3,0
-Lechuga;Hortaliza;Todos;Todos;90;3,0
-Melón;Hortaliza;Enero, Febrero, Septiembre, Octubre, Noviembre, Diciembre;Enero, Febrero, Marzo, Diciembre;120;4,0
-Papa;Hortaliza;Agosto, Septiembre, Octubre, Noviembre;Todos;90;3,0
-Pepino ensalada;Hortaliza;Septiembre, Octubre, Noviembre, Diciembre;Todos;120;4,0
-Poroto granado;Hortaliza;Enero, Octubre, Noviembre, Diciembre;Enero, Febrero, Marzo, Abril, Mayo, Diciembre;80;2,6
-Poroto verde;Hortaliza;Enero, Septiembre, Octubre, Noviembre, Diciembre;Todos;80;2,6
-Repollo;Hortaliza;Todos;Todos;100;3,3
-Sandía;Hortaliza;Enero, Febrero, Septiembre, Octubre, Noviembre, Diciembre;Enero, Febrero, Marzo, Diciembre;120;4,0
-Tomate;Hortaliza;Agosto, Septiembre;Todos;90;3,0
-Zanahoría;Hortaliza;Todos;Todos;120;4,0
-Zapallo italiano;Hortaliza;Enero, Septiembre, Octubre, Noviembre, Diciembre;Todos;100;3,3
-Durazno;Fruta;;;;
-Frambuesa;Fruta;;;;
-Frutilla;Fruta;Abril, Mayo;Enero, Febrero, Marzo, Abril, Mayo, Octubre, Noviembre, Diciembre;120;4,0
-Kiwi;Fruta;;;;
-Limón;Fruta;;;;
-Mandarina;Fruta;;;;
-Manzana;Fruta;;;;
-Naranja;Fruta;;;;
-Nectarín;Fruta;;;;
-Palta;Fruta;;;;
-Pera;Fruta;;;;
-Uva;Fruta;;;;
+﻿nombre;tipo;meses_siembra;meses_venta;dias_cosecha;meses_cosecha;valid;heladas_bajo;heladas_medio;heladas_alto;oc_bajo;oc_medio;oc_alto;sequia_baja;sequia_media;sequia_alta;plaga_baja;plaga_media;plaga_alta
+Ajo;Hortaliza;Abril, Mayo, Junio, Julio, Agosto;Todos;180;6;true;1;1;2;;;;;;;;;
+Alcachofa;Hortaliza;Febrero, Marzo;Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre;90;3;true;1;2;2;;;;;;;;;
+Apio;Hortaliza;Todos;Todos;70;2,3;true;1;2;2;;;;;;;;;
+Arveja Verde;Hortaliza;Mayo, Junio, Julio, Agosto;Todos;90;3;true;1;2;2;;;;;;;;;
+Brócoli;Hortaliza;Todos;Todos;90;3;true;1;2;2;;;;;;;;;
+Cebolla;Hortaliza;Enero, Febrero, Octubre, Noviembre, Diciembre;Todos;120;4;true;1;1;2;;;;;;;;;
+Choclo;Hortaliza;Septiembre, Octubre, Noviembre, Diciembre;Todos;120;4;true;1;2;3;;;;;;;;;
+Coliflor;Hortaliza;Todos;Todos;130;4,3;true;1;2;2;;;;;;;;;
+Espinaca;Hortaliza;Todos;Todos;90;3;true;1;2;2;;;;;;;;;
+Haba;Hortaliza;Abril, Mayo, Junio;Enero, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre;90;3;true;1;2;2;;;;;;;;;
+Lechuga;Hortaliza;Todos;Todos;90;3;true;1;2;2;;;;;;;;;
+Melón;Hortaliza;Enero, Febrero, Septiembre, Octubre, Noviembre, Diciembre;Enero, Febrero, Marzo, Diciembre;120;4;true;3;3;3;;;;;;;;;
+Papa;Hortaliza;Agosto, Septiembre, Octubre, Noviembre;Todos;90;3;false;;;;;;;;;;;;
+Pepino ensalada;Hortaliza;Septiembre, Octubre, Noviembre, Diciembre;Todos;120;4;true;3;3;3;;;;;;;;;
+Poroto granado;Hortaliza;Enero, Octubre, Noviembre, Diciembre;Enero, Febrero, Marzo, Abril, Mayo, Diciembre;80;2,6;true;3;3;3;;;;;;;;;
+Poroto verde;Hortaliza;Enero, Septiembre, Octubre, Noviembre, Diciembre;Todos;80;2,6;true;3;3;3;;;;;;;;;
+Repollo;Hortaliza;Todos;Todos;100;3,3;true;1;2;2;;;;;;;;;
+Sandía;Hortaliza;Enero, Febrero, Septiembre, Octubre, Noviembre, Diciembre;Enero, Febrero, Marzo, Diciembre;120;4;true;3;3;3;;;;;;;;;
+Tomate;Hortaliza;Agosto, Septiembre;Todos;90;3;true;3;3;3;;;;;;;;;
+Zanahoría;Hortaliza;Todos;Todos;120;4;true;1;2;2;;;;;;;;;
+Zapallo italiano;Hortaliza;Enero, Septiembre, Octubre, Noviembre, Diciembre;Todos;100;3,3;true;3;3;3;;;;;;;;;
+Durazno;Fruta;;;;;false;;;;;;;;;;;;
+Frambuesa;Fruta;;;;;false;;;;;;;;;;;;
+Frutilla;Fruta;Abril, Mayo;Enero, Febrero, Marzo, Abril, Mayo, Octubre, Noviembre, Diciembre;120;4;true;1;2;3;;;;;;;;;
+Kiwi;Fruta;;;;;false;;;;;;;;;;;;
+Limón;Fruta;;;;;false;;;;;;;;;;;;
+Mandarina;Fruta;;;;;false;;;;;;;;;;;;
+Manzana;Fruta;;;;;false;;;;;;;;;;;;
+Naranja;Fruta;;;;;false;;;;;;;;;;;;
+Nectarín;Fruta;;;;;false;;;;;;;;;;;;
+Palta;Fruta;;;;;false;;;;;;;;;;;;
+Pera;Fruta;;;;;false;;;;;;;;;;;;
+Uva;Fruta;;;;;false;;;;;;;;;;;;
