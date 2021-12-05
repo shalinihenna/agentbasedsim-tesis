@@ -111,7 +111,7 @@ global{
 		//TODO: Borrar cantidad de terrenos
 		int number_terrenos <- 1;
 		create comunas from: shpfiles['comunas_shp'];
-		create terrenos from: shpfiles['terrenos_shp'] number: number_terrenos; 
+		create terrenos from: shpfiles['terrenos_shp']; // number: number_terrenos; 
 		create ferias from: shpfiles['ferias_shp']; /*with: [type::float(get(veg))]{
 			if (type > 0){
 				color <- #brown;
@@ -190,6 +190,8 @@ global{
 		 	write "Riesgo de olas de calor: " + heatwaveRisk;	
 		 }
 		generalRisks <- [int(frostRisk), heatwaveRisk, droughtRisk, 0];
+		//Borrar
+		write 'risks: ' + generalRisks; 
 	}
 }
 
@@ -204,17 +206,13 @@ species terrenos {
 	
 	//Calcular riesgo en el terreno
 	action getMinRisk{
-		map<string, list<int>> finalRisks;
-		/*Borrar 2 */
-		write 'risks: ' + generalRisks; 
-		write 'productossssssss: ' + products;
+		map<string, float> finalRisks;
 		loop i over: products {
 			float affectionLevel <- 0.0; 
+			float aux <- 0.0;
 			list<int> indexes;
 			string months_siembra <- i[2];
 			if(i[2] != '' and (contains(months_siembra, current_month) or contains(months_siembra, 'Todos'))){
-				//Borrar
-				write "product -- " + i[0];
 				loop j from:0 to:3 step:1 {
 					switch(threats[j]){
 						match 'Helada' { indexes <- [7,8,9]; }
@@ -224,20 +222,19 @@ species terrenos {
 					}
 					
 					switch(generalRisks[j]){
-						match 0 {affectionLevel <- affectionLevel + 0;}
-						match 1 {affectionLevel <- affectionLevel + int(i[indexes[0]]) * float(affect_weight["Peso de afectación " + threats[j]]);}
-						match 2 {affectionLevel <- affectionLevel + int(i[indexes[1]]) * float(affect_weight["Peso de afectación " + threats[j]]);}
-						match 3 {affectionLevel <- affectionLevel + int(i[indexes[2]]) * float(affect_weight["Peso de afectación " + threats[j]]);}
+						match 1 { aux <- ceil(int(i[indexes[0]]) * float(affect_weight["Peso de afectación " + threats[j]])); }
+						match 2 { aux <- ceil(int(i[indexes[1]]) * float(affect_weight["Peso de afectación " + threats[j]])); }
+						match 3 { aux <- ceil(int(i[indexes[2]]) * float(affect_weight["Peso de afectación " + threats[j]])); }
 					}
+					affectionLevel <- affectionLevel +  aux * generalRisks[j];
 				}
-				write 'affectionLevel: '+affectionLevel;
-				write '';				
+				//Borrar
+				//write "product: " + i[0] + ' -- affectionLevel: '+ affectionLevel;
+				add affectionLevel at: i[0] to: finalRisks;		
 			}
 		}
-		
-		//aquí se debe evaluar
-		//add risk at: i[0] to: finalRisks;
 		write "risks list " + finalRisks;
+		write " ";
 	}
 	
 	reflex prueba_reflex{
