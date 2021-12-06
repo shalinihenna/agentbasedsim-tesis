@@ -111,7 +111,7 @@ global{
 		//TODO: Borrar cantidad de terrenos
 		int number_terrenos <- 1;
 		create comunas from: shpfiles['comunas_shp'];
-		create terrenos from: shpfiles['terrenos_shp']; // number: number_terrenos; 
+		create terrenos from: shpfiles['terrenos_shp'] number: number_terrenos; 
 		create ferias from: shpfiles['ferias_shp']; /*with: [type::float(get(veg))]{
 			if (type > 0){
 				color <- #brown;
@@ -152,9 +152,9 @@ global{
 		 			}
 		 		}
 		 		if(sumRisks[2] + sumRisks[3] >= sumRisks[1]){
-		 			frostRisk <- sumRisks index_of max(sumRisks[2], sumRisks[3]); 
+		 			frostRisk <- sumRisks last_index_of max(sumRisks[2], sumRisks[3]); 
 		 		}else{
-		 			frostRisk <- sumRisks index_of max(sumRisks);
+		 			frostRisk <- sumRisks last_index_of max(sumRisks);
 		 		}
 		 	}else{
 		 		frostRisk <- 0; 
@@ -206,7 +206,8 @@ species terrenos {
 	
 	//Calcular riesgo en el terreno
 	action getMinRisk{
-		map<string, float> finalRisks;
+		list<string> finalRisksProduct;
+		list<int> finalRisksValue;
 		loop i over: products {
 			float affectionLevel <- 0.0; 
 			float aux <- 0.0;
@@ -228,14 +229,21 @@ species terrenos {
 					}
 					affectionLevel <- affectionLevel +  aux * generalRisks[j];
 				}
-				//Borrar
-				//write "product: " + i[0] + ' -- affectionLevel: '+ affectionLevel;
-				add affectionLevel at: i[0] to: finalRisks;		
+				add int(affectionLevel) to: finalRisksValue;		
+				add i[0] to: finalRisksProduct;
 			}
 		}
-		write "risks list " + finalRisks;
+		write "risks list value " + finalRisksValue;
+		write "risks list prods " + finalRisksProduct;
+ 		
+		//cálculo del mínimo
+		int minRiskValue <- min(finalRisksValue);  
+		list<int> minIndexes <- finalRisksValue all_indexes_of minRiskValue;
+		list<string> minRiskProducts <- minIndexes collect(finalRisksProduct[each]);
+		write "min risk value: " + minRiskValue + "min risk products: " + minRiskProducts;
 		write " ";
 	}
+	
 	
 	reflex prueba_reflex{
 		do getMinRisk;
