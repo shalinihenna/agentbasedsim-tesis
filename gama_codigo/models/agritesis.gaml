@@ -57,16 +57,16 @@ global{
 	
 	//Cantidad de agentes
 	map<string, int> people <- [
-		'number_of_farmers'::20,
+		'number_of_farmers'::4695,
 		'number_of_feriantes'::20,
 		'number_of_consumers'::20
 	];
 	
 	//Colores de los agentes
-	map<string, string> colors <- [
-		'farmer_color'::'yellow',
-		'feriante_color'::'green',
-		'consumer_color'::'blue'
+	map<string, rgb> colors <- [
+		'farmer_color'::#yellow,
+		'feriante_color'::#green,
+		'consumer_color'::#blue
 	];
 	
 	//Variables estáticas para cálculos de riesgo (Amenazas x vulnerabilidad, GRD)
@@ -82,6 +82,7 @@ global{
 		"Media"::2,
 		"Alta"::3	
 	];
+	//Borrar --> no va.
 	map<string, list<int>> affect_score <- [
 		"Ola de calor"::[1,4,7],
 		"Helada"::[3,5,8],
@@ -99,10 +100,6 @@ global{
 	
 	/*Creación e inicialización de los agentes en la simulación */
 	init{
-		write "Inicializando agentes";
-	 	/*create farmers number:number_of_farmers;
-		create feriantes number:number_of_feriante;
-		create consumer number:number_of_consumer;*/
 		
 		write "Conectando DB";
 		create agentDB;
@@ -111,7 +108,7 @@ global{
 		//TODO: Borrar cantidad de terrenos
 		int number_terrenos <- 1;
 		create comunas from: shpfiles['comunas_shp'];
-		create terrenos from: shpfiles['terrenos_shp'] number: number_terrenos; 
+		create terrenos from: shpfiles['terrenos_shp'] with:[area::float(get("area_ha"))];
 		create ferias from: shpfiles['ferias_shp']; /*with: [type::float(get(veg))]{
 			if (type > 0){
 				color <- #brown;
@@ -121,6 +118,19 @@ global{
 				color <- risklevel = "ALTA (desborde)" ? #blue : #darkblue;
 				border <- risklevel = "ALTA (desborde)" ? #blue : #darkblue;
 		}
+		
+		write "Inicializando agentes";
+		list<terrenos> te;
+	 	create farmers number:people['number_of_farmers'];//{
+	 		/*te <- terrenos where (each.estado = 0);
+	 		terrenos t <- one_of(te); 
+	 		t.estado <- 1;
+	 		location <- any_location_in(one_of(te));
+	 		self.terreno <- t;*/
+	 	//}
+		/*create feriantes number:number_of_feriante;
+		create consumer number:number_of_consumer;*/
+		
 		
 		write "Fin";
 		
@@ -193,12 +203,42 @@ global{
 		//Borrar
 		write 'risks: ' + generalRisks; 
 	}
+
+	//predicates for BDI agents
+	//FARMER
+	predicate sembrar <- new_predicate("sembrar");
+	predicate cosechar <- new_predicate("cosechar"); 
+
+}
+
+//Agente agricultores
+species farmers skills:[moving] control:simple_bdi{
+	int riskTaker <- rnd_choice([1::0.6, 2::0.3, 3::0.1]);
+	rgb my_color <- colors['farmer_color'];
+	terrenos terreno;
+	int sold_vegetables;
+	
+	init{
+		//assign terreno(s) 
+		list<terrenos> te <- terrenos where (each.estado = 0);
+		terreno <- one_of(te);
+		terreno.estado <- 1;
+		self.location <- centroid(terreno);
+		
+		//add first desire because terreno vacío
+	}
+	
+	aspect base {
+        draw circle(70) color: my_color border: #black;  //depth: gold_sold;
+    }
 }
 
 /*They are not agents, its just for display */
 species terrenos {
 	rgb color <- #white;
 	rgb border <- #black;
+	int estado <- 0; //0 --> vacío, 1 --> preparando tierra, 2 --> cultivando, 3 --> cosechando.
+	float area;
 	  
 	aspect base {
 		draw shape color: color border: border;
@@ -240,7 +280,7 @@ species terrenos {
 		int minRiskValue <- min(finalRisksValue);  
 		list<int> minIndexes <- finalRisksValue all_indexes_of minRiskValue;
 		list<string> minRiskProducts <- minIndexes collect(finalRisksProduct[each]);
-		write "min risk value: " + minRiskValue + "min risk products: " + minRiskProducts;
+		write "min risk value: " + minRiskValue + " --- min risk products: " + minRiskProducts;
 		write " ";
 	}
 	
@@ -303,7 +343,8 @@ experiment agriculture_world type: gui {
 	   			species comunas aspect:base;
 		        species terrenos aspect:base;     
 		        species ferias aspect:base; 
-		        species floods aspect:base;
+		        //species floods aspect:base;
+		        species farmers aspect:base;
 		    }
 	   	} /*https://gama-platform.github.io/wiki/LuneraysFlu_step3 VER ESTE EJEMPLOOOOO */
 }  
