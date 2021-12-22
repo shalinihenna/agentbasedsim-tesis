@@ -57,7 +57,7 @@ global{
 	
 	//Cantidad de agentes
 	map<string, int> people <- [
-		'number_of_farmers'::4695,
+		'number_of_farmers'::4695, //la misma cantidad de terrenos
 		'number_of_feriantes'::20,
 		'number_of_consumers'::20
 	];
@@ -77,17 +77,20 @@ global{
 		"Alta"::[6,7,8],
 		"Muy Alta"::[9]	
 	];
+	
 	map<string, int> risk_scale <- [
 		"Baja"::1,
 		"Media"::2,
 		"Alta"::3	
 	];
-	//Borrar --> no va.
-	map<string, list<int>> affect_score <- [
-		"Ola de calor"::[1,4,7],
-		"Helada"::[3,5,8],
-		"Inundacion"::[2,5,7],
-		"Plaga"::[6,8,10]	
+	
+	map<int, string> land_state <- [ 
+		0::"Sin Agricultor",
+		1::"Vacío",
+		2::"Preparando Tierra",
+		3::"Sembrando",
+		4::"Proceso de cultivo",
+		5::"Cosecha Lista"
 	];
 	
 	//Input de user
@@ -105,29 +108,17 @@ global{
 		create agentDB;
 		
 		write "Cargando capas de mapas";
-		//TODO: Borrar cantidad de terrenos
-		int number_terrenos <- 1;
 		create comunas from: shpfiles['comunas_shp'];
 		create terrenos from: shpfiles['terrenos_shp'] with:[area::float(get("area_ha"))];
-		create ferias from: shpfiles['ferias_shp']; /*with: [type::float(get(veg))]{
-			if (type > 0){
-				color <- #brown;
-			}
-		}*/
-		create floods from: shpfiles['floods_shp'] with: [risklevel::string((get("INUNDA2")))]{
+		create ferias from: shpfiles['ferias_shp']; 
+		/*create floods from: shpfiles['floods_shp'] with: [risklevel::string((get("INUNDA2")))]{
 				color <- risklevel = "ALTA (desborde)" ? #blue : #darkblue;
 				border <- risklevel = "ALTA (desborde)" ? #blue : #darkblue;
-		}
+		}*/
 		
 		write "Inicializando agentes";
 		list<terrenos> te;
-	 	create farmers number:people['number_of_farmers'];//{
-	 		/*te <- terrenos where (each.estado = 0);
-	 		terrenos t <- one_of(te); 
-	 		t.estado <- 1;
-	 		location <- any_location_in(one_of(te));
-	 		self.terreno <- t;*/
-	 	//}
+	 	create farmers number:people['number_of_farmers'];
 		/*create feriantes number:number_of_feriante;
 		create consumer number:number_of_consumer;*/
 		
@@ -206,8 +197,14 @@ global{
 
 	//predicates for BDI agents
 	//FARMER
+	predicate esperar <- new_predicate("esperar");
+	predicate cosecha_lista <- new_predicate("cosecha lista", true);
+	predicate cosecha_nolista <- new_predicate("cosecha lista", false);
+	predicate empty_land <- new_predicate("empty land");
 	predicate sembrar <- new_predicate("sembrar");
+	predicate preparar_tierra <- new_predicate("preparar tierra"); 
 	predicate cosechar <- new_predicate("cosechar"); 
+	predicate vender <- new_predicate("vender a feriante"); 
 
 }
 
@@ -216,17 +213,47 @@ species farmers skills:[moving] control:simple_bdi{
 	int riskTaker <- rnd_choice([1::0.6, 2::0.3, 3::0.1]);
 	rgb my_color <- colors['farmer_color'];
 	terrenos terreno;
+	int non_sold_vegetables;
 	int sold_vegetables;
 	
+	
 	init{
-		//assign terreno(s) 
+		//assign terreno 
 		list<terrenos> te <- terrenos where (each.estado = 0);
 		terreno <- one_of(te);
 		terreno.estado <- 1;
 		self.location <- centroid(terreno);
 		
 		//add first desire because terreno vacío
+		do add_desire(esperar);
 	}
+	
+	//cuando el terreno está vacío
+	perceive target:terreno when: terreno.estado = 1 {
+		//focus id:"algo" var:
+		ask myself{
+			do remove_intention(esperar, true);
+			do add_belief(empty_land);
+			do add_belief(cosecha_nolista);
+			do remove_belief(cosecha_lista);
+		}
+	}
+	
+	rule belief: empty_land new_desire: sembrar;
+	
+	
+	plan proceso_siembra intention: sembrar{
+		write "hola";
+	}
+	
+	//cuando el terreno está listo para cosechar
+	perceive target:terreno when: terreno.estado = 5 {
+		ask myself{
+			do add_belief(cosecha_lista);
+			do remove_belief(cosecha_nolista);
+		}
+	}
+	
 	
 	aspect base {
         draw circle(70) color: my_color border: #black;  //depth: gold_sold;
@@ -239,6 +266,7 @@ species terrenos {
 	rgb border <- #black;
 	int estado <- 0; //0 --> vacío, 1 --> preparando tierra, 2 --> cultivando, 3 --> cosechando.
 	float area;
+	string producto_actual;
 	  
 	aspect base {
 		draw shape color: color border: border;
@@ -284,7 +312,7 @@ species terrenos {
 		write " ";
 	}
 	
-	
+	//Cada step de la simulación
 	reflex prueba_reflex{
 		do getMinRisk;
 	}
@@ -346,5 +374,5 @@ experiment agriculture_world type: gui {
 		        //species floods aspect:base;
 		        species farmers aspect:base;
 		    }
-	   	} /*https://gama-platform.github.io/wiki/LuneraysFlu_step3 VER ESTE EJEMPLOOOOO */
+	   	} /*https://gama-platform.github.io/wiki/LuneraysFlu_step3 VER ESTE EJEMPLOOOOO (chart_display para gráficos) */
 }  
