@@ -78,19 +78,19 @@ global{
 		"Muy Alta"::[9]	
 	];
 	
-	map<string, int> risk_scale <- [
-		"Baja"::1,
-		"Media"::2,
-		"Alta"::3	
+	map<int,string> risk_scale <- [
+		0::"Nulo",
+		1::"Baja",
+		2::"Media",
+		3::"Alta"	
 	];
 	
 	map<int, string> land_state <- [ 
 		0::"Sin Agricultor",
 		1::"Vacío",
-		2::"Preparando Tierra",
-		3::"Sembrando",
-		4::"Proceso de cultivo",
-		5::"Cosecha Lista"
+		2::"Sembrando",
+		3::"Proceso de cultivo",
+		4::"Cosecha Lista"
 	];
 	
 	//Input de user
@@ -127,7 +127,7 @@ global{
 		
 	}
 	
-	reflex generalRisk{
+	reflex climateRisks{
 		write "Step " + current_month + ' ' + current_date.year;
 		unknown frostRisk;
 		int droughtRisk;
@@ -194,7 +194,58 @@ global{
 		//Borrar
 		write 'risks: ' + generalRisks; 
 	}
+	
+	list<string> finalRisksProduct;
+	list<int> finalRisksValue;
+	reflex generalRisk{
+		finalRisksProduct <- [];
+		finalRisksValue <- []; 
+		loop i over: products {
+			float affectionLevel <- 0.0; 
+			float aux <- 0.0;
+			list<int> indexes;
+			string months_siembra <- i[2];
+			if(i[2] != '' and (contains(months_siembra, current_month) or contains(months_siembra, 'Todos'))){
+				loop j from:0 to:3 step:1 {
+					switch(threats[j]){
+						match 'Helada' { indexes <- [7,8,9]; }
+						match 'Ola de calor' { indexes <- [10,11,12]; }
+						match 'Sequia' { indexes <- [13, 14, 15]; }
+						match 'Plaga' { indexes <- [16,17,18]; }
+					}
+					
+					switch(generalRisks[j]){
+						match 1 { aux <- ceil(int(i[indexes[0]]) * float(affect_weight["Peso de afectación " + threats[j]])); }
+						match 2 { aux <- ceil(int(i[indexes[1]]) * float(affect_weight["Peso de afectación " + threats[j]])); }
+						match 3 { aux <- ceil(int(i[indexes[2]]) * float(affect_weight["Peso de afectación " + threats[j]])); }
+					}
+					affectionLevel <- affectionLevel +  aux * generalRisks[j];
+				}
+				add int(affectionLevel) to: finalRisksValue;		
+				add i[0] to: finalRisksProduct;
+			}
+		}
+		write "risks list valueeee " + finalRisksValue;
+		write "risks list prodssss " + finalRisksProduct;
+	}
 
+	reflex getMinRisk{
+		int riskValue;
+		list<int> indexes;
+		list<string> filteredProducts;
+		
+		//para los farmers con riskLevel 1
+		riskValue <- min(finalRisksValue);  
+		indexes <- finalRisksValue all_indexes_of riskValue;
+		filteredProducts <- indexes collect(finalRisksProduct[each]);
+		write "min risk value: " + riskValue + " --- min risk products: " + filteredProducts;
+		write " ";		
+	}
+	
+	reflex getPrices{
+			
+	}
+	
 	//predicates for BDI agents
 	//FARMER
 	predicate esperar <- new_predicate("esperar");
@@ -210,7 +261,8 @@ global{
 
 //Agente agricultores
 species farmers skills:[moving] control:simple_bdi{
-	int riskTaker <- rnd_choice([1::0.6, 2::0.3, 3::0.1]);
+	//int riskLevel <- rnd_choice([1::0.6, 2::0.3, 3::0.1]);
+	bool riskLevel <- flip(0.06); 
 	rgb my_color <- colors['farmer_color'];
 	terrenos terreno;
 	int non_sold_vegetables;
@@ -241,13 +293,38 @@ species farmers skills:[moving] control:simple_bdi{
 	
 	rule belief: empty_land new_desire: sembrar;
 	
-	
 	plan proceso_siembra intention: sembrar{
-		write "hola";
+		
+		if(terreno.estado = 1){
+			//subdesire 1: Selección de hortaliza según el riesgo de eventos climáticos y el precio/demanda del periodo pasado
+			if(!self.riskLevel){
+				//write "Riesgo 1";
+				//write " ";
+				
+			}else{
+				
+			}
+			
+			terreno.producto_seleccionado <- "Frutilla"; //hacer el random y falta agregar lo del precio/demanda!
+			terreno.estado <- 2;
+		}else if(terreno.estado = 2){
+			//subdesire 2: Preparar tierra
+			
+			terreno.estado <- 3;
+		}else if(terreno.estado = 3){
+			//desire: Sembrar propiamente tal
+			terreno.estado <- 4;
+			
+			//actualización de beliefs e intentions
+			do remove_belief(empty_land);
+			do remove_intention(sembrar);
+			//falta
+		}
+		
 	}
 	
 	//cuando el terreno está listo para cosechar
-	perceive target:terreno when: terreno.estado = 5 {
+	perceive target:terreno when: terreno.estado = 4 {
 		ask myself{
 			do add_belief(cosecha_lista);
 			do remove_belief(cosecha_nolista);
@@ -266,56 +343,19 @@ species terrenos {
 	rgb border <- #black;
 	int estado <- 0; //0 --> vacío, 1 --> preparando tierra, 2 --> cultivando, 3 --> cosechando.
 	float area;
-	string producto_actual;
+	string producto_seleccionado;
 	  
 	aspect base {
 		draw shape color: color border: border;
 	}
 	
 	//Calcular riesgo en el terreno
-	action getMinRisk{
-		list<string> finalRisksProduct;
-		list<int> finalRisksValue;
-		loop i over: products {
-			float affectionLevel <- 0.0; 
-			float aux <- 0.0;
-			list<int> indexes;
-			string months_siembra <- i[2];
-			if(i[2] != '' and (contains(months_siembra, current_month) or contains(months_siembra, 'Todos'))){
-				loop j from:0 to:3 step:1 {
-					switch(threats[j]){
-						match 'Helada' { indexes <- [7,8,9]; }
-						match 'Ola de calor' { indexes <- [10,11,12]; }
-						match 'Sequia' { indexes <- [13, 14, 15]; }
-						match 'Plaga' { indexes <- [16,17,18]; }
-					}
-					
-					switch(generalRisks[j]){
-						match 1 { aux <- ceil(int(i[indexes[0]]) * float(affect_weight["Peso de afectación " + threats[j]])); }
-						match 2 { aux <- ceil(int(i[indexes[1]]) * float(affect_weight["Peso de afectación " + threats[j]])); }
-						match 3 { aux <- ceil(int(i[indexes[2]]) * float(affect_weight["Peso de afectación " + threats[j]])); }
-					}
-					affectionLevel <- affectionLevel +  aux * generalRisks[j];
-				}
-				add int(affectionLevel) to: finalRisksValue;		
-				add i[0] to: finalRisksProduct;
-			}
-		}
-		write "risks list value " + finalRisksValue;
-		write "risks list prods " + finalRisksProduct;
- 		
-		//cálculo del mínimo
-		int minRiskValue <- min(finalRisksValue);  
-		list<int> minIndexes <- finalRisksValue all_indexes_of minRiskValue;
-		list<string> minRiskProducts <- minIndexes collect(finalRisksProduct[each]);
-		write "min risk value: " + minRiskValue + " --- min risk products: " + minRiskProducts;
-		write " ";
-	}
+	//aquí copiar y pegar action getMinRisk() {} --> se cambio a generalRisks
 	
 	//Cada step de la simulación
-	reflex prueba_reflex{
+	/*reflex prueba_reflex{
 		do getMinRisk;
-	}
+	}*/
 }
 
 species ferias {
@@ -374,5 +414,18 @@ experiment agriculture_world type: gui {
 		        //species floods aspect:base;
 		        species farmers aspect:base;
 		    }
+		    
+		    monitor "Step actual " value: current_month + ' ' + current_date.year ;
+		    /*monitor "Peso de afectación Helada" value: affect_weight['Peso de afectación Helada'];
+		    monitor "Peso de afectación Ola de calor" value:  affect_weight['Peso de afectación Ola de calor'] ;
+		    monitor "Peso de afectación Sequía" value: affect_weight['Peso de afectación Sequía'] ;
+		    monitor "Peso de afectación Plaga" value: affect_weight['Peso de afectación Plaga'];
+		    monitor "Peso de afectación Helada" value: affect_weight['Peso de afectación Helada'];*/
+		    monitor "Riesgo Helada" value: risk_scale[generalRisks[0]] ;
+		    monitor "Riesgo Ola de calor" value: risk_scale[generalRisks[1]] ;
+		    monitor "Riesgo Sequía" value:risk_scale[generalRisks[2]] ;
+		    monitor "Riesgo Plaga" value: risk_scale[generalRisks[3]];
+		    
+		    //para chart display: every 12 cycles
 	   	} /*https://gama-platform.github.io/wiki/LuneraysFlu_step3 VER ESTE EJEMPLOOOOO (chart_display para gráficos) */
 }  
