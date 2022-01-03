@@ -192,7 +192,7 @@ global{
 		 }
 		generalRisks <- [int(frostRisk), heatwaveRisk, droughtRisk, 0];
 		//Borrar
-		write 'risks: ' + generalRisks; 
+		//write 'risks: ' + generalRisks; 
 	}
 	
 	list<string> finalRisksProduct;
@@ -227,19 +227,6 @@ global{
 		}
 		write "risks list valueeee " + finalRisksValue;
 		write "risks list prodssss " + finalRisksProduct;
-	}
-
-	reflex getMinRisk{
-		int riskValue;
-		list<int> indexes;
-		list<string> filteredProducts;
-		
-		//para los farmers con riskLevel 1
-		riskValue <- min(finalRisksValue);  
-		indexes <- finalRisksValue all_indexes_of riskValue;
-		filteredProducts <- indexes collect(finalRisksProduct[each]);
-		write "min risk value: " + riskValue + " --- min risk products: " + filteredProducts;
-		write " ";		
 	}
 	
 	reflex getPrices{
@@ -344,14 +331,63 @@ species terrenos {
 	int estado <- 0; //0 --> vacío, 1 --> preparando tierra, 2 --> cultivando, 3 --> cosechando.
 	float area;
 	string producto_seleccionado;
+	int plagaRisk;
+	list<string> finalProducts;
+	list<int> riskValues;
 	  
 	aspect base {
 		draw shape color: color border: border;
 	}
 	
-	//Calcular riesgo en el terreno
-	//aquí copiar y pegar action getMinRisk() {} --> se cambio a generalRisks
+	//Calcular riesgo en el terreno	
+	action getMinRisk{
+		int riskValue;
+		list<int> indexes;
+		list<string> filteredProducts;
+		
+		//para los farmers con riskLevel 1
+		write "global riskValues: " + finalRisksValue;
+		write "riskValues: " + riskValues;
+		riskValue <- min(riskValues);  
+		indexes <- riskValues all_indexes_of riskValue;
+		filteredProducts <- indexes collect(finalProducts[each]);
+		write "min risk value: " + riskValue + " --- min risk products: " + filteredProducts;
+		write " ";		
+	}
+	action assignPlagaRisk{
+		float aux <- 0.0;
+		int index;	
+		//asignación de riesgo a plaga en el mismo terreno, desde el "put" se mantiene tal cual	
+		plagaRisk <- rnd_choice([0.7, 0.1, 0.1, 0.1]);
+		write "plagaRisk: " + plagaRisk;
+		//put plagaRisk at:3 in: generalRisks;
+		finalProducts <- copy(finalRisksProduct);
+		//print finalRisksProduct y finalRisksValue, en el último podría estar el problema
+		riskValues <- copy(finalRisksValue);
+		write "global riskValues: " + finalRisksValue;
+		write "riskValues: " + riskValues;
+		list<list> i;
+		loop prod over: finalProducts{
+			ask(agentDB){
+				i <- list<list> (select(params: POSTGRES,
+										select: "SELECT * FROM productos_respaldo WHERE valid = true and nombre = ?;",
+										values: [prod]));
+				i <- i[2][0];
+			}
+			switch(plagaRisk){
+				match 1 { aux <- ceil(int(i[16][0]) * float(affect_weight["Peso de afectación " + threats[3]])); }
+				match 2 { aux <- ceil(int(i[17][0]) * float(affect_weight["Peso de afectación " + threats[3]])); }
+				match 3 { aux <- ceil(int(i[18][0]) * float(affect_weight["Peso de afectación " + threats[3]])); }
+			}
+			index <- finalProducts index_of(prod);
+			riskValues[index] <- riskValues[index] +  aux * plagaRisk;
+		}
+	}
 	
+	reflex all{
+		do assignPlagaRisk;
+		do getMinRisk;
+	}
 	//Cada step de la simulación
 	/*reflex prueba_reflex{
 		do getMinRisk;
@@ -424,7 +460,6 @@ experiment agriculture_world type: gui {
 		    monitor "Riesgo Helada" value: risk_scale[generalRisks[0]] ;
 		    monitor "Riesgo Ola de calor" value: risk_scale[generalRisks[1]] ;
 		    monitor "Riesgo Sequía" value:risk_scale[generalRisks[2]] ;
-		    monitor "Riesgo Plaga" value: risk_scale[generalRisks[3]];
 		    
 		    //para chart display: every 12 cycles
 	   	} /*https://gama-platform.github.io/wiki/LuneraysFlu_step3 VER ESTE EJEMPLOOOOO (chart_display para gráficos) */
