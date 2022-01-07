@@ -346,8 +346,15 @@ species terrenos {
 		list<string> filteredProducts;
 		
 		//para los farmers con riskLevel 1
-		riskValue <- min(riskValues);  
-		indexes <- riskValues all_indexes_of riskValue;
+		riskValue <- min(riskValues);
+		int contador <- 0;   
+		loop j over: riskValues {
+			if(j = riskValue){
+				indexes <- indexes + contador;
+			}
+			contador <- contador + 1;
+		}
+		//indexes <- riskValues all_indexes_of riskValue; Este no funciona, así que se tuvo que hacer un loop para obtener los índices.
 		filteredProducts <- indexes collect(finalProducts[each]);
 		write "risk values:" + riskValues + " --- min risk value: " + riskValue + " --- min risk products: " + filteredProducts;		
 	}
