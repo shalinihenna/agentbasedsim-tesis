@@ -196,7 +196,7 @@ global{
 	}
 	
 	list<string> finalRisksProduct;
-	list<int> finalRisksValue;
+	list<float> finalRisksValue;
 	reflex generalRisk{
 		finalRisksProduct <- [];
 		finalRisksValue <- []; 
@@ -215,13 +215,13 @@ global{
 					}
 					
 					switch(generalRisks[j]){
-						match 1 { aux <- ceil(int(i[indexes[0]]) * float(affect_weight["Peso de afectación " + threats[j]])); }
-						match 2 { aux <- ceil(int(i[indexes[1]]) * float(affect_weight["Peso de afectación " + threats[j]])); }
-						match 3 { aux <- ceil(int(i[indexes[2]]) * float(affect_weight["Peso de afectación " + threats[j]])); }
+						match 1 { aux <- float(i[indexes[0]]) * float(affect_weight["Peso de afectación " + threats[j]]); }
+						match 2 { aux <- float(i[indexes[1]]) * float(affect_weight["Peso de afectación " + threats[j]]); }
+						match 3 { aux <- float(i[indexes[2]]) * float(affect_weight["Peso de afectación " + threats[j]]); }
 					}
 					affectionLevel <- affectionLevel +  aux * generalRisks[j];
 				}
-				add int(affectionLevel) to: finalRisksValue;		
+				add affectionLevel to: finalRisksValue;		
 				add i[0] to: finalRisksProduct;
 			}
 		}
@@ -333,7 +333,7 @@ species terrenos {
 	string producto_seleccionado;
 	int plagaRisk;
 	list<string> finalProducts;
-	list<int> riskValues;
+	list<float> riskValues;
 	  
 	aspect base {
 		draw shape color: color border: border;
@@ -341,18 +341,15 @@ species terrenos {
 	
 	//Calcular riesgo en el terreno	
 	action getMinRisk{
-		int riskValue;
+		float riskValue;
 		list<int> indexes;
 		list<string> filteredProducts;
 		
 		//para los farmers con riskLevel 1
-		write "global riskValues: " + finalRisksValue;
-		write "riskValues: " + riskValues;
 		riskValue <- min(riskValues);  
 		indexes <- riskValues all_indexes_of riskValue;
 		filteredProducts <- indexes collect(finalProducts[each]);
-		write "min risk value: " + riskValue + " --- min risk products: " + filteredProducts;
-		write " ";		
+		write "risk values:" + riskValues + " --- min risk value: " + riskValue + " --- min risk products: " + filteredProducts;		
 	}
 	action assignPlagaRisk{
 		float aux <- 0.0;
@@ -360,12 +357,8 @@ species terrenos {
 		//asignación de riesgo a plaga en el mismo terreno, desde el "put" se mantiene tal cual	
 		plagaRisk <- rnd_choice([0.7, 0.1, 0.1, 0.1]);
 		write "plagaRisk: " + plagaRisk;
-		//put plagaRisk at:3 in: generalRisks;
 		finalProducts <- copy(finalRisksProduct);
-		//print finalRisksProduct y finalRisksValue, en el último podría estar el problema
 		riskValues <- copy(finalRisksValue);
-		write "global riskValues: " + finalRisksValue;
-		write "riskValues: " + riskValues;
 		list<list> i;
 		loop prod over: finalProducts{
 			ask(agentDB){
@@ -375,9 +368,9 @@ species terrenos {
 				i <- i[2][0];
 			}
 			switch(plagaRisk){
-				match 1 { aux <- ceil(int(i[16][0]) * float(affect_weight["Peso de afectación " + threats[3]])); }
-				match 2 { aux <- ceil(int(i[17][0]) * float(affect_weight["Peso de afectación " + threats[3]])); }
-				match 3 { aux <- ceil(int(i[18][0]) * float(affect_weight["Peso de afectación " + threats[3]])); }
+				match 1 { aux <- float(i[16][0]) * float(affect_weight["Peso de afectación " + threats[3]]); }
+				match 2 { aux <- float(i[17][0]) * float(affect_weight["Peso de afectación " + threats[3]]); }
+				match 3 { aux <- float(i[18][0]) * float(affect_weight["Peso de afectación " + threats[3]]); }
 			}
 			index <- finalProducts index_of(prod);
 			riskValues[index] <- riskValues[index] +  aux * plagaRisk;
