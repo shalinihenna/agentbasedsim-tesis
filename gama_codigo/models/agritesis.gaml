@@ -160,7 +160,7 @@ global{
 		 	}else{
 		 		frostRisk <- 0; 
 		 	}
-		 	write 'Riesgo de heladas: ' + frostRisk;
+		 	//write 'Riesgo de heladas: ' + frostRisk;
 		 	
 		 	/*SEQUIA METEOROLOGICA -- PRECIPITACIONES (SPI) */
 		 	list<list<list>> spi <- list<list<list>> (select(params:POSTGRES,
@@ -176,7 +176,7 @@ global{
 		 		match_between[-#infinity,-2]{droughtRisk <- 3;}
 		 	}
 		 	
-		 	write "Riesgo de sequía: " + droughtRisk;
+		 	//write "Riesgo de sequía: " + droughtRisk;
 		 	
 		 	/*OLAS DE CALOR */
 		 	list<list<list>> heatwaves <- list<list<list>>(select(params:POSTGRES,
@@ -188,50 +188,113 @@ global{
 		 		match_between[4,7]{heatwaveRisk <- 2;}
 		 		match_between[8,#infinity]{heatwaveRisk <- 3;}
 		 	}
-		 	write "Riesgo de olas de calor: " + heatwaveRisk;	
+		 	//write "Riesgo de olas de calor: " + heatwaveRisk;	
+		 	
+		 	
 		 }
 		generalRisks <- [int(frostRisk), heatwaveRisk, droughtRisk, 0];
 		//Borrar
 		//write 'risks: ' + generalRisks; 
 	}
 	
-	list<string> finalRisksProduct;
-	list<float> finalRisksValue;
+	list<string> finalRisksProduct0; //Riesgo de Plaga 0
+	list<float> finalRisksValue0;
+	list<string> finalRisksProduct1; //Riesgo de Plaga 1
+	list<float> finalRisksValue1;
+	list<string> finalRisksProduct2; //Riesgo de Plaga 2
+	list<float> finalRisksValue2;
+	list<string> finalRisksProduct3; //Riesgo de Plaga 3
+	list<float> finalRisksValue3;
 	reflex generalRisk{
-		finalRisksProduct <- [];
-		finalRisksValue <- []; 
-		loop i over: products {
-			float affectionLevel <- 0.0; 
-			float aux <- 0.0;
-			list<int> indexes;
-			string months_siembra <- i[2];
-			if(i[2] != '' and (contains(months_siembra, current_month) or contains(months_siembra, 'Todos'))){
-				loop j from:0 to:3 step:1 {
-					switch(threats[j]){
-						match 'Helada' { indexes <- [7,8,9]; }
-						match 'Ola de calor' { indexes <- [10,11,12]; }
-						match 'Sequia' { indexes <- [13, 14, 15]; }
-						match 'Plaga' { indexes <- [16,17,18]; }
+		list<string> finalRisksProduct;
+		list<float> finalRisksValue;
+		loop a from: 0 to: 3 step:1 {
+			finalRisksProduct <- [];
+			finalRisksValue <- [];
+			put a at:3 in:generalRisks;
+			loop i over: products {
+				float affectionLevel <- 0.0; 
+				float aux <- 0.0;
+				list<int> indexes;
+				string months_siembra <- i[2];
+				if(i[2] != '' and (contains(months_siembra, current_month) or contains(months_siembra, 'Todos'))){
+					loop j from:0 to:3 step:1 {
+						switch(threats[j]){
+							match 'Helada' { indexes <- [7,8,9]; }
+							match 'Ola de calor' { indexes <- [10,11,12]; }
+							match 'Sequia' { indexes <- [13, 14, 15]; }
+							match 'Plaga' { indexes <- [16,17,18]; }
+						}
+						
+						switch(generalRisks[j]){
+							match 1 { aux <- float(i[indexes[0]]) * float(affect_weight["Peso de afectación " + threats[j]]); }
+							match 2 { aux <- float(i[indexes[1]]) * float(affect_weight["Peso de afectación " + threats[j]]); }
+							match 3 { aux <- float(i[indexes[2]]) * float(affect_weight["Peso de afectación " + threats[j]]); }
+						}
+						affectionLevel <- affectionLevel +  aux * generalRisks[j];
 					}
-					
-					switch(generalRisks[j]){
-						match 1 { aux <- float(i[indexes[0]]) * float(affect_weight["Peso de afectación " + threats[j]]); }
-						match 2 { aux <- float(i[indexes[1]]) * float(affect_weight["Peso de afectación " + threats[j]]); }
-						match 3 { aux <- float(i[indexes[2]]) * float(affect_weight["Peso de afectación " + threats[j]]); }
-					}
-					affectionLevel <- affectionLevel +  aux * generalRisks[j];
+					add affectionLevel to: finalRisksValue;		
+					add i[0] to: finalRisksProduct;
 				}
-				add affectionLevel to: finalRisksValue;		
-				add i[0] to: finalRisksProduct;
+			}
+			
+			switch(a){
+				match 0 {finalRisksValue0 <- copy(finalRisksValue); finalRisksProduct0 <- copy(finalRisksProduct);}
+				match 1 {finalRisksValue1 <- copy(finalRisksValue); finalRisksProduct1 <- copy(finalRisksProduct);}
+				match 2 {finalRisksValue2 <- copy(finalRisksValue); finalRisksProduct2 <- copy(finalRisksProduct);}
+				match 3 {finalRisksValue3 <- copy(finalRisksValue); finalRisksProduct3 <- copy(finalRisksProduct);}
 			}
 		}
-		write "risks list valueeee " + finalRisksValue;
-		write "risks list prodssss " + finalRisksProduct;
+		
+		write "finalRisk -- Plaga 0" + finalRisksValue0 + " --" + finalRisksProduct0;
+		write "finalRisk -- Plaga 1" + finalRisksValue1 + " --" + finalRisksProduct1;
+		write "finalRisk -- Plaga 2" + finalRisksValue2 + " --" + finalRisksProduct2;
+		write "finalRisk -- Plaga 3" + finalRisksValue3 + " --" + finalRisksProduct3;
 	}
 	
-	reflex getPrices{
+	//Para los farmers con riskLevel false
+	list<string> minRiskFilteredProducts0;
+	list<string> minRiskFilteredProducts1;
+	list<string> minRiskFilteredProducts2;
+	list<string> minRiskFilteredProducts3;
+	reflex getMinRisk{
+		list<float> riskValues;
+		float oneRiskValue;
+		list<int> indexes;
+		loop b from: 0 to: 3 step: 1{
+			riskValues <- [];
+			indexes <- []; 
+			switch(b){
+				match 0 {riskValues <- copy(finalRisksValue0);}
+				match 1 {riskValues <- copy(finalRisksValue1);}
+				match 2 {riskValues <- copy(finalRisksValue2);}
+				match 3 {riskValues <- copy(finalRisksValue3);}
+			}
 			
+			oneRiskValue <- min(riskValues);
+			int contador <- 0;
+			loop j over:riskValues{
+				if(j = oneRiskValue){
+					indexes <- indexes + contador;
+				}
+				contador <- contador + 1;
+			}
+			
+			switch(b){
+				match 0 { minRiskFilteredProducts0 <- indexes collect(finalRisksProduct0[each]); }
+				match 1 { minRiskFilteredProducts1 <- indexes collect(finalRisksProduct1[each]); }
+				match 2 { minRiskFilteredProducts2 <- indexes collect(finalRisksProduct2[each]); }
+				match 3 { minRiskFilteredProducts3 <- indexes collect(finalRisksProduct3[each]); }
+			}
+		}
+		
+		write "minProducts -- Plaga 0: " + minRiskFilteredProducts0;
+		write "minProducts -- Plaga 1: " + minRiskFilteredProducts1;
+		write "minProducts -- Plaga 2: " + minRiskFilteredProducts2;
+		write "minProducts -- Plaga 3: " + minRiskFilteredProducts3;
 	}
+	
+	
 	
 	//predicates for BDI agents
 	//FARMER
@@ -248,7 +311,6 @@ global{
 
 //Agente agricultores
 species farmers skills:[moving] control:simple_bdi{
-	//int riskLevel <- rnd_choice([1::0.6, 2::0.3, 3::0.1]);
 	bool riskLevel <- flip(0.06); 
 	rgb my_color <- colors['farmer_color'];
 	terrenos terreno;
@@ -285,20 +347,33 @@ species farmers skills:[moving] control:simple_bdi{
 		if(terreno.estado = 1){
 			//subdesire 1: Selección de hortaliza según el riesgo de eventos climáticos y el precio/demanda del periodo pasado
 			if(!self.riskLevel){
-				//write "Riesgo 1";
-				//write " ";
-				
+				//Dado que no toma riesgo, toma el producto con mínimo riesgo --> Si hay varios con mínimo riesgo, random entre ellos
+				switch(terreno.plagaRisk){
+					match 0 {terreno.producto_seleccionado <- any(minRiskFilteredProducts0);}
+					match 1 {terreno.producto_seleccionado <- any(minRiskFilteredProducts1);}
+					match 2 {terreno.producto_seleccionado <- any(minRiskFilteredProducts2);}
+					match 3 {terreno.producto_seleccionado <- any(minRiskFilteredProducts3);}
+				}
+				//write "NO toma riesgo";
+				//terreno.producto_seleccionado <- any(terreno.minRiskFilteredProducts);
 			}else{
-				
+				//Si toma riesgo, así que toma cualquier producto --> random entre todos
+				switch(terreno.plagaRisk){
+					match 0 {terreno.producto_seleccionado <- any(finalRisksProduct0);}
+					match 1 {terreno.producto_seleccionado <- any(finalRisksProduct1);}
+					match 2 {terreno.producto_seleccionado <- any(finalRisksProduct2);}
+					match 3 {terreno.producto_seleccionado <- any(finalRisksProduct3);}
+				}
+				//write "SI toma riesgo";
+				//terreno.producto_seleccionado <- any(terreno.finalProducts); 
 			}
-			
-			terreno.producto_seleccionado <- "Frutilla"; //hacer el random y falta agregar lo del precio/demanda!
+			//terreno.producto_seleccionado <- "Frutilla"; //hacer el random y falta agregar lo del precio/demanda!
 			terreno.estado <- 2;
 		}else if(terreno.estado = 2){
 			//subdesire 2: Preparar tierra
 			
 			terreno.estado <- 3;
-		}else if(terreno.estado = 3){
+		}/*else if(terreno.estado = 3){
 			//desire: Sembrar propiamente tal
 			terreno.estado <- 4;
 			
@@ -306,7 +381,7 @@ species farmers skills:[moving] control:simple_bdi{
 			do remove_belief(empty_land);
 			do remove_intention(sembrar);
 			//falta
-		}
+		}*/
 		
 	}
 	
@@ -317,7 +392,6 @@ species farmers skills:[moving] control:simple_bdi{
 			do remove_belief(cosecha_nolista);
 		}
 	}
-	
 	
 	aspect base {
         draw circle(70) color: my_color border: #black;  //depth: gold_sold;
@@ -331,9 +405,10 @@ species terrenos {
 	int estado <- 0; //0 --> vacío, 1 --> preparando tierra, 2 --> cultivando, 3 --> cosechando.
 	float area;
 	string producto_seleccionado;
-	int plagaRisk;
+	int plagaRisk <- rnd_choice([0.7, 0.1, 0.1, 0.1]);
 	list<string> finalProducts;
 	list<float> riskValues;
+	list<string> minRiskFilteredProducts;
 	  
 	aspect base {
 		draw shape color: color border: border;
@@ -356,7 +431,8 @@ species terrenos {
 		}
 		//indexes <- riskValues all_indexes_of riskValue; Este no funciona, así que se tuvo que hacer un loop para obtener los índices.
 		filteredProducts <- indexes collect(finalProducts[each]);
-		write "risk values:" + riskValues + " --- min risk value: " + riskValue + " --- min risk products: " + filteredProducts;		
+		//write "risk values:" + riskValues + " --- min risk value: " + riskValue + " --- min risk products: " + filteredProducts;
+		minRiskFilteredProducts <- copy(filteredProducts);		
 	}
 	action assignPlagaRisk{
 		float aux <- 0.0;
@@ -364,8 +440,8 @@ species terrenos {
 		//asignación de riesgo a plaga en el mismo terreno, desde el "put" se mantiene tal cual	
 		plagaRisk <- rnd_choice([0.7, 0.1, 0.1, 0.1]);
 		write "plagaRisk: " + plagaRisk;
-		finalProducts <- copy(finalRisksProduct);
-		riskValues <- copy(finalRisksValue);
+		finalProducts <- copy(finalRisksProduct0);
+		riskValues <- copy(finalRisksValue0);
 		list<list> i;
 		loop prod over: finalProducts{
 			ask(agentDB){
@@ -383,15 +459,6 @@ species terrenos {
 			riskValues[index] <- riskValues[index] +  aux * plagaRisk;
 		}
 	}
-	
-	reflex all{
-		do assignPlagaRisk;
-		do getMinRisk;
-	}
-	//Cada step de la simulación
-	/*reflex prueba_reflex{
-		do getMinRisk;
-	}*/
 }
 
 species ferias {
