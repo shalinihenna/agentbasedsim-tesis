@@ -5,9 +5,6 @@
 * Tags: 
 */
 
-/*TODO:
- * Borrar todos los write extras.
- */
 model agritesis
 
 /* Insert your model definition here */
@@ -49,6 +46,7 @@ global{
 	geometry shape <- envelope(shpfiles['comunas_shp']);
 		
 	list<list> products <- [];
+	map<string, int> days_cosecha <- [];
 	date starting_date <- date([2020,3]);
 	date current_date <- date([2020,3]);
 	float step update: 1 #month;
@@ -88,9 +86,8 @@ global{
 	map<int, string> land_state <- [ 
 		0::"Sin Agricultor",
 		1::"Vacío",
-		2::"Sembrando",
-		3::"Proceso de cultivo",
-		4::"Cosecha Lista"
+		2::"Sembrado. En proceso de cultivo",
+		3::"Cosecha Lista"
 	];
 	
 	//Input de user
@@ -111,6 +108,7 @@ global{
 		create comunas from: shpfiles['comunas_shp'];
 		create terrenos from: shpfiles['terrenos_shp'] with:[area::float(get("area_ha"))];
 		create ferias from: shpfiles['ferias_shp']; 
+		/*TODO: Borrar */
 		/*create floods from: shpfiles['floods_shp'] with: [risklevel::string((get("INUNDA2")))]{
 				color <- risklevel = "ALTA (desborde)" ? #blue : #darkblue;
 				border <- risklevel = "ALTA (desborde)" ? #blue : #darkblue;
@@ -160,7 +158,6 @@ global{
 		 	}else{
 		 		frostRisk <- 0; 
 		 	}
-		 	//write 'Riesgo de heladas: ' + frostRisk;
 		 	
 		 	/*SEQUIA METEOROLOGICA -- PRECIPITACIONES (SPI) */
 		 	list<list<list>> spi <- list<list<list>> (select(params:POSTGRES,
@@ -176,8 +173,6 @@ global{
 		 		match_between[-#infinity,-2]{droughtRisk <- 3;}
 		 	}
 		 	
-		 	//write "Riesgo de sequía: " + droughtRisk;
-		 	
 		 	/*OLAS DE CALOR */
 		 	list<list<list>> heatwaves <- list<list<list>>(select(params:POSTGRES,
 		 											select: "SELECT * FROM heatwave where month = ? and year = ?;",
@@ -188,13 +183,9 @@ global{
 		 		match_between[4,7]{heatwaveRisk <- 2;}
 		 		match_between[8,#infinity]{heatwaveRisk <- 3;}
 		 	}
-		 	//write "Riesgo de olas de calor: " + heatwaveRisk;	
-		 	
-		 	
 		 }
 		generalRisks <- [int(frostRisk), heatwaveRisk, droughtRisk, 0];
-		//Borrar
-		//write 'risks: ' + generalRisks; 
+
 	}
 	
 	list<string> finalRisksProduct0; //Riesgo de Plaga 0
@@ -292,6 +283,7 @@ global{
 		write "minProducts -- Plaga 1: " + minRiskFilteredProducts1;
 		write "minProducts -- Plaga 2: " + minRiskFilteredProducts2;
 		write "minProducts -- Plaga 3: " + minRiskFilteredProducts3;
+		write " ";
 	}
 	
 	
@@ -347,41 +339,36 @@ species farmers skills:[moving] control:simple_bdi{
 		if(terreno.estado = 1){
 			//subdesire 1: Selección de hortaliza según el riesgo de eventos climáticos y el precio/demanda del periodo pasado
 			if(!self.riskLevel){
-				//Dado que no toma riesgo, toma el producto con mínimo riesgo --> Si hay varios con mínimo riesgo, random entre ellos
+				//Dado que NO toma riesgo, toma el producto con mínimo riesgo --> Si hay varios con mínimo riesgo, random entre ellos
 				switch(terreno.plagaRisk){
 					match 0 {terreno.producto_seleccionado <- any(minRiskFilteredProducts0);}
 					match 1 {terreno.producto_seleccionado <- any(minRiskFilteredProducts1);}
 					match 2 {terreno.producto_seleccionado <- any(minRiskFilteredProducts2);}
 					match 3 {terreno.producto_seleccionado <- any(minRiskFilteredProducts3);}
 				}
-				//write "NO toma riesgo";
-				//terreno.producto_seleccionado <- any(terreno.minRiskFilteredProducts);
 			}else{
-				//Si toma riesgo, así que toma cualquier producto --> random entre todos
+				//SI toma riesgo, así que toma cualquier producto --> random entre todos
 				switch(terreno.plagaRisk){
 					match 0 {terreno.producto_seleccionado <- any(finalRisksProduct0);}
 					match 1 {terreno.producto_seleccionado <- any(finalRisksProduct1);}
 					match 2 {terreno.producto_seleccionado <- any(finalRisksProduct2);}
 					match 3 {terreno.producto_seleccionado <- any(finalRisksProduct3);}
 				}
-				//write "SI toma riesgo";
-				//terreno.producto_seleccionado <- any(terreno.finalProducts); 
 			}
-			//terreno.producto_seleccionado <- "Frutilla"; //hacer el random y falta agregar lo del precio/demanda!
 			terreno.estado <- 2;
-		}else if(terreno.estado = 2){
-			//subdesire 2: Preparar tierra
+			ask(agentDB){
+				myself.terreno.days_left <- days_cosecha[myself.terreno.producto_seleccionado];
+				//myself.terreno.days_left <- int (select (params:POSTGRES, select: "SELECT dias_cosecha FROM productos_respaldo where nombre = ? ;", values: [myself.terreno.producto_seleccionado]));
+				//list<list> frost <- list<list> (select(params:POSTGRES,  select: "SELECT * FROM frost where mes = ? ;", values: [current_month]));
+			}
 			
-			terreno.estado <- 3;
-		}/*else if(terreno.estado = 3){
-			//desire: Sembrar propiamente tal
-			terreno.estado <- 4;
-			
-			//actualización de beliefs e intentions
 			do remove_belief(empty_land);
 			do remove_intention(sembrar);
-			//falta
-		}*/
+		}else if(terreno.estado = 2){
+			//Actualizar beliefs y desires blabla
+			
+			terreno.estado <- 3;
+		}
 		
 	}
 	
@@ -400,64 +387,22 @@ species farmers skills:[moving] control:simple_bdi{
 
 /*They are not agents, its just for display */
 species terrenos {
+	//Atributos visuales
 	rgb color <- #white;
 	rgb border <- #black;
-	int estado <- 0; //0 --> vacío, 1 --> preparando tierra, 2 --> cultivando, 3 --> cosechando.
-	float area;
-	string producto_seleccionado;
-	int plagaRisk <- rnd_choice([0.7, 0.1, 0.1, 0.1]);
+	//Atributos para el producto a sembrar
 	list<string> finalProducts;
 	list<float> riskValues;
 	list<string> minRiskFilteredProducts;
+	string producto_seleccionado;
+	//Atributos del terreno en sí
+	int estado <- 0; //0 --> sin agricultor, 1 --> vacío, 2 --> cultivando, 3 --> cosecha lista.
+	int plagaRisk <- rnd_choice([0.7, 0.1, 0.1, 0.1]);
+	float area;
+	int days_left;
 	  
 	aspect base {
 		draw shape color: color border: border;
-	}
-	
-	//Calcular riesgo en el terreno	
-	action getMinRisk{
-		float riskValue;
-		list<int> indexes;
-		list<string> filteredProducts;
-		
-		//para los farmers con riskLevel 1
-		riskValue <- min(riskValues);
-		int contador <- 0;   
-		loop j over: riskValues {
-			if(j = riskValue){
-				indexes <- indexes + contador;
-			}
-			contador <- contador + 1;
-		}
-		//indexes <- riskValues all_indexes_of riskValue; Este no funciona, así que se tuvo que hacer un loop para obtener los índices.
-		filteredProducts <- indexes collect(finalProducts[each]);
-		//write "risk values:" + riskValues + " --- min risk value: " + riskValue + " --- min risk products: " + filteredProducts;
-		minRiskFilteredProducts <- copy(filteredProducts);		
-	}
-	action assignPlagaRisk{
-		float aux <- 0.0;
-		int index;	
-		//asignación de riesgo a plaga en el mismo terreno, desde el "put" se mantiene tal cual	
-		plagaRisk <- rnd_choice([0.7, 0.1, 0.1, 0.1]);
-		write "plagaRisk: " + plagaRisk;
-		finalProducts <- copy(finalRisksProduct0);
-		riskValues <- copy(finalRisksValue0);
-		list<list> i;
-		loop prod over: finalProducts{
-			ask(agentDB){
-				i <- list<list> (select(params: POSTGRES,
-										select: "SELECT * FROM productos_respaldo WHERE valid = true and nombre = ?;",
-										values: [prod]));
-				i <- i[2][0];
-			}
-			switch(plagaRisk){
-				match 1 { aux <- float(i[16][0]) * float(affect_weight["Peso de afectación " + threats[3]]); }
-				match 2 { aux <- float(i[17][0]) * float(affect_weight["Peso de afectación " + threats[3]]); }
-				match 3 { aux <- float(i[18][0]) * float(affect_weight["Peso de afectación " + threats[3]]); }
-			}
-			index <- finalProducts index_of(prod);
-			riskValues[index] <- riskValues[index] +  aux * plagaRisk;
-		}
 	}
 }
 
@@ -493,28 +438,24 @@ species agentDB skills:[SQLSKILL]{
 		if(testConnection(POSTGRES)){
 			products <- list<list> (select(POSTGRES,"SELECT * FROM productos_respaldo WHERE valid = true;"));
 			products <- products[2];
+			loop c over: products{
+				add int(c[4]) at:c[0] to: days_cosecha;
+			}
+			
 		}else{
 			write "Problemas de conexión con la BD.";
 		}
 	}
 }
 
-/*TODO: Revisar como hacer panel de usuario (sin seguir arquitetcura propiamente tal */
-/*user_panel default initial:true{
-	
-}*/
-
 experiment agriculture_world type: gui {
-	    parameter "Shapefiles:" var: shpfiles category: "GIS";
-	    /*parameter "Shapefile for the ferias:" var: shpfiles['ferias_shp'] category: "GIS";
-	    parameter "Shapefile for the comunas:" var: shpfiles['comunas_shp'] category: "GIS";
-*/	    
+	   parameter "Shapefiles:" var: shpfiles category: "GIS";
+    
 	   output{
 	   		display map type: java2D{
 	   			species comunas aspect:base;
 		        species terrenos aspect:base;     
 		        species ferias aspect:base; 
-		        //species floods aspect:base;
 		        species farmers aspect:base;
 		    }
 		    
