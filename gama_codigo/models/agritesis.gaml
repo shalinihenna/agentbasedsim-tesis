@@ -326,8 +326,6 @@ species farmers skills:[moving] control:simple_bdi{
 		ask myself{
 			do remove_intention(esperar, true);
 			do add_belief(empty_land);
-			// do add_belief(cosecha_nolista); --> esta no va
-			// do remove_belief(cosecha_lista); --> esta tampoco
 		}
 	}
 	
@@ -357,7 +355,7 @@ species farmers skills:[moving] control:simple_bdi{
 			}
 			terreno.estado <- 2;
 			terreno.start_date <- current_date;
-			terreno.days_left <- days_cosecha[terreno.producto_seleccionado];
+			terreno.days_left <- terreno.days_left + days_cosecha[terreno.producto_seleccionado];
 			terreno.end_date <- current_date plus_days terreno.days_left;  
 			
 			do remove_belief(empty_land);
@@ -383,7 +381,26 @@ species farmers skills:[moving] control:simple_bdi{
 	rule belief: cosecha_lista new_desire: cosechar;
 	
 	plan extraer_cosecha intention: cosechar{
+		//Cambio de estado del terreno (último estado)
 		terreno.estado <- 3;
+		
+		//Extraer la cosecha (modificar la siguiente línea) 
+		self.non_sold_vegetables <- 150; //lo que se saca en un m2 o ha multiplicado por el área
+		
+		//Recalcular cuantos días faltan del step actual hasta el siguiente step
+		terreno.days_left <- int((terreno.end_date - (current_date + 1#month)) / 86400);
+		
+		//Resetear todo sobre terreno
+		terreno.plagaRisk <- rnd_choice([0.7, 0.1, 0.1, 0.1]);
+		terreno.producto_seleccionado <- nil;
+		terreno.start_date <- nil;
+		terreno.end_date <- nil;  
+		//Actualización de beliefs y desires
+		
+		do remove_belief(cosecha_lista);
+		do remove_intention(cosechar, true);
+		do add_desire(esperar);
+		terreno.estado <- 1;
 	}
 	
 	aspect base {
@@ -412,8 +429,6 @@ species terrenos {
 	aspect base {
 		draw shape color: color border: border;
 	}
-	/*reflex discount_days when: self.start_date != nil and after(self.start_date){
-	}*/
 }
 
 species ferias {
