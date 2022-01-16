@@ -55,7 +55,7 @@ global{
 	
 	//Cantidad de agentes
 	map<string, int> people <- [
-		'number_of_farmers'::4695, //la misma cantidad de terrenos
+		'number_of_farmers'::1, //la misma cantidad de terrenos
 		'number_of_feriantes'::20,
 		'number_of_consumers'::20
 	];
@@ -106,7 +106,7 @@ global{
 		
 		write "Cargando capas de mapas";
 		create comunas from: shpfiles['comunas_shp'];
-		create terrenos from: shpfiles['terrenos_shp'] with:[area::float(get("area_ha"))];
+		create terrenos from: shpfiles['terrenos_shp'] with:[area::float(get("area_ha"))]  number: 1;
 		create ferias from: shpfiles['ferias_shp']; 
 		/*TODO: Borrar */
 		/*create floods from: shpfiles['floods_shp'] with: [risklevel::string((get("INUNDA2")))]{
@@ -295,7 +295,6 @@ global{
 	predicate cosecha_nolista <- new_predicate("cosecha lista", false);
 	predicate empty_land <- new_predicate("empty land");
 	predicate sembrar <- new_predicate("sembrar");
-	predicate preparar_tierra <- new_predicate("preparar tierra"); 
 	predicate cosechar <- new_predicate("cosechar"); 
 	predicate vender <- new_predicate("vender a feriante"); 
 
@@ -327,11 +326,12 @@ species farmers skills:[moving] control:simple_bdi{
 		ask myself{
 			do remove_intention(esperar, true);
 			do add_belief(empty_land);
-			do add_belief(cosecha_nolista);
-			do remove_belief(cosecha_lista);
+			// do add_belief(cosecha_nolista); --> esta no va
+			// do remove_belief(cosecha_lista); --> esta tampoco
 		}
 	}
 	
+	//The rules are used to create a desire from a belief. We can specify the priority of the desire with a statement priority.
 	rule belief: empty_land new_desire: sembrar;
 	
 	plan proceso_siembra intention: sembrar{
@@ -356,28 +356,34 @@ species farmers skills:[moving] control:simple_bdi{
 				}
 			}
 			terreno.estado <- 2;
-			ask(agentDB){
-				myself.terreno.days_left <- days_cosecha[myself.terreno.producto_seleccionado];
-				//myself.terreno.days_left <- int (select (params:POSTGRES, select: "SELECT dias_cosecha FROM productos_respaldo where nombre = ? ;", values: [myself.terreno.producto_seleccionado]));
-				//list<list> frost <- list<list> (select(params:POSTGRES,  select: "SELECT * FROM frost where mes = ? ;", values: [current_month]));
-			}
+			terreno.start_date <- current_date;
+			terreno.days_left <- days_cosecha[terreno.producto_seleccionado];
+			terreno.end_date <- current_date plus_days terreno.days_left;  
 			
 			do remove_belief(empty_land);
-			do remove_intention(sembrar);
-		}else if(terreno.estado = 2){
-			//Actualizar beliefs y desires blabla
-			
-			terreno.estado <- 3;
+			do remove_intention(sembrar, true);
+			do add_belief(cosecha_nolista);
 		}
-		
 	}
 	
+	rule belief: cosecha_nolista new_desire: esperar;
+	
 	//cuando el terreno está listo para cosechar
-	perceive target:terreno when: terreno.estado = 4 {
-		ask myself{
-			do add_belief(cosecha_lista);
-			do remove_belief(cosecha_nolista);
+	perceive target:terreno when: terreno.estado = 2 {
+		//Agregar condiciones para extraer la cosecha
+		if(current_date.month = self.end_date.month){
+			ask myself{
+				do add_belief(cosecha_lista);
+				do remove_intention(esperar, true);
+				do remove_belief(cosecha_nolista);
+			}	
 		}
+	}
+	
+	rule belief: cosecha_lista new_desire: cosechar;
+	
+	plan extraer_cosecha intention: cosechar{
+		terreno.estado <- 3;
 	}
 	
 	aspect base {
@@ -400,10 +406,14 @@ species terrenos {
 	int plagaRisk <- rnd_choice([0.7, 0.1, 0.1, 0.1]);
 	float area;
 	int days_left;
+	date start_date;
+	date end_date; 
 	  
 	aspect base {
 		draw shape color: color border: border;
 	}
+	/*reflex discount_days when: self.start_date != nil and after(self.start_date){
+	}*/
 }
 
 species ferias {
@@ -460,14 +470,15 @@ experiment agriculture_world type: gui {
 		    }
 		    
 		    monitor "Step actual " value: current_month + ' ' + current_date.year ;
+		    monitor "Riesgo Helada" value: risk_scale[generalRisks[0]] ;
+		    monitor "Riesgo Ola de calor" value: risk_scale[generalRisks[1]] ;
+		    monitor "Riesgo Sequía" value:risk_scale[generalRisks[2]] ;
+		    
 		    /*monitor "Peso de afectación Helada" value: affect_weight['Peso de afectación Helada'];
 		    monitor "Peso de afectación Ola de calor" value:  affect_weight['Peso de afectación Ola de calor'] ;
 		    monitor "Peso de afectación Sequía" value: affect_weight['Peso de afectación Sequía'] ;
 		    monitor "Peso de afectación Plaga" value: affect_weight['Peso de afectación Plaga'];
 		    monitor "Peso de afectación Helada" value: affect_weight['Peso de afectación Helada'];*/
-		    monitor "Riesgo Helada" value: risk_scale[generalRisks[0]] ;
-		    monitor "Riesgo Ola de calor" value: risk_scale[generalRisks[1]] ;
-		    monitor "Riesgo Sequía" value:risk_scale[generalRisks[2]] ;
 		    
 		    //para chart display: every 12 cycles
 	   	} /*https://gama-platform.github.io/wiki/LuneraysFlu_step3 VER ESTE EJEMPLOOOOO (chart_display para gráficos) */
