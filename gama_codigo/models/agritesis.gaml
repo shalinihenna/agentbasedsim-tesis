@@ -47,6 +47,8 @@ global{
 		
 	list<list> products <- [];
 	map<string, int> days_cosecha <- [];
+	map<string, string> units <- [];
+	map<string, int> production <- [];
 	date starting_date <- date([2020,3]);
 	date current_date <- date([2020,3]);
 	float step update: 1 #month;
@@ -55,7 +57,7 @@ global{
 	
 	//Cantidad de agentes
 	map<string, int> people <- [
-		'number_of_farmers'::1, //la misma cantidad de terrenos
+		'number_of_farmers'::2, //la misma cantidad de terrenos
 		'number_of_feriantes'::20,
 		'number_of_consumers'::20
 	];
@@ -106,7 +108,7 @@ global{
 		
 		write "Cargando capas de mapas";
 		create comunas from: shpfiles['comunas_shp'];
-		create terrenos from: shpfiles['terrenos_shp'] with:[area::float(get("area_ha"))]  number: 1;
+		create terrenos from: shpfiles['terrenos_shp'] with:[area::float(get("area_ha"))]  number: 2;
 		create ferias from: shpfiles['ferias_shp']; 
 		/*TODO: Borrar */
 		/*create floods from: shpfiles['floods_shp'] with: [risklevel::string((get("INUNDA2")))]{
@@ -354,7 +356,7 @@ species farmers skills:[moving] control:simple_bdi{
 				}
 			}
 			terreno.estado <- 2;
-			terreno.start_date <- current_date;
+			terreno.start_date <- current_date plus_days terreno.days_left plus_days 1;
 			terreno.days_left <- terreno.days_left + days_cosecha[terreno.producto_seleccionado];
 			terreno.end_date <- current_date plus_days terreno.days_left;  
 			
@@ -385,21 +387,24 @@ species farmers skills:[moving] control:simple_bdi{
 		terreno.estado <- 3;
 		
 		//Extraer la cosecha (modificar la siguiente línea) 
-		self.non_sold_vegetables <- 150; //lo que se saca en un m2 o ha multiplicado por el área
+		self.non_sold_vegetables <- int(floor(terreno.area*production[terreno.producto_seleccionado])); //lo que se saca en una ha multiplicado por el área
 		
 		//Recalcular cuantos días faltan del step actual hasta el siguiente step
 		terreno.days_left <- int((terreno.end_date - (current_date + 1#month)) / 86400);
 		
 		//Resetear todo sobre terreno
 		terreno.plagaRisk <- rnd_choice([0.7, 0.1, 0.1, 0.1]);
+		terreno.historial_productos <- terreno.historial_productos + terreno.producto_seleccionado; 
 		terreno.producto_seleccionado <- nil;
 		terreno.start_date <- nil;
 		terreno.end_date <- nil;  
-		//Actualización de beliefs y desires
 		
+		//Actualización de beliefs y desires
 		do remove_belief(cosecha_lista);
 		do remove_intention(cosechar, true);
 		do add_desire(esperar);
+		
+		//Cambio de estado del terreno (para volver al inicio y sembrar otro producto)
 		terreno.estado <- 1;
 	}
 	
@@ -420,9 +425,10 @@ species terrenos {
 	string producto_seleccionado;
 	//Atributos del terreno en sí
 	int estado <- 0; //0 --> sin agricultor, 1 --> vacío, 2 --> cultivando, 3 --> cosecha lista.
+	list<string> historial_productos <- [];
 	int plagaRisk <- rnd_choice([0.7, 0.1, 0.1, 0.1]);
 	float area;
-	int days_left;
+	int days_left <- 0;
 	date start_date;
 	date end_date; 
 	  
@@ -461,12 +467,13 @@ species agentDB skills:[SQLSKILL]{
 	
 	init{
 		if(testConnection(POSTGRES)){
-			products <- list<list> (select(POSTGRES,"SELECT * FROM productos_respaldo WHERE valid = true;"));
+			products <- list<list> (select(POSTGRES,"SELECT * FROM productos WHERE valid = true;"));
 			products <- products[2];
 			loop c over: products{
 				add int(c[4]) at:c[0] to: days_cosecha;
+				add c[19] at:c[0] to: units;
+				add int(c[20]) at:c[0] to: production;
 			}
-			
 		}else{
 			write "Problemas de conexión con la BD.";
 		}
