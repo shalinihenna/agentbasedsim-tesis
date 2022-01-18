@@ -57,7 +57,7 @@ global{
 	
 	//Cantidad de agentes
 	map<string, int> people <- [
-		'number_of_farmers'::2, //la misma cantidad de terrenos
+		'number_of_farmers'::1, //la misma cantidad de terrenos
 		'number_of_feriantes'::20,
 		'number_of_consumers'::20
 	];
@@ -108,7 +108,7 @@ global{
 		
 		write "Cargando capas de mapas";
 		create comunas from: shpfiles['comunas_shp'];
-		create terrenos from: shpfiles['terrenos_shp'] with:[area::float(get("area_ha"))]  number: 2;
+		create terrenos from: shpfiles['terrenos_shp'] with:[area::float(get("area_ha"))]  number: 1;
 		create ferias from: shpfiles['ferias_shp']; 
 		/*TODO: Borrar */
 		/*create floods from: shpfiles['floods_shp'] with: [risklevel::string((get("INUNDA2")))]{
@@ -356,7 +356,7 @@ species farmers skills:[moving] control:simple_bdi{
 				}
 			}
 			terreno.estado <- 2;
-			terreno.start_date <- current_date plus_days terreno.days_left plus_days 1;
+			terreno.start_date <- current_date plus_days terreno.days_left;
 			terreno.days_left <- terreno.days_left + days_cosecha[terreno.producto_seleccionado];
 			terreno.end_date <- current_date plus_days terreno.days_left;  
 			
@@ -382,16 +382,16 @@ species farmers skills:[moving] control:simple_bdi{
 	
 	rule belief: cosecha_lista new_desire: cosechar;
 	
-	plan extraer_cosecha intention: cosechar{
+	plan extraer_cosecha intention: cosechar instantaneous: true{
 		//Cambio de estado del terreno (último estado)
 		terreno.estado <- 3;
 		
 		//Extraer la cosecha (modificar la siguiente línea) 
 		self.non_sold_vegetables <- int(floor(terreno.area*production[terreno.producto_seleccionado])); //lo que se saca en una ha multiplicado por el área
 		
-		//Recalcular cuantos días faltan del step actual hasta el siguiente step
-		terreno.days_left <- int((terreno.end_date - (current_date + 1#month)) / 86400);
-		
+		//Recalcular cuantos días han pasado desde la fecha actual hasta la fecha de cosecha
+		terreno.days_left <- int((terreno.end_date - current_date) / 86400);
+
 		//Resetear todo sobre terreno
 		terreno.plagaRisk <- rnd_choice([0.7, 0.1, 0.1, 0.1]);
 		terreno.historial_productos <- terreno.historial_productos + terreno.producto_seleccionado; 
@@ -402,7 +402,7 @@ species farmers skills:[moving] control:simple_bdi{
 		//Actualización de beliefs y desires
 		do remove_belief(cosecha_lista);
 		do remove_intention(cosechar, true);
-		do add_desire(esperar);
+		do add_desire(sembrar);
 		
 		//Cambio de estado del terreno (para volver al inicio y sembrar otro producto)
 		terreno.estado <- 1;
@@ -504,4 +504,6 @@ experiment agriculture_world type: gui {
 		    
 		    //para chart display: every 12 cycles
 	   	} /*https://gama-platform.github.io/wiki/LuneraysFlu_step3 VER ESTE EJEMPLOOOOO (chart_display para gráficos) */
+	   	/*https://gama-platform.org/wiki/Statements#permanent ejemplo para chart,
+	   	 * https://gama-platform.org/wiki/Statements#data */
 }  
