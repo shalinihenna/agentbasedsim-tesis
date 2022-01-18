@@ -54,10 +54,11 @@ global{
 	float step update: 1 #month;
 	string current_month update: months_names[current_date.month]; 
 	list<int> generalRisks <- [];
+	map<string, int> mercadoMayoristaVol <- [];
 	
 	//Cantidad de agentes
 	map<string, int> people <- [
-		'number_of_farmers'::1, //la misma cantidad de terrenos
+		'number_of_farmers'::4695, //la misma cantidad de terrenos
 		'number_of_feriantes'::20,
 		'number_of_consumers'::20
 	];
@@ -108,7 +109,7 @@ global{
 		
 		write "Cargando capas de mapas";
 		create comunas from: shpfiles['comunas_shp'];
-		create terrenos from: shpfiles['terrenos_shp'] with:[area::float(get("area_ha"))]  number: 1;
+		create terrenos from: shpfiles['terrenos_shp'] with:[area::float(get("area_ha"))];  //number:2;
 		create ferias from: shpfiles['ferias_shp']; 
 		/*TODO: Borrar */
 		/*create floods from: shpfiles['floods_shp'] with: [risklevel::string((get("INUNDA2")))]{
@@ -122,7 +123,11 @@ global{
 		/*create feriantes number:number_of_feriante;
 		create consumer number:number_of_consumer;*/
 		
-		
+		write "Inicializando mercado mayorista";
+		loop d over:products{
+			add 0 at:d[0] to: mercadoMayoristaVol;
+		}
+
 		write "Fin";
 		
 	}
@@ -286,9 +291,12 @@ global{
 		write "minProducts -- Plaga 2: " + minRiskFilteredProducts2;
 		write "minProducts -- Plaga 3: " + minRiskFilteredProducts3;
 		write " ";
+		
 	}
 	
-	
+	/*reflex printMM{
+		write "Mercado Mayorista: " + mercadoMayoristaVol;
+	}*/
 	
 	//predicates for BDI agents
 	//FARMER
@@ -298,6 +306,7 @@ global{
 	predicate empty_land <- new_predicate("empty land");
 	predicate sembrar <- new_predicate("sembrar");
 	predicate cosechar <- new_predicate("cosechar"); 
+	predicate no_vendido <- new_predicate("No vendido");
 	predicate vender <- new_predicate("vender a feriante"); 
 
 }
@@ -402,10 +411,17 @@ species farmers skills:[moving] control:simple_bdi{
 		//Actualización de beliefs y desires
 		do remove_belief(cosecha_lista);
 		do remove_intention(cosechar, true);
-		do add_desire(sembrar);
+		do add_desire(vender, 2.0); //se le pone strength de 2 para que primero venda y luego siembre, así no se ejecuta la venta en el siguiente step
+		do add_desire(sembrar, 1.0);
 		
 		//Cambio de estado del terreno (para volver al inicio y sembrar otro producto)
 		terreno.estado <- 1;
+	}
+	
+	plan venta_a_mm intention: vender instantaneous: true{
+		mercadoMayoristaVol[last(terreno.historial_productos)] <- mercadoMayoristaVol[last(terreno.historial_productos)] + self.non_sold_vegetables;
+		self.non_sold_vegetables <- 0;
+		do remove_intention(vender, true);
 	}
 	
 	aspect base {
@@ -495,6 +511,7 @@ experiment agriculture_world type: gui {
 		    monitor "Riesgo Helada" value: risk_scale[generalRisks[0]] ;
 		    monitor "Riesgo Ola de calor" value: risk_scale[generalRisks[1]] ;
 		    monitor "Riesgo Sequía" value:risk_scale[generalRisks[2]] ;
+		    monitor "MM" value: mercadoMayoristaVol;
 		    
 		    /*monitor "Peso de afectación Helada" value: affect_weight['Peso de afectación Helada'];
 		    monitor "Peso de afectación Ola de calor" value:  affect_weight['Peso de afectación Ola de calor'] ;
