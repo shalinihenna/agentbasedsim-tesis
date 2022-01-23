@@ -1,0 +1,574 @@
+﻿Mes_escrito;Mes;Anio;Mes/Año;Producto;Variedad;Calidad;Unidad;Precio mínimo;Precio máximo;Precio promedio;Precio ponderado mayorista;Volumen mayorista;Descripcion volumen;Descripcion precio
+Marzo;3;2019;mar-19;Ajo;Chino;Primera;$/unidad;100;350;191;80;19000;380*trenza de 50 unidades;4000/trenza de 50 unidades
+Marzo;3;2019;mar-19;Ajo;Chino;Segunda;$/unidad;100;200;115;60;10000;200*trenza de 50 unidades ;3000/trenza de 50 unidades
+Abril;4;2019;abr-19;Ajo;Chino;Primera;$/unidad;100;350;183;74;22000;440*trenza de 50 unidades;3670/trenza de 50 unidades
+Abril;4;2019;abr-19;Ajo;Chino;Segunda;$/unidad;100;150;109;56;18000;360*trenza de 50 unidades;2860/trenza de 50 unidades 
+Mayo;5;2019;may-19;Ajo;Chino;Primera;$/unidad;100;350;173;75;39500;790*trenza de 50 unidades;3722/trenza de 50 unidades
+Mayo;5;2019;may-19;Ajo;Chino;Segunda;$/unidad;70;166;113;56;73500;1470*trenza de 50 unidades;2799/trenza de 50 unidades
+Junio;6;2019;jun-19;Ajo;Chino;Primera;$/unidad;100;400;186;;;;
+Junio;6;2019;jun-19;Ajo;Chino;Segunda;$/unidad;100;300;122;;;;
+Julio;7;2019;jul-19;Ajo;Chino;Primera;$/unidad;100;400;200;;;;
+Julio;7;2019;jul-19;Ajo;Chino;Segunda;$/unidad;100;166;125;;;;
+Agosto;8;2019;ago-19;Ajo;Chino;Primera;$/unidad;150;350;215;;;;
+Agosto;8;2019;ago-19;Ajo;Chino;Segunda;$/unidad;100;200;134;;;;
+Septiembre;9;2019;sept-19;Ajo;Chino;Primera;$/unidad;150;400;218;;;;
+Septiembre;9;2019;sept-19;Ajo;Chino;Segunda;$/unidad;100;300;146;;;;
+Octubre;10;2019;oct-19;Ajo;Chino;Primera;$/unidad;150;400;216;80;31000;;1600/paquete 20 unidades
+Octubre;10;2019;oct-19;Ajo;Chino;Segunda;$/unidad;100;200;140;60;26000;;1200/paquete 20 unidades
+Noviembre;11;2019;nov-19;Ajo;Chino;Primera;$/unidad;100;400;214;72;469000;;1436/paquete 20 unidades
+Noviembre;11;2019;nov-19;Ajo;Chino;Segunda;$/unidad;100;200;133;51;349000;;1018/paquete 20 unidades
+Diciembre;12;2019;dic-19;Ajo;Chino;Primera;$/unidad;100;400;208;75;79000;;1500/paquete  20 unidades
+Diciembre;12;2019;dic-19;Ajo;Chino;Segunda;$/unidad;70;200;137;50;65000;;1000/paquete 20 unidades
+Enero;1;2020;ene-20;Ajo;Chino;Primera;$/unidad;150;400;224;114;46000;920*trenza 50 unidades;5696/trenza 50 unidades
+Enero;1;2020;ene-20;Ajo;Chino;Segunda;$/unidad;100;250;148;93;44000;880*trenza 50 unidades;4625/trenza 50 unidades
+Febrero;2;2020;feb-20;Ajo;Chino;Primera;$/unidad;166;400;251;200;8500;170*trenza 50 unidades;10000/trenza 50 unidades
+Febrero;2;2020;feb-20;Ajo;Chino;Segunda;$/unidad;100;250;167;160;6500;130*trenza 50 unidades;8000/trenza 50 unidades
+Marzo;3;2020;mar-20;Ajo;Chino;Primera;$/unidad;150;450;282;200;12500;250*trenza de 50 unidades;10000/trenza de 50 unidades
+Marzo;3;2020;mar-20;Ajo;Chino;Segunda;$/unidad;150;250;177;160;6000;120*trenza 50 unidades;8000/trenza 50 unidades
+Mayo;5;2019;may-19;Alcachofa;Española;Primera;$/unidad;200;900;466;;;;
+Mayo;5;2019;may-19;Alcachofa;Española;Segunda;$/unidad;400;1.000;650;;;;
+Junio;6;2019;jun-19;Alcachofa;Española;Primera;$/unidad;200;800;433;;;;
+Junio;6;2019;jun-19;Alcachofa;Española;Segunda;$/unidad;150;400;320;;;;
+Julio;7;2019;jul-19;Alcachofa;Española;Primera;$/unidad;250;800;450;;;;
+Julio;7;2019;jul-19;Alcachofa;Española;Segunda;$/unidad;200;600;325;;;;
+Agosto;8;2019;ago-19;Alcachofa;Española;Primera;$/unidad;200;700;454;;;;
+Agosto;8;2019;ago-19;Alcachofa;Española;Segunda;$/unidad;200;400;346;;;;
+Septiembre;9;2019;sept-19;Alcachofa;Española;Primera;$/unidad;200;700;368;132;76500;;
+Septiembre;9;2019;sept-19;Alcachofa;Española;Segunda;$/unidad;166;400;281;100;30600;;
+Octubre;10;2019;oct-19;Alcachofa;Española;Primera;$/unidad;166;700;296;237;370000;;
+Octubre;10;2019;oct-19;Alcachofa;Española;Segunda;$/unidad;130;600;233;185;197000;;
+Noviembre;11;2019;nov-19;Alcachofa;Española;Primera;$/unidad;125;600;225;115;531000;;
+Noviembre;11;2019;nov-19;Alcachofa;Española;Segunda;$/unidad;100;300;155;86;327000;;
+Marzo;3;2019;mar-19;Apio;Americana (o);Primera;$/unidad;600;1.500;935;;;;
+Marzo;3;2019;mar-19;Apio;Americana (o);Segunda;$/unidad;500;1.000;719;;;;
+Abril;4;2019;abr-19;Apio;Americana (o);Primera;$/unidad;600;1.500;955;469;21600;1800*docena de matas;5622/docena de matas
+Abril;4;2019;abr-19;Apio;Americana (o);Segunda;$/unidad;400;1.000;746;325;11880;990*docena de matas;3899/docena de matas
+Mayo;5;2019;may-19;Apio;Americana (o);Primera;$/unidad;600;1.500;895;;;;
+Mayo;5;2019;may-19;Apio;Americana (o);Segunda;$/unidad;400;1.200;659;;;;
+Junio;6;2019;jun-19;Apio;Americana (o);Primera;$/unidad;600;1.500;918;;;;
+Junio;6;2019;jun-19;Apio;Americana (o);Segunda;$/unidad;500;1.000;646;;;;
+Julio;7;2019;jul-19;Apio;Americana (o);Primera;$/unidad;600;1.500;914;;;;
+Julio;7;2019;jul-19;Apio;Americana (o);Segunda;$/unidad;500;1.000;665;;;;
+Agosto;8;2019;ago-19;Apio;Americana (o);Primera;$/unidad;600;1.500;959;;;;
+Agosto;8;2019;ago-19;Apio;Americana (o);Segunda;$/unidad;500;1.000;736;;;;
+Septiembre;9;2019;sept-19;Apio;Americana (o);Primera;$/unidad;600;1.500;875;500;8400;700*docena de matas;6000/docena de matas
+Septiembre;9;2019;sept-19;Apio;Americana (o);Segunda;$/unidad;500;1.000;641;;;;
+Octubre;10;2019;oct-19;Apio;Americana (o);Primera;$/unidad;500;1.500;875;297;10560;880*docena de matas;3568/docena de matas
+Octubre;10;2019;oct-19;Apio;Americana (o);Segunda;$/unidad;400;800;624;277;33600;2800*docena de matas;3325/docena de matas
+Noviembre;11;2019;nov-19;Apio;Americana (o);Primera;$/unidad;500;1.500;900;444;10800;900*docena de matas;5333/docena de matas
+Noviembre;11;2019;nov-19;Apio;Americana (o);Segunda;$/unidad;500;900;673;264;10800;900*docena de matas;3167/docena de matas
+Diciembre;12;2019;dic-19;Apio;Americana (o);Primera;$/unidad;600;2.000;1.035;;;;
+Diciembre;12;2019;dic-19;Apio;Americana (o);Segunda;$/unidad;600;1.000;763;;;;
+Enero;1;2020;ene-20;Apio;Americana (o);Primera;$/unidad;700;2.000;1.203;;;;
+Enero;1;2020;ene-20;Apio;Americana (o);Segunda;$/unidad;600;1.200;911;;;;
+Febrero;2;2020;feb-20;Apio;Americana (o);Primera;$/unidad;1.000;1.800;1.236;651;39.000;3250*docena de matas;7808/docena de matas
+Febrero;2;2020;feb-20;Apio;Americana (o);Segunda;$/unidad;800;1.500;976;458;36000;3000*docena de matas;5500/docena de matas
+Marzo;3;2020;mar-20;Apio;Americana (o);Primera;$/unidad;700;2.000;1.070;441;119040;9923*docena de matas;5299/docena de matas
+Marzo;3;2020;mar-20;Apio;Americana (o);Segunda;$/unidad;500;1.400;813;360;70560;5880*docena de matas;4319/docena de matas
+Marzo;3;2019;mar-19;Arveja Verde;Sin especificar;Primera;$/kilo;800;1.600;1.083;;;;
+Marzo;3;2019;mar-19;Arveja Verde;Sin especificar;Segunda;$/kilo;800;800;800;;;;
+Abril;4;2019;abr-19;Arveja Verde;Sin especificar;Primera;$/kilo;800;1.400;1.060;;;;
+Abril;4;2019;abr-19;Arveja Verde;Sin especificar;Segunda;$/kilo;800;900;833;;;;
+Mayo;5;2019;may-19;Arveja Verde;Sin especificar;Primera;$/kilo;800;1.500;1.145;;;;
+Mayo;5;2019;may-19;Arveja Verde;Sin especificar;Segunda;$/kilo;800;1.000;933;;;;
+Junio;6;2019;jun-19;Arveja Verde;Sin especificar;Primera;$/kilo;800;1.600;1.141;;;;
+Junio;6;2019;jun-19;Arveja Verde;Sin especificar;Segunda;$/kilo;750;1.000;883;;;;
+Julio;7;2019;jul-19;Arveja Verde;Sin especificar;Primera;$/kilo;700;1.600;1.117;;;;
+Julio;7;2019;jul-19;Arveja Verde;Sin especificar;Segunda;$/kilo;600;1.200;985;;;;
+Agosto;8;2019;ago-19;Arveja Verde;Sin especificar;Primera;$/kilo;700;1.600;1.139;;;;
+Agosto;8;2019;ago-19;Arveja Verde;Sin especificar;Segunda;$/kilo;1.000;1.200;1.014;;;;
+Septiembre;9;2019;sept-19;Arveja Verde;Sin especificar;Primera;$/kilo;700;1.600;1.089;;;;
+Septiembre;9;2019;sept-19;Arveja Verde;Sin especificar;Segunda;$/kilo;800;1.200;943;;;;
+Octubre;10;2019;oct-19;Arveja Verde;Sin especificar;Primera;$/kilo;700;1.500;1.028;629;40750;1630*malla 25 kilos;15724/malla 25 kilos
+Octubre;10;2019;oct-19;Arveja Verde;Sin especificar;Segunda;$/kilo;500;1.200;861;;;;
+Noviembre;11;2019;nov-19;Arveja Verde;Sin especificar;Primera;$/kilo;600;1.500;942;619;93750;3750*malla 25 kilos;15464/malla 25 kilos
+Noviembre;11;2019;nov-19;Arveja Verde;Sin especificar;Segunda;$/kilo;500;1.000;700;480;5000;200*malla 25 kilos;12000/malla 25 kilos
+Diciembre;12;2019;dic-19;Arveja Verde;Sin especificar;Primera;$/kilo;500;1.500;933;;;;
+Diciembre;12;2019;dic-19;Arveja Verde;Sin especificar;Segunda;$/kilo;600;1.000;679;;;;
+Enero;1;2020;ene-20;Arveja Verde;Sin especificar;Primera;$/kilo;700;1.800;1.020;;;;
+Enero;1;2020;ene-20;Arveja Verde;Sin especificar;Segunda;$/kilo;700;800;756;;;;
+Febrero;2;2020;feb-20;Arveja Verde;Sin especificar;Primera;$/kilo;800;1.600;1.111;;;;
+Febrero;2;2020;feb-20;Arveja Verde;Sin especificar;Segunda;$/kilo;700;1.200;943;;;;
+Marzo;3;2020;mar-20;Arveja Verde;Sin especificar;Primera;$/kilo;700;1.400;1.030;;;;
+Marzo;3;2020;mar-20;Arveja Verde;Sin especificar;Segunda;$/kilo;800;1.000;858;;;;
+Marzo;3;2019;mar-19;Brócoli;Sin especificar;Primera;$/unidad;500;2.600;808;528;191500;;
+Marzo;3;2019;mar-19;Brócoli;Sin especificar;Segunda;$/unidad;400;1.000;571;370;64500;;
+Abril;4;2019;abr-19;Brócoli;Sin especificar;Primera;$/unidad;600;1.500;973;741;202900;;
+Abril;4;2019;abr-19;Brócoli;Sin especificar;Segunda;$/unidad;500;1.000;704;507;72900;;
+Mayo;5;2019;may-19;Brócoli;Sin especificar;Primera;$/unidad;600;1.400;893;670;10700;;
+Mayo;5;2019;may-19;Brócoli;Sin especificar;Segunda;$/unidad;500;800;683;500;2500;;
+Junio;6;2019;jun-19;Brócoli;Sin especificar;Primera;$/unidad;600;1.400;842;508;163200;;
+Junio;6;2019;jun-19;Brócoli;Sin especificar;Segunda;$/unidad;400;1.000;631;371;61200;;
+Julio;7;2019;jul-19;Brócoli;Sin especificar;Primera;$/unidad;500;1.200;821;573;38800;;
+Julio;7;2019;jul-19;Brócoli;Sin especificar;Segunda;$/unidad;300;800;611;437;15600;;
+Agosto;8;2019;ago-19;Brócoli;Sin especificar;Primera;$/unidad;450;1.200;727;462;165400;;
+Agosto;8;2019;ago-19;Brócoli;Sin especificar;Segunda;$/unidad;250;700;488;297;79800;;
+Septiembre;9;2019;sept-19;Brócoli;Sin especificar;Primera;$/unidad;400;1.000;737;452;283400;;
+Septiembre;9;2019;sept-19;Brócoli;Sin especificar;Segunda;$/unidad;300;700;533;275;165100;;
+Octubre;10;2019;oct-19;Brócoli;Sin especificar;Primera;$/unidad;400;1.200;728;463;409.250;;
+Octubre;10;2019;oct-19;Brócoli;Sin especificar;Segunda;$/unidad;250;800;524;277;259.960;;
+Noviembre;11;2019;nov-19;Brócoli;Sin especificar;Primera;$/unidad;500;1.000;673;412;354.800;;
+Noviembre;11;2019;nov-19;Brócoli;Sin especificar;Segunda;$/unidad;300;700;483;276;223.300;;
+Diciembre;12;2019;dic-19;Brócoli;Sin especificar;Primera;$/unidad;500;1.200;694;403;290.300;;
+Diciembre;12;2019;dic-19;Brócoli;Sin especificar;Segunda;$/unidad;350;800;515;301;181.550;;
+Enero;1;2020;ene-20;Brócoli;Sin especificar;Primera;$/unidad;600;1.600;869;547;121.520;;
+Enero;1;2020;ene-20;Brócoli;Sin especificar;Segunda;$/unidad;350;1.000;642;445;78.480;;
+Febrero;2;2020;feb-20;Brócoli;Sin especificar;Primera;$/unidad;650;1.500;1.115;746;78.100;;
+Febrero;2;2020;feb-20;Brócoli;Sin especificar;Segunda;$/unidad;500;1.300;847;575;51.500;;
+Marzo;3;2020;mar-20;Brócoli;Sin especificar;Primera;$/unidad;800;2.500;1.317;935;109.600;;
+Marzo;3;2020;mar-20;Brócoli;Sin especificar;Segunda;$/unidad;700;2.000;972;742;66.100;;
+Marzo;3;2019;mar-19;Cebolla;Sin especificar;1a (cosecha);$/kilo;250;700;481;284;283.000;14150*caja 20 kilos;5681/caja 20 kilos
+Marzo;3;2019;mar-19;Cebolla;Sin especificar;2a (cosecha);$/kilo;200;450;383;258;212.600;10630*caja 20 kilos;5150/caja 20 kilos
+Abril;4;2019;abr-19;Cebolla;Sin especificar;1a (cosecha);$/kilo;450;500;475;263;258.000;12900*caja 20 kilos;5269/caja 20 kilos
+Abril;4;2019;abr-19;Cebolla;Sin especificar;2a (cosecha);$/kilo;400;450;413;243;199.000;9950*caja 20 kilos;4866/caja 20 kilos
+Mayo;5;2019;may-19;Cebolla;Sin especificar;1a (guarda);$/kilo;450;1.000;590;325;248.000;12400*caja 20 kilos;6497/caja 20 kilos
+Mayo;5;2019;may-19;Cebolla;Sin especificar;2a (guarda);$/kilo;400;700;536;306;182.000;9100*caja 20 kilos;6114/caja 20 kilos
+Junio;6;2019;jun-19;Cebolla;Sin especificar;1a (guarda);$/kilo;400;800;623;310;320.000;16000*caja 20 kilos;6208/caja 20 kilos
+Junio;6;2019;jun-19;Cebolla;Sin especificar;2a (guarda);$/kilo;350;700;550;291;252.400;12620*caja 20 kilos;5829/caja 20 kilos
+Julio;7;2019;jul-19;Cebolla;Sin especificar;1a (guarda);$/kilo;400;700;535;322;331.800;16590*caja 20 kilos;6438/caja 20 kilos
+Julio;7;2019;jul-19;Cebolla;Sin especificar;2a (guarda);$/kilo;400;600;472;296;273.400;13670*caja 20 kilos;5929/caja 20 kilos
+Agosto;8;2019;ago-19;Cebolla;Sin especificar;1a (guarda);$/kilo;400;800;643;404;431.600;21580*caja 20 kilos;8087/caja 20 kilos
+Agosto;8;2019;ago-19;Cebolla;Sin especificar;2a (guarda);$/kilo;400;700;530;376;349.200;17460*caja 20 kilos;7522/caja 20 kilos
+Septiembre;9;2019;sept-19;Cebolla;Sin especificar;1a (guarda);$/kilo;400;1.000;729;407;431.800;21590*caja 20 kilos;8143/caja 20 kilos
+Septiembre;9;2019;sept-19;Cebolla;Sin especificar;2a (guarda);$/kilo;500;700;608;381;358.200;17910*caja 20 kilos;7620/caja 20 kilos
+Octubre;10;2019;oct-19;Cebolla;Sin especificar;1a (guarda);$/kilo;500;1.000;795;349;401.600;20080*caja 20 kilos;6987/caja 20 kilos
+Octubre;10;2019;oct-19;Cebolla;Sin especificar;2a (guarda);$/kilo;100;700;456;310;303.600;15180*caja 20 kilos;6199/caja 20 kilos
+Noviembre;11;2019;nov-19;Cebolla;Sin especificar;1a (guarda);$/kilo;1.000;1.000;1.000;315;195.000;9750*caja 20 kilos;6305/caja 20 kilos
+Diciembre;12;2019;dic-19;Cebolla;Sin especificar;1a nueva(o);$/kilo;400;600;500;176;441.000;24500*malla 18 kilos;3159/malla 18 kilos
+Diciembre;12;2019;dic-19;Cebolla;Sin especificar;2a nueva(o);$/kilo;400;500;450;148;324.000;18000*malla 18 kilos;2667/malla 18 kilos
+Enero;1;2020;ene-20;Cebolla;Sin especificar;1a nueva(o);$/kilo;400;450;433;182;54.000;3000*malla 18 kilos;3283/malla 18 kilos
+Enero;1;2020;ene-20;Cebolla;Sin especificar;2a nueva(o);$/kilo;400;450;408;155;39.600;2200*malla 18 kilos;2795/malla 18 kilos
+Febrero;2;2020;feb-20;Cebolla;Sin especificar;1a nueva(o);$/kilo;450;600;550;;;;
+Febrero;2;2020;feb-20;Cebolla;Sin especificar;2a nueva(o);$/kilo;400;500;470;;;;
+Marzo;3;2020;mar-20;Cebolla;Sin especificar;1a (cosecha);$/kilo;390;450;420;336;255.000;12750*caja 20 kilos;6716/caja 20 kilos
+Marzo;3;2020;mar-20;Cebolla;Sin especificar;2a (cosecha);$/kilo;100;390;245;315;180.800;9040*caja 20 kilos;6308/caja 20 kilos
+Marzo;3;2019;mar-19;Choclo;Dulce o Americano;Primera;$/unidad;150;500;253;107;785.000;;
+Marzo;3;2019;mar-19;Choclo;Dulce o Americano;Segunda;$/unidad;100;400;210;87;45.000;;
+Abril;4;2019;abr-19;Choclo;Dulce o Americano;Primera;$/unidad;150;400;244;98;984.000;;
+Abril;4;2019;abr-19;Choclo;Dulce o Americano;Segunda;$/unidad;100;200;169;67;245.000;;
+Mayo;5;2019;may-19;Choclo;Dulce o Americano;Primera;$/unidad;100;450;239;139;292.000;;
+Mayo;5;2019;may-19;Choclo;Dulce o Americano;Segunda;$/unidad;100;200;166;100;80.000;;
+Junio;6;2019;jun-19;Choclo;Dulce o Americano;Primera;$/unidad;150;500;319;;;;
+Junio;6;2019;jun-19;Choclo;Dulce o Americano;Segunda;$/unidad;100;300;210;;;;
+Julio;7;2019;jul-19;Choclo;Dulce o Americano;Primera;$/unidad;230;800;425;;;;
+Julio;7;2019;jul-19;Choclo;Dulce o Americano;Segunda;$/unidad;150;600;336;;;;
+Agosto;8;2019;ago-19;Choclo;Dulce o Americano;Primera;$/unidad;400;800;602;;;;
+Agosto;8;2019;ago-19;Choclo;Dulce o Americano;Segunda;$/unidad;300;600;461;;;;
+Septiembre;9;2019;sept-19;Choclo;Dulce o Americano;Primera;$/unidad;200;900;599;;;;
+Septiembre;9;2019;sept-19;Choclo;Dulce o Americano;Segunda;$/unidad;300;650;437;;;;
+Octubre;10;2019;oct-19;Choclo;Dulce o Americano;Primera;$/unidad;400;800;633;;;;
+Octubre;10;2019;oct-19;Choclo;Dulce o Americano;Segunda;$/unidad;300;600;483;;;;
+Noviembre;11;2019;nov-19;Choclo;Dulce o Americano;Primera;$/unidad;200;800;533;245;180.000;;
+Noviembre;11;2019;nov-19;Choclo;Dulce o Americano;Segunda;$/unidad;200;500;406;200;60.000;;
+Diciembre;12;2019;dic-19;Choclo;Dulce o Americano;Primera;$/unidad;200;600;344;158;257.000;;
+Diciembre;12;2019;dic-19;Choclo;Dulce o Americano;Segunda;$/unidad;200;350;247;115;85.000;;
+Enero;1;2020;ene-20;Choclo;Dulce o Americano;Primera;$/unidad;180;500;312;163;554.000;;
+Enero;1;2020;ene-20;Choclo;Dulce o Americano;Segunda;$/unidad;120;350;220;114;99.000;;
+Febrero;2;2020;feb-20;Choclo;Dulce o Americano;Primera;$/unidad;200;500;304;190;650.000;;
+Febrero;2;2020;feb-20;Choclo;Dulce o Americano;Segunda;$/unidad;100;300;224;149;165.000;;
+Marzo;3;2020;mar-20;Choclo;Dulce o Americano;Primera;$/unidad;200;450;306;163;575.500;;
+Marzo;3;2020;mar-20;Choclo;Dulce o Americano;Segunda;$/unidad;200;250;218;126;160.500;;
+Marzo;3;2019;mar-19;Coliflor;Sin especificar;Primera;$/unidad;500;1.300;846;519;274.400;;
+Marzo;3;2019;mar-19;Coliflor;Sin especificar;Segunda;$/unidad;400;1.000;621;356;87.300;;
+Abril;4;2019;abr-19;Coliflor;Sin especificar;Primera;$/unidad;700;1.500;1.115;742;205.200;;
+Abril;4;2019;abr-19;Coliflor;Sin especificar;Segunda;$/unidad;500;1.200;811;525;70.200;;
+Mayo;5;2019;may-19;Coliflor;Sin especificar;Primera;$/unidad;500;1.400;980;660;112.900;;
+Mayo;5;2019;may-19;Coliflor;Sin especificar;Segunda;$/unidad;500;900;721;455;45.200;;
+Junio;6;2019;jun-19;Coliflor;Sin especificar;Primera;$/unidad;700;1.400;922;582;126.200;;
+Junio;6;2019;jun-19;Coliflor;Sin especificar;Segunda;$/unidad;400;900;677;401;44.230;;
+Julio;7;2019;jul-19;Coliflor;Sin especificar;Primera;$/unidad;500;1.500;876;668;22.300;;
+Julio;7;2019;jul-19;Coliflor;Sin especificar;Segunda;$/unidad;400;900;664;456;11.500;;
+Agosto;8;2019;ago-19;Coliflor;Sin especificar;Primera;$/unidad;600;1.700;1.050;616;62.900;;
+Agosto;8;2019;ago-19;Coliflor;Sin especificar;Segunda;$/unidad;400;1.300;722;473;29.000;;
+Septiembre;9;2019;sept-19;Coliflor;Sin especificar;Primera;$/unidad;500;1.200;787;515;242.900;;
+Septiembre;9;2019;sept-19;Coliflor;Sin especificar;Segunda;$/unidad;400;800;568;337;142.600;;
+Octubre;10;2019;oct-19;Coliflor;Sin especificar;Primera;$/unidad;500;1.200;797;542;373.800;;
+Octubre;10;2019;oct-19;Coliflor;Sin especificar;Segunda;$/unidad;400;800;580;352;222.570;;
+Noviembre;11;2019;nov-19;Coliflor;Sin especificar;Primera;$/unidad;500;1.200;720;489;286.600;;
+Noviembre;11;2019;nov-19;Coliflor;Sin especificar;Segunda;$/unidad;350;700;525;342;171.900;;
+Diciembre;12;2019;dic-19;Coliflor;Sin especificar;Primera;$/unidad;500;1.200;768;435;335.300;;
+Diciembre;12;2019;dic-19;Coliflor;Sin especificar;Segunda;$/unidad;300;800;564;361;171.700;;
+Enero;1;2020;ene-20;Coliflor;Sin especificar;Primera;$/unidad;600;1.700;939;641;94.620;;
+Enero;1;2020;ene-20;Coliflor;Sin especificar;Segunda;$/unidad;400;1.000;675;536;70.080;;
+Febrero;2;2020;feb-20;Coliflor;Sin especificar;Primera;$/unidad;650;2.000;1.213;783;52.400;;
+Febrero;2;2020;feb-20;Coliflor;Sin especificar;Segunda;$/unidad;500;1.300;886;612;34.500;;
+Marzo;3;2020;mar-20;Coliflor;Sin especificar;Primera;$/unidad;800;2.500;1.410;1.032;86.660;;
+Marzo;3;2020;mar-20;Coliflor;Sin especificar;Segunda;$/unidad;600;2.000;1.069;841;50.030;;
+Marzo;3;2019;mar-19;Espinaca;Sin especificar;Primera;$/kilo;1.200;2.800;1.793;808;66.800;6680*cuna 10 kilos;8075/cuna 10 kilos
+Marzo;3;2019;mar-19;Espinaca;Sin especificar;Segunda;$/kilo;1.000;1.800;1.332;600;4.800;480*cuna 10 kilos;6000/cuna 10 kilos
+Abril;4;2019;abr-19;Espinaca;Sin especificar;Primera;$/kilo;800;2.000;1.435;451;75.400;7540*cuna 10 kilos;4514/cuna 10 kilos
+Abril;4;2019;abr-19;Espinaca;Sin especificar;Segunda;$/kilo;600;1.400;1.067;349;9.900;990*cuna 10 kilos;3485/cuna 10 kilos
+Mayo;5;2019;may-19;Espinaca;Sin especificar;Primera;$/kilo;800;2.000;1.356;412;109.800;10980*cuna 10 kilos;4121/cuna 10 kilos
+Mayo;5;2019;may-19;Espinaca;Sin especificar;Segunda;$/kilo;700;1.200;1.019;250;1.100;110*cuna 10 kilos;2500/cuna 10 kilos
+Junio;6;2019;jun-19;Espinaca;Sin especificar;Primera;$/kilo;800;2.000;1.295;438;42.000;4200*cuna 10 kilos;4382/cuna 10 kilos
+Junio;6;2019;jun-19;Espinaca;Sin especificar;Segunda;$/kilo;800;1.400;1.032;473;6.300;630*cuna 10 kilos;4730/cuna 10 kilos
+Julio;7;2019;jul-19;Espinaca;Sin especificar;Primera;$/kilo;1.000;2.000;1.391;466;172.000;17200*cuna 10 kilos;4660/cuna 10 kilos
+Julio;7;2019;jul-19;Espinaca;Sin especificar;Segunda;$/kilo;800;1.400;1.046;;;;
+Agosto;8;2019;ago-19;Espinaca;Sin especificar;Primera;$/kilo;800;2.000;1.394;462;155.400;15540*cuna 10 kilos;4621/cuna 10 kilos
+Agosto;8;2019;ago-19;Espinaca;Sin especificar;Segunda;$/kilo;700;1.400;1.005;350;2.400;240*cuna 10 kilos;3500/cuna 10 kilos
+Septiembre;9;2019;sept-19;Espinaca;Sin especificar;Primera;$/kilo;1.000;2.000;1.329;432;140.150;14015*cuna 10 kilos;4321/cuna 10 kilos
+Septiembre;9;2019;sept-19;Espinaca;Sin especificar;Segunda;$/kilo;500;1.200;999;;;;
+Octubre;10;2019;oct-19;Espinaca;Sin especificar;Primera;$/kilo;800;2.000;1.311;472;166.000;16600*cuna 10 kilos;4716/cuna 10 kilos
+Octubre;10;2019;oct-19;Espinaca;Sin especificar;Segunda;$/kilo;700;1.200;1.011;;;;
+Noviembre;11;2019;nov-19;Espinaca;Sin especificar;Primera;$/kilo;800;2.000;1.264;454;107.800;10780*cuna 10 kilos;4541/cuna 10 kilos
+Noviembre;11;2019;nov-19;Espinaca;Sin especificar;Segunda;$/kilo;800;1.200;945;;;;
+Diciembre;12;2019;dic-19;Espinaca;Sin especificar;Primera;$/kilo;700;2.000;1.319;503;105600;10560*cuna 10 kilos;5034/cuna 10 kilos
+Diciembre;12;2019;dic-19;Espinaca;Sin especificar;Segunda;$/kilo;800;1.200;995;;;;
+Enero;1;2020;ene-20;Espinaca;Sin especificar;Primera;$/kilo;1.000;2.800;1.745;1.087;30.500;3050*cuna 10 kilos;10867/cuna 10 kilos
+Enero;1;2020;ene-20;Espinaca;Sin especificar;Segunda;$/kilo;800;1.600;1.221;850;3600;360*cuna 10 kilos;8500/cuna 10 kilos
+Febrero;2;2020;feb-20;Espinaca;Sin especificar;Primera;$/kilo;1.200;3.200;2.111;1.263;27.800;2780*cuna 10 kilos;12633/cuna 10 kilos
+Febrero;2;2020;feb-20;Espinaca;Sin especificar;Segunda;$/kilo;1.000;2.400;1.834;;;;
+Marzo;3;2020;mar-20;Espinaca;Sin especificar;Primera;$/kilo;1.200;3.200;1.887;752;64.400;6440*cuna 10 kilos;7519/cuna 10 kilos
+Marzo;3;2020;mar-20;Espinaca;Sin especificar;Segunda;$/kilo;1.000;2.000;1.567;669;8.000;800*cuna 10 kilos;6688/cuna 10 kilos
+Mayo;5;2019;may-19;Haba;Sin especificar;Primera;$/kilo;350;1.500;586;445;7.500;300*saco 25 kilos;11133/saco 25 kilos
+Mayo;5;2019;may-19;Haba;Sin especificar;Segunda;$/kilo;400;500;464;;;;
+Junio;6;2019;jun-19;Haba;Sin especificar;Primera;$/kilo;400;1.200;535;290;58.750;2350*saco 25 kilos;7243/saco 25 kilos
+Junio;6;2019;jun-19;Haba;Sin especificar;Segunda;$/kilo;300;450;387;;;;
+Julio;7;2019;jul-19;Haba;Sin especificar;Primera;$/kilo;350;1.000;518;;;;
+Julio;7;2019;jul-19;Haba;Sin especificar;Segunda;$/kilo;300;450;390;;;;
+Agosto;8;2019;ago-19;Haba;Sin especificar;Primera;$/kilo;350;1.000;547;;;;
+Agosto;8;2019;ago-19;Haba;Sin especificar;Segunda;$/kilo;300;500;396;;;;
+Septiembre;9;2019;sept-19;Haba;Sin especificar;Primera;$/kilo;300;1.000;486;240;168750;6750*saco 25 kilos;6008/saco 25 kilos
+Septiembre;9;2019;sept-19;Haba;Sin especificar;Segunda;$/kilo;250;600;377;200;9250;370*saco 25 kilos;5000/saco 25 kilos
+Octubre;10;2019;oct-19;Haba;Sin especificar;Primera;$/kilo;200;900;378;198;392250;15690*saco 25 kilos;4962/saco 25 kilos
+Octubre;10;2019;oct-19;Haba;Sin especificar;Segunda;$/kilo;200;400;299;131;49250;1970*saco 25 kilos;3287/saco 25 kilos
+Noviembre;11;2019;nov-19;Haba;Sin especificar;Primera;$/kilo;300;800;498;331;228000;9120*saco 25 kilos;8268/saco 25 kilos
+Noviembre;11;2019;nov-19;Haba;Sin especificar;Segunda;$/kilo;250;400;346;200;2500;100*saco 25 kilos;5000/saco 25 kilos
+Diciembre;12;2019;dic-19;Haba;Sin especificar;Primera;$/kilo;300;900;606;560;14000;560*saco 25 kilos;14000/saco 25 kilos
+Diciembre;12;2019;dic-19;Haba;Sin especificar;Segunda;$/kilo;300;600;412;;;;
+Enero;1;2020;ene-20;Haba;Sin especificar;Primera;$/kilo;400;1.000;593;384;6250;250*saco 25 kilos;9600/saco 25 kilos
+Marzo;3;2019;mar-19;Lechuga;Escarola;Primera;$/unidad;500;1.000;740;439;49500;3300*caja 15 unidades;6583/caja 15 unidades
+Marzo;3;2019;mar-19;Lechuga;Escarola;Segunda;$/unidad;350;700;555;294;63000;3500*caja 18 unidades;5286/caja 18 unidades
+Abril;4;2019;abr-19;Lechuga;Escarola;Primera;$/unidad;400;1.000;633;;;;
+Abril;4;2019;abr-19;Lechuga;Escarola;Segunda;$/unidad;250;600;465;;;;
+Mayo;5;2019;may-19;Lechuga;Escarola;Primera;$/unidad;400;1.000;579;315;23250;1550* caja 15 unidades;4732/caja 15 unidades
+Mayo;5;2019;may-19;Lechuga;Escarola;Segunda;$/unidad;300;600;413;173;11880;660*caja 18 unidads;3121/caja 18 unidades
+Junio;6;2019;jun-19;Lechuga;Escarola;Primera;$/unidad;300;1.000;579;284;48750;3250*caja 15 unidades;4262/caja 15 unidades
+Junio;6;2019;jun-19;Lechuga;Escarola;Segunda;$/unidad;250;600;408;156;56160;3120*caja 18 unidades;2801/caja 18 unidades
+Julio;7;2019;jul-19;Lechuga;Escarola;Primera;$/unidad;400;1.000;572;242;277500;18500*caja 15 unidades;3624/caja 15 unidades
+Julio;7;2019;jul-19;Lechuga;Escarola;Segunda;$/unidad;250;700;400;147;220680;12260*caja 18 unidades;2637/caja 18 unidades
+Agosto;8;2019;ago-19;Lechuga;Escarola;Primera;$/unidad;333;1.000;551;214;9750;650*caja 15 unidades;3215/caja 15 unidades
+Agosto;8;2019;ago-19;Lechuga;Escarola;Segunda;$/unidad;250;550;380;;;;
+Septiembre;9;2019;sept-19;Lechuga;Escarola;Primera;$/unidad;300;1.000;545;250;11400;790*caja 15 unidades;3750/caja 15 unidades
+Septiembre;9;2019;sept-19;Lechuga;Escarola;Segunda;$/unidad;200;600;372;153;9000;500*caja 18 unidades;2750/caja 18 unidades
+Octubre;10;2019;oct-19;Lechuga;Escarola;Primera;$/unidad;300;1.000;538;213;93150;6210*caja 15 unidades;3193/caja 15 unidades
+Octubre;10;2019;oct-19;Lechuga;Escarola;Segunda;$/unidad;200;500;357;122;70920;3940*caja 18 unidades;2190/caja 18 unidades
+Noviembre;11;2019;nov-19;Lechuga;Escarola;Primera;$/unidad;300;1.000;530;183;155250;10350*caja 15 unidades;2750/caja 15 unidades
+Noviembre;11;2019;nov-19;Lechuga;Escarola;Segunda;$/unidad;200;500;367;99;125640;6980*caja 18 unidades;1784/caja 18 unidades
+Diciembre;12;2019;dic-19;Lechuga;Escarola;Primera;$/unidad;333;1.000;570;232;81000;5400*caja 15 unidades;3487/caja 15 unidades
+Diciembre;12;2019;dic-19;Lechuga;Escarola;Segunda;$/unidad;250;600;419;141;64800;3600*caja 18 unidades;2542/caja 18 unidades
+Enero;1;2020;ene-20;Lechuga;Escarola;Primera;$/unidad;300;1.000;601;253;158400;10560*caja 15 unidades;3799/caja 15 unidades
+Enero;1;2020;ene-20;Lechuga;Escarola;Segunda;$/unidad;250;600;441;143;165060;9170*caja 18 unidades;2579/caja 18 unidades
+Febrero;2;2020;feb-20;Lechuga;Escarola;Primera;$/unidad;400;1.000;733;340;116700;7780*caja 15 unidades;5104/caja 15 unidades
+Febrero;2;2020;feb-20;Lechuga;Escarola;Segunda;$/unidad;300;800;542;202;103860;5770*caja 18 unidades;3633/caja 18 unidades
+Marzo;3;2020;mar-20;Lechuga;Escarola;Primera;$/unidad;500;1.000;764;426;200850;13390*caja 15 unidades;6396/caja 15 unidades
+Marzo;3;2020;mar-20;Lechuga;Escarola;Segunda;$/unidad;300;700;573;273;169200;9400*caja 18 unidades;4914/caja 18 unidades
+Marzo;3;2019;mar-19;Melón;Tuna;Primera;$/unidad;500;1.200;810;503;37.000;;
+Marzo;3;2019;mar-19;Melón;Tuna;Segunda;$/unidad;400;600;514;363;31.900;;
+Diciembre;12;2019;dic-19;Melón;Tuna;Primera;$/unidad;500;1.500;805;571;11.400;;
+Diciembre;12;2019;dic-19;Melón;Tuna;Segunda;$/unidad;333;800;569;470;8.600;;
+Enero;1;2020;ene-20;Melón;Tuna;Primera;$/unidad;500;1.700;842;;;;
+Enero;1;2020;ene-20;Melón;Tuna;Segunda;$/unidad;400;1.000;605;;;;
+Febrero;2;2020;feb-20;Melón;Tuna;Primera;$/unidad;500;1.800;848;521;16.030;;
+Febrero;2;2020;feb-20;Melón;Tuna;Segunda;$/unidad;400;800;622;383;7.520;;
+Marzo;3;2020;mar-20;Melón;Tuna;Primera;$/unidad;500;1.700;901;;;;
+Marzo;3;2020;mar-20;Melón;Tuna;Segunda;$/unidad;400;900;626;;;;
+Marzo;3;2019;mar-19;Papa;Asterix;Primera;$/kilo;350;800;485;;;;
+Marzo;3;2019;mar-19;Papa;Asterix;Segunda;$/kilo;300;500;374;;;;
+Abril;4;2019;abr-19;Papa;Asterix;Primera;$/kilo;350;800;469;;;;
+Abril;4;2019;abr-19;Papa;Asterix;Segunda;$/kilo;250;500;347;;;;
+Mayo;5;2019;may-19;Papa;Asterix;Primera;$/kilo;300;700;473;;;;
+Mayo;5;2019;may-19;Papa;Asterix;Segunda;$/kilo;250;500;363;;;;
+Junio;6;2019;jun-19;Papa;Asterix;Primera;$/kilo;300;900;496;;;;
+Junio;6;2019;jun-19;Papa;Asterix;Segunda;$/kilo;250;450;376;;;;
+Julio;7;2019;jul-19;Papa;Asterix;Primera;$/kilo;300;700;494;;;;
+Julio;7;2019;jul-19;Papa;Asterix;Segunda;$/kilo;200;550;361;;;;
+Agosto;8;2019;ago-19;Papa;Asterix;Primera;$/kilo;300;700;485;;;;
+Agosto;8;2019;ago-19;Papa;Asterix;Segunda;$/kilo;250;500;367;;;;
+Septiembre;9;2019;sept-19;Papa;Asterix;Primera;$/kilo;400;900;515;;;;
+Septiembre;9;2019;sept-19;Papa;Asterix;Segunda;$/kilo;300;500;386;;;;
+Octubre;10;2019;oct-19;Papa;Asterix;Primera;$/kilo;400;1.000;575;;;;
+Octubre;10;2019;oct-19;Papa;Asterix;Segunda;$/kilo;300;600;440;;;;
+Noviembre;11;2019;nov-19;Papa;Asterix;Primera;$/kilo;350;800;525;;;;
+Noviembre;11;2019;nov-19;Papa;Asterix;Segunda;$/kilo;300;500;376;;;;
+Diciembre;12;2019;dic-19;Papa;Asterix;Primera;$/kilo;300;800;484;;;;
+Diciembre;12;2019;dic-19;Papa;Asterix;Segunda;$/kilo;250;550;361;;;;
+Enero;1;2020;ene-20;Papa;Asterix;Primera;$/kilo;350;900;526;;;;
+Enero;1;2020;ene-20;Papa;Asterix;Segunda;$/kilo;300;500;387;;;;
+Febrero;2;2020;feb-20;Papa;Asterix;Primera;$/kilo;350;900;522;;;;
+Febrero;2;2020;feb-20;Papa;Asterix;Segunda;$/kilo;250;500;401;;;;
+Marzo;3;2020;mar-20;Papa;Asterix;Primera;$/kilo;300;800;522;;;;
+Marzo;3;2020;mar-20;Papa;Asterix;Segunda;$/kilo;250;500;402;;;;
+Marzo;3;2019;mar-19;Pepino ensalada;Sin especificar;Primera;$/unidad;200;600;336;135;133000;1900*caja 70 unidades;9468/caja 70 unidades
+Marzo;3;2019;mar-19;Pepino ensalada;Sin especificar;Segunda;$/unidad;150;450;232;94;38000;380*caja 100 unidades;9447/caja 100 unidades
+Abril;4;2019;abr-19;Pepino ensalada;Sin especificar;Primera;$/unidad;150;600;275;98;233800;3340*caja 70 unidades;6874/caja 70 unidades
+Abril;4;2019;abr-19;Pepino ensalada;Sin especificar;Segunda;$/unidad;100;300;185;47;41000;410*caja 100 unidades;4707/caja 100 unidades
+Mayo;5;2019;may-19;Pepino ensalada;Sin especificar;Primera;$/unidad;180;500;281;108;79800;1140*caja 70 unidades;7561/caja 70 unidades
+Mayo;5;2019;may-19;Pepino ensalada;Sin especificar;Segunda;$/unidad;100;300;202;68;29000;290*caja 100 unidades;6793/caja 100 unidades
+Junio;6;2019;jun-19;Pepino ensalada;Sin especificar;Primera;$/unidad;150;500;290;122;55300;790* caja 70 unidades;8519/caja 70 unidades
+Junio;6;2019;jun-19;Pepino ensalada;Sin especificar;Segunda;$/unidad;100;300;203;;;;
+Julio;7;2019;jul-19;Pepino ensalada;Sin especificar;Primera;$/unidad;166;600;282;;;;
+Julio;7;2019;jul-19;Pepino ensalada;Sin especificar;Segunda;$/unidad;100;400;204;;;;
+Agosto;8;2019;ago-19;Pepino ensalada;Sin especificar;Primera;$/unidad;200;600;363;;;;
+Agosto;8;2019;ago-19;Pepino ensalada;Sin especificar;Segunda;$/unidad;100;300;233;;;;
+Septiembre;9;2019;sept-19;Pepino ensalada;Sin especificar;Primera;$/unidad;200;600;340;;;;
+Septiembre;9;2019;sept-19;Pepino ensalada;Sin especificar;Segunda;$/unidad;100;400;238;;;;
+Octubre;10;2019;oct-19;Pepino ensalada;Sin especificar;Primera;$/unidad;200;700;345;;;;
+Octubre;10;2019;oct-19;Pepino ensalada;Sin especificar;Segunda;$/unidad;166;500;251;;;;
+Noviembre;11;2019;nov-19;Pepino ensalada;Sin especificar;Primera;$/unidad;150;500;263;;;;
+Noviembre;11;2019;nov-19;Pepino ensalada;Sin especificar;Segunda;$/unidad;100;250;166;;;;
+Diciembre;12;2019;dic-19;Pepino ensalada;Sin especificar;Primera;$/unidad;180;600;272;;;;
+Diciembre;12;2019;dic-19;Pepino ensalada;Sin especificar;Segunda;$/unidad;100;350;182;;;;
+Enero;1;2020;ene-20;Pepino ensalada;Sin especificar;Primera;$/unidad;150;600;283;97;170800;2440*caja 70 unidades;6790/caja 70 unidades
+Enero;1;2020;ene-20;Pepino ensalada;Sin especificar;Segunda;$/unidad;100;300;195;49;192000;1920*caja 100 unidades;4909/caja 100 unidades
+Febrero;2;2020;feb-20;Pepino ensalada;Sin especificar;Primera;$/unidad;200;600;280;95;317800;4540*caja 70 unidades;6622/caja 70 unidades
+Febrero;2;2020;feb-20;Pepino ensalada;Sin especificar;Segunda;$/unidad;100;400;204;46;415000;4150*caja 100 unidades;4593/caja 100 unidades
+Marzo;3;2020;mar-20;Pepino ensalada;Sin especificar;Primera;$/unidad;200;600;301;109;473900;6770*caja 70 unidades;7598/caja 70 unidades
+Marzo;3;2020;mar-20;Pepino ensalada;Sin especificar;Segunda;$/unidad;150;400;206;50;231000;2310*caja 100 unidades;5000/caja 100 unidades
+Marzo;3;2019;mar-19;Pimiento;Cuatro cascos verde;Primera;$/unidad;200;700;321;;;;
+Marzo;3;2019;mar-19;Pimiento;Cuatro cascos verde;Segunda;$/unidad;100;350;213;;;;
+Abril;4;2019;abr-19;Pimiento;Cuatro cascos verde;Primera;$/unidad;166;700;310;;;;
+Abril;4;2019;abr-19;Pimiento;Cuatro cascos verde;Segunda;$/unidad;100;300;194;;;;
+Mayo;5;2019;may-19;Pimiento;Cuatro cascos verde;Primera;$/unidad;150;700;294;;;;
+Mayo;5;2019;may-19;Pimiento;Cuatro cascos verde;Segunda;$/unidad;100;500;192;;;;
+Junio;6;2019;jun-19;Pimiento;Cuatro cascos verde;Primera;$/unidad;166;600;285;;;;
+Junio;6;2019;jun-19;Pimiento;Cuatro cascos verde;Segunda;$/unidad;100;500;200;;;;
+Julio;7;2019;jul-19;Pimiento;Cuatro cascos verde;Primera;$/unidad;166;500;300;;;;
+Julio;7;2019;jul-19;Pimiento;Cuatro cascos verde;Segunda;$/unidad;125;350;213;;;;
+Agosto;8;2019;ago-19;Pimiento;Cuatro cascos verde;Primera;$/unidad;200;700;344;;;;
+Agosto;8;2019;ago-19;Pimiento;Cuatro cascos verde;Segunda;$/unidad;150;300;240;;;;
+Septiembre;9;2019;sept-19;Pimiento;Cuatro cascos verde;Primera;$/unidad;200;600;392;;;;
+Septiembre;9;2019;sept-19;Pimiento;Cuatro cascos verde;Segunda;$/unidad;150;400;272;;;;
+Octubre;10;2019;oct-19;Pimiento;Cuatro cascos verde;Primera;$/unidad;300;500;405;;;;
+Octubre;10;2019;oct-19;Pimiento;Cuatro cascos verde;Segunda;$/unidad;200;350;284;;;;
+Enero;1;2020;ene-20;Pimiento;Cuatro cascos verde;Primera;$/unidad;200;900;332;;;;
+Enero;1;2020;ene-20;Pimiento;Cuatro cascos verde;Segunda;$/unidad;100;350;213;;;;
+Febrero;2;2020;feb-20;Pimiento;Cuatro cascos verde;Primera;$/unidad;166;600;335;;;;
+Febrero;2;2020;feb-20;Pimiento;Cuatro cascos verde;Segunda;$/unidad;100;300;215;;;;
+Marzo;3;2020;mar-20;Pimiento;Cuatro cascos verde;Primera;$/unidad;200;500;323;;;;
+Marzo;3;2020;mar-20;Pimiento;Cuatro cascos verde;Segunda;$/unidad;100;350;213;;;;
+Marzo;3;2019;mar-19;Poroto granado;Sin especificar;Primera;$/kilo;500;1.500;889;669;342500;13700*saco 25 kilos;16729/saco 25 kilos
+Marzo;3;2019;mar-19;Poroto granado;Sin especificar;Segunda;$/kilo;600;1.200;825;562;85750;3430*saco 25 kilos;14055/saco 25 kilos
+Abril;4;2019;abr-19;Poroto granado;Sin especificar;Primera;$/kilo;600;1.500;845;591;321750;2870*saco 25 kilos;14780/saco 25 kilos
+Abril;4;2019;abr-19;Poroto granado;Sin especificar;Segunda;$/kilo;500;800;662;470;77500;3100*saco 25 kilos;11742/saco 25 kilos
+Mayo;5;2019;may-19;Poroto granado;Sin especificar;Primera;$/kilo;650;1.500;948;726;121000;4840*saco 25 kilos;18157/saco 25 kilos
+Mayo;5;2019;may-19;Poroto granado;Sin especificar;Segunda;$/kilo;600;1.000;843;564;13250;530*saco 25 kilos;14094/saco 25 kilos
+Diciembre;12;2019;dic-19;Poroto granado;Sin especificar;Primera;$/kilo;1.000;2.500;1.706;1.004;220.250;8810*saco 25 kilos;25094/saco 25 kilos
+Diciembre;12;2019;dic-19;Poroto granado;Sin especificar;Segunda;$/kilo;1.000;2.000;1.466;554;19.750;790*saco 25 kilos;13861/saco 25 kilos
+Enero;1;2020;ene-20;Poroto granado;Sin especificar;Primera;$/kilo;800;2.000;1.165;824;389750;15590*saco 25 kilos;20614/saco 25 kilos
+Enero;1;2020;ene-20;Poroto granado;Sin especificar;Segunda;$/kilo;750;1.400;1.024;645;50500;2020*saco 25 kilos;16114/saco 25 kilos
+Febrero;2;2020;feb-20;Poroto granado;Sin especificar;Primera;$/kilo;800;2.000;1.255;977;254500;10180*saco 25 kilos;24430/saco 25 kilos
+Febrero;2;2020;feb-20;Poroto granado;Sin especificar;Segunda;$/kilo;700;1.500;1.036;784;33500;1340*saco 25 kilos;19612/saco 25 kilos
+Marzo;3;2020;mar-20;Poroto granado;Sin especificar;Primera;$/kilo;900;2.200;1.293;1017;373250;14930*saco 25 kilos;25417/saco 25 kilos
+Marzo;3;2020;mar-20;Poroto granado;Sin especificar;Segunda;$/kilo;800;1.500;1.128;846;27000;1080*saco 25 kilos;21148/saco 25 kilos
+Marzo;3;2019;mar-19;Poroto verde;Sin especificar;Primera;$/kilo;700;2.000;1.104;722;191500;7660*saco 25 kilos;10844/saco 25 kilos
+Marzo;3;2019;mar-19;Poroto verde;Sin especificar;Segunda;$/kilo;700;1.600;900;634;46750;1870*saco 25 kilos;15854/saco 25 kilos
+Abril;4;2019;abr-19;Poroto verde;Sin especificar;Primera;$/kilo;600;1.900;1.012;687;80000;3200*saco 25 kilos;17181/saco 25 kilos
+Abril;4;2019;abr-19;Poroto verde;Sin especificar;Segunda;$/kilo;600;1.000;777;480;5250;210*saco 25 kilos;12000/saco 25 kilos
+Mayo;5;2019;may-19;Poroto verde;Magnum;Primera;$/kilo;700;2.000;1.169;;;;
+Mayo;5;2019;may-19;Poroto verde;Magnum;Segunda;$/kilo;600;1.200;923;;;;
+Junio;6;2019;jun-19;Poroto verde;Magnum;Primera;$/kilo;800;3.000;1.434;;;;
+Junio;6;2019;jun-19;Poroto verde;Magnum;Segunda;$/kilo;700;2.000;1.035;;;;
+Julio;7;2019;jul-19;Poroto verde;Magnum;Primera;$/kilo;900;3.000;1.393;;;;
+Julio;7;2019;jul-19;Poroto verde;Magnum;Segunda;$/kilo;800;2.000;1.279;;;;
+Agosto;8;2019;ago-19;Poroto verde;Magnum;Primera;$/kilo;1.000;2.400;1.500;;;;
+Agosto;8;2019;ago-19;Poroto verde;Magnum;Segunda;$/kilo;1.000;1.600;1.295;;;;
+Septiembre;9;2019;sept-19;Poroto verde;Magnum;Primera;$/kilo;1.200;3.600;2.064;;;;
+Septiembre;9;2019;sept-19;Poroto verde;Magnum;Segunda;$/kilo;1.200;2.000;1.807;;;;
+Octubre;10;2019;oct-19;Poroto verde;Magnum;Primera;$/kilo;1.500;3.000;2.147;;;;
+Octubre;10;2019;oct-19;Poroto verde;Magnum;Segunda;$/kilo;1.400;2.200;1.826;;;;
+Noviembre;11;2019;nov-19;Poroto verde;Magnum;Primera;$/kilo;1.000;3.000;1.803;;;;
+Noviembre;11;2019;nov-19;Poroto verde;Magnum;Segunda;$/kilo;1.000;2.000;1.463;;;;
+Diciembre;12;2019;dic-19;Poroto verde;Magnum;Primera;$/kilo;800;2.000;1.370;711;78500;3140*saco 25 kilos;17768/saco 25 kilos
+Diciembre;12;2019;dic-19;Poroto verde;Magnum;Segunda;$/kilo;600;800;772;547;12750;510*saco 25 kilos;13667/saco 25 kilos
+Enero;1;2020;ene-20;Poroto verde;Sin especificar;Primera;$/kilo;700;2.500;1.268;645;44000;1760*saco 25 kilos;16125/saco 25 kilos
+Enero;1;2020;ene-20;Poroto verde;Sin especificar;Segunda;$/kilo;600;1.500;999;400;4000;160*saco 25 kilos;10000/saco 25 kilos
+Febrero;2;2020;feb-20;Poroto verde;Sin especificar;Primera;$/kilo;900;2.000;1.272;951;135000;5400*saco 25 kilos;23774/saco 25 kilos
+Febrero;2;2020;feb-20;Poroto verde;Sin especificar;Segunda;$/kilo;750;1.500;1.068;740;23000;920*saco 25 kilos;18500/saco 25 kilos
+Marzo;3;2020;mar-20;Poroto verde;Sin especificar;Primera;$/kilo;1.000;2.500;1.416;1.052;25.000;1000*saco 25 kilos;26300/saco 25 kilos
+Marzo;3;2020;mar-20;Poroto verde;Sin especificar;Segunda;$/kilo;1.000;1.600;1.197;;;;
+Marzo;3;2019;mar-19;Repollo;Crespo record;Primera;$/unidad;800;2.000;1.397;728;351.700;;
+Marzo;3;2019;mar-19;Repollo;Crespo record;Segunda;$/unidad;700;1.400;1.059;493;96.300;;
+Abril;4;2019;abr-19;Repollo;Crespo record;Primera;$/unidad;900;1.600;1.237;672;248.000;;
+Abril;4;2019;abr-19;Repollo;Crespo record;Segunda;$/unidad;700;1.400;991;467;84.150;;
+Mayo;5;2019;may-19;Repollo;Crespo record;Primera;$/unidad;700;1.600;1.101;522;285.470;;
+Mayo;5;2019;may-19;Repollo;Crespo record;Segunda;$/unidad;600;1.400;873;373;106.900;;
+Junio;6;2019;jun-19;Repollo;Crespo record;Primera;$/unidad;800;1.600;1.117;552;248.900;;
+Junio;6;2019;jun-19;Repollo;Crespo record;Segunda;$/unidad;500;1.000;842;372;78.100;;
+Julio;7;2019;jul-19;Repollo;Crespo record;Primera;$/unidad;700;1.600;1.163;690;86.580;;
+Julio;7;2019;jul-19;Repollo;Crespo record;Segunda;$/unidad;600;1.200;881;474;39.028;;
+Agosto;8;2019;ago-19;Repollo;Crespo record;Primera;$/unidad;700;1.600;1.205;602;129.620;;
+Agosto;8;2019;ago-19;Repollo;Crespo record;Segunda;$/unidad;500;1.200;864;431;74.240;;
+Septiembre;9;2019;sept-19;Repollo;Crespo record;Primera;$/unidad;600;1.600;1.047;567;162.350;;
+Septiembre;9;2019;sept-19;Repollo;Crespo record;Segunda;$/unidad;500;1.000;778;416;34.900;;
+Octubre;10;2019;oct-19;Repollo;Crespo record;Primera;$/unidad;700;2.000;1.093;517;351.530;;
+Octubre;10;2019;oct-19;Repollo;Crespo record;Segunda;$/unidad;500;1.600;802;328;189.570;;
+Noviembre;11;2019;nov-19;Repollo;Crespo record;Primera;$/unidad;600;1.500;1.028;485;231.670;;
+Noviembre;11;2019;nov-19;Repollo;Crespo record;Segunda;$/unidad;500;1.000;783;347;128.750;;
+Diciembre;12;2019;dic-19;Repollo;Crespo record;Primera;$/unidad;500;1.500;993;452;236.890;;
+Diciembre;12;2019;dic-19;Repollo;Crespo record;Segunda;$/unidad;400;1.000;713;359;128.500;;
+Enero;1;2020;ene-20;Repollo;Crespo record;Primera;$/unidad;700;2.400;1.253;591;95.470;;
+Enero;1;2020;ene-20;Repollo;Crespo record;Segunda;$/unidad;500;1.200;824;480;58.780;;
+Febrero;2;2020;feb-20;Repollo;Crespo record;Primera;$/unidad;800;2.400;1.568;909;31.620;;
+Febrero;2;2020;feb-20;Repollo;Crespo record;Segunda;$/unidad;800;2.000;1.223;731;20.820;;
+Marzo;3;2020;mar-20;Repollo;Crespo record;Primera;$/unidad;1.400;3.200;2.224;1.039;64.100;;
+Marzo;3;2020;mar-20;Repollo;Crespo record;Segunda;$/unidad;1.000;2.200;1.603;835;29.100;;
+Marzo;3;2019;mar-19;Sandia;Sin especificar;Primera;$/unidad;2.000;3.000;2.342;1.617;30.190;;
+Marzo;3;2019;mar-19;Sandia;Sin especificar;Segunda;$/unidad;1.000;2.500;1.771;1.234;24.620;;
+Diciembre;12;2019;dic-19;Sandia;Sin especificar;Primera;$/unidad;300;5.000;2.891;2.546;10.800;;
+Diciembre;12;2019;dic-19;Sandia;Sin especificar;Segunda;$/unidad;1.000;3.500;2.247;1.900;6.200;;
+Enero;1;2020;ene-20;Sandia;Sin especificar;Primera;$/unidad;1.500;4.500;2.837;2.024;99.400;;
+Enero;1;2020;ene-20;Sandia;Sin especificar;Segunda;$/unidad;1.200;3.500;2.169;1.541;50.300;;
+Febrero;2;2020;feb-20;Sandia;Sin especificar;Primera;$/unidad;1.500;3.500;2.535;1.535;26.690;;
+Febrero;2;2020;feb-20;Sandia;Sin especificar;Segunda;$/unidad;1.000;2.700;1.970;1.065;18.100;;
+Marzo;3;2020;mar-20;Sandia;Sin especificar;Primera;$/unidad;2.000;3.200;2.547;1.458;6.700;;
+Marzo;3;2020;mar-20;Sandia;Sin especificar;Segunda;$/unidad;1.200;2.700;1.931;991;5.300;;
+Marzo;3;2019;mar-19;Tomate;Larga vida;Primera;$/kilo;500;1.400;780;530;96.120;5340*bandeja 18 kilos;9554/bandeja 18 kilos
+Marzo;3;2019;mar-19;Tomate;Larga vida;Segunda;$/kilo;400;800;592;420;91.800;5100*bandeja 18 kilos;7557/bandeja 18 kilos
+Abril;4;2019;abr-19;Tomate;Larga vida;Primera;$/kilo;600;1.700;889;489;94.680;5260*bandeja 18 kilos;8810/bandeja 18 kilos
+Abril;4;2019;abr-19;Tomate;Larga vida;Segunda;$/kilo;500;1.000;666;374;71.820;3990*bandeja 18 kilos;6732/bandeja 18 kilos
+Mayo;5;2019;may-19;Tomate;Larga vida;Primera;$/kilo;550;1.300;793;;;;
+Mayo;5;2019;may-19;Tomate;Larga vida;Segunda;$/kilo;450;1.000;619;;;;
+Junio;6;2019;jun-19;Tomate;Larga vida;Primera;$/kilo;500;1.500;829;;;;
+Junio;6;2019;jun-19;Tomate;Larga vida;Segunda;$/kilo;400;1.100;647;;;;
+Julio;7;2019;jul-19;Tomate;Larga vida;Primera;$/kilo;400;1.200;647;;;;
+Julio;7;2019;jul-19;Tomate;Larga vida;Segunda;$/kilo;300;800;472;;;;
+Agosto;8;2019;ago-19;Tomate;Larga vida;Primera;$/kilo;400;1.000;657;;;;
+Agosto;8;2019;ago-19;Tomate;Larga vida;Segunda;$/kilo;300;800;494;;;;
+Septiembre;9;2019;sept-19;Tomate;Larga vida;Primera;$/kilo;500;1.200;766;;;;
+Septiembre;9;2019;sept-19;Tomate;Larga vida;Segunda;$/kilo;350;850;574;;;;
+Octubre;10;2019;oct-19;Tomate;Larga vida;Primera;$/kilo;600;1.500;930;;;;
+Octubre;10;2019;oct-19;Tomate;Larga vida;Segunda;$/kilo;500;1.000;716;;;;
+Noviembre;11;2019;nov-19;Tomate;Larga vida;Primera;$/kilo;500;1.300;806;;;;
+Noviembre;11;2019;nov-19;Tomate;Larga vida;Segunda;$/kilo;400;1.100;624;;;;
+Diciembre;12;2019;dic-19;Tomate;Larga vida;Primera;$/kilo;400;1.200;777;346;28260;1570*bandeja 18 kilos;6229/bandeja 18 kilos
+Diciembre;12;2019;dic-19;Tomate;Larga vida;Segunda;$/kilo;300;800;599;291;26100;1450*bandeja 18 kilos;5234/bandeja 18 kilos
+Enero;1;2020;ene-20;Tomate;Larga vida;Primera;$/kilo;450;1.300;720;285;378540;21030*bandeja 18 kilos;5123/bandeja 18 kilos
+Enero;1;2020;ene-20;Tomate;Larga vida;Segunda;$/kilo;350;1.000;559;193;292680;16260*bandeja 18 kilos;3480/bandeja 18 kilos
+Febrero;2;2020;feb-20;Tomate;Larga vida;Primera;$/kilo;500;1.200;721;391;433620;24090*bandeja 18 kilos;7040/bandeja 18 kilos
+Febrero;2;2020;feb-20;Tomate;Larga vida;Segunda;$/kilo;400;900;533;298;345600;19200*bandeja 18 kilos;5367/bandeja 18 kilos
+Marzo;3;2020;mar-20;Tomate;Larga vida;Primera;$/kilo;500;1.400;770;360;603900;33550*bandeja 18 kilos;6485/bandeja 18 kilos
+Marzo;3;2020;mar-20;Tomate;Larga vida;Segunda;$/kilo;350;800;585;252;385020;21390*bandeja 18 kilos;4534/bandeja 18 kilos
+Marzo;3;2019;mar-19;Zanahoria;Sin especificar;Primera;$/kilo;400;800;571;243;238400;11920*saco 20 kilos;4850/saco 20 kilos
+Marzo;3;2019;mar-19;Zanahoria;Sin especificar;Segunda;$/kilo;350;500;444;170;45600;2280*saco 20 kilos;3408/saco 20 kilos
+Abril;4;2019;abr-19;Zanahoria;Sin especificar;Primera;$/kilo;450;800;561;;;;
+Abril;4;2019;abr-19;Zanahoria;Sin especificar;Segunda;$/kilo;400;500;419;;;;
+Mayo;5;2019;may-19;Zanahoria;Sin especificar;Primera;$/kilo;450;800;551;255;186000;9300*saco 20 kilos;5090/saco 20 kilos
+Mayo;5;2019;may-19;Zanahoria;Sin especificar;Segunda;$/kilo;350;500;421;200;5000;250*saco 20 kilos;4000/saco 20 kilos
+Junio;6;2019;jun-19;Zanahoria;Sin especificar;Primera;$/kilo;400;800;558;259;522200;26110*saco 20 kilos;5185/saco 20 kilos
+Junio;6;2019;jun-19;Zanahoria;Sin especificar;Segunda;$/kilo;300;600;437;220;24000;1200*saco 20 kilos;4396/saco 20 kilos
+Julio;7;2019;jul-19;Zanahoria;Sin especificar;Primera;$/kilo;400;800;569;272;425000;1250*saco 20 kilos;5436/saco 20 kilos
+Julio;7;2019;jul-19;Zanahoria;Sin especificar;Segunda;$/kilo;200;700;434;191;50400;2520*saco 20 kilos;3813/saco 20 kilos
+Agosto;8;2019;ago-19;Zanahoria;Sin especificar;Primera;$/kilo;400;800;568;255;321800;16090*saco 20 kilos;5103/saco 20 kilos
+Agosto;8;2019;ago-19;Zanahoria;Sin especificar;Segunda;$/kilo;300;600;424;167;34400;1720*saco 20 kilos;3347/saco 20 kilos
+Septiembre;9;2019;sept-19;Zanahoria;Sin especificar;Primera;$/kilo;500;1.000;617;300;316400;15820*saco 20 kilos;6000/saco 20 kilos
+Septiembre;9;2019;sept-19;Zanahoria;Sin especificar;Segunda;$/kilo;350;600;497;228;43000;2150*saco 20 kilos;4555/saco 20 kilos
+Octubre;10;2019;oct-19;Zanahoria;Sin especificar;Primera;$/kilo;450;1.500;697;333;384000;19200*saco 20 kilos;6654/saco 20 kilos
+Octubre;10;2019;oct-19;Zanahoria;Sin especificar;Segunda;$/kilo;300;4.500;601;250;55200;2760*saco 20 kilos;5009/saco 20 kilos
+Noviembre;11;2019;nov-19;Zanahoria;Sin especificar;Primera;$/kilo;400;1.000;686;360;371000;18550*saco 20 kilos;7194/saco 20 kilos
+Noviembre;11;2019;nov-19;Zanahoria;Sin especificar;Segunda;$/kilo;300;650;506;266;70000;3500*saco 20 kilos;5320/saco 20 kilos
+Diciembre;12;2019;dic-19;Zanahoria;Sin especificar;Primera;$/kilo;400;1.000;595;296;363600;18180*saco 20 kilos;5911/saco 20 kilos
+Diciembre;12;2019;dic-19;Zanahoria;Sin especificar;Segunda;$/kilo;300;600;433;213;58600;2930*saco 20 kilos;4261/saco 20 kilos
+Enero;1;2020;ene-20;Zanahoria;Sin especificar;Primera;$/kilo;400;1.200;644;316;161600;8080*saco 20 kilos;6310/saco 20 kilos
+Enero;1;2020;ene-20;Zanahoria;Sin especificar;Segunda;$/kilo;280;700;488;225;24600;1230*saco 20 kilos;4500/saco 20 kilos
+Febrero;2;2020;feb-20;Zanahoria;Sin especificar;Primera;$/kilo;500;1.000;609;300;18600;930*saco 20 kilos;6000/saco 20 kilos
+Febrero;2;2020;feb-20;Zanahoria;Sin especificar;Segunda;$/kilo;300;600;464;250;10200;510*saco 20 kilos;5000/saco 20 kilos
+Marzo;3;2020;mar-20;Zanahoria;Sin especificar;Primera;$/kilo;350;1.200;682;269;28800;1440*saco 20 kilos;5382/saco 20 kilos
+Marzo;3;2020;mar-20;Zanahoria;Sin especificar;Segunda;$/kilo;390;800;518;200;3200;160*saco 20 kilos;4000/saco 20 kilos
+Marzo;3;2019;mar-19;Zapallo;Camote;1a (cosecha);$/kilo;400;1.000;678;;;;
+Marzo;3;2019;mar-19;Zapallo;Camote;2a (cosecha);$/kilo;300;700;429;;;;
+Marzo;3;2019;mar-19;Zapallo;Paine;1a (cosecha);$/kilo;500;700;600;;;;
+Marzo;3;2019;mar-19;Zapallo;Paine;2a (cosecha);$/kilo;200;250;225;;;;
+Abril;4;2019;abr-19;Zapallo;Camote;1a (cosecha);$/kilo;400;1.000;662;;;;
+Abril;4;2019;abr-19;Zapallo;Camote;2a (cosecha);$/kilo;300;600;407;;;;
+Abril;4;2019;abr-19;Zapallo;Paine;1a (cosecha);$/kilo;400;700;615;;;;
+Abril;4;2019;abr-19;Zapallo;Paine;2a (cosecha);$/kilo;250;350;300;;;;
+Mayo;5;2019;may-19;Zapallo;Camote;1a (guarda);$/kilo;350;1.000;657;;;;
+Mayo;5;2019;may-19;Zapallo;Camote;2a (guarda);$/kilo;300;1.000;453;;;;
+Mayo;5;2019;may-19;Zapallo;Paine;1a (guarda);$/kilo;400;800;610;;;;
+Mayo;5;2019;may-19;Zapallo;Paine;2a (guarda);$/kilo;500;600;520;;;;
+Junio;6;2019;jun-19;Zapallo;Camote;1a (guarda);$/kilo;500;1.400;767;;;;
+Junio;6;2019;jun-19;Zapallo;Camote;2a (guarda);$/kilo;400;900;550;;;;
+Junio;6;2019;jun-19;Zapallo;Paine;1a (guarda);$/kilo;600;700;668;;;;
+Junio;6;2019;jun-19;Zapallo;Paine;2a (guarda);$/kilo;500;500;500;;;;
+Julio;7;2019;jul-19;Zapallo;Camote;1a (guarda);$/kilo;300;1.200;751;;;;
+Julio;7;2019;jul-19;Zapallo;Camote;2a (guarda);$/kilo;200;700;506;;;;
+Julio;7;2019;jul-19;Zapallo;Paine;1a (guarda);$/kilo;500;800;650;;;;
+Julio;7;2019;jul-19;Zapallo;Paine;2a (guarda);$/kilo;400;600;520;;;;
+Agosto;8;2019;ago-19;Zapallo;Camote;1a (guarda);$/kilo;300;1.200;819;;;;
+Agosto;8;2019;ago-19;Zapallo;Camote;2a (guarda);$/kilo;300;1.000;625;;;;
+Agosto;8;2019;ago-19;Zapallo;Paine;1a (guarda);$/kilo;500;800;710;;;;
+Agosto;8;2019;ago-19;Zapallo;Paine;2a (guarda);$/kilo;600;600;600;;;;
+Septiembre;9;2019;sept-19;Zapallo;Camote;1a (guarda);$/kilo;300;2.000;995;;;;
+Septiembre;9;2019;sept-19;Zapallo;Camote;2a (guarda);$/kilo;400;1.000;674;;;;
+Septiembre;9;2019;sept-19;Zapallo;Paine;1a (guarda);$/kilo;600;1.200;929;;;;
+Septiembre;9;2019;sept-19;Zapallo;Paine;2a (guarda);$/kilo;700;700;700;;;;
+Octubre;10;2019;oct-19;Zapallo;Camote;1a (guarda);$/kilo;800;2.000;1.273;;;;
+Octubre;10;2019;oct-19;Zapallo;Camote;2a (guarda);$/kilo;700;2.000;967;;;;
+Octubre;10;2019;oct-19;Zapallo;Paine;1a (guarda);$/kilo;500;1.500;1.065;;;;
+Octubre;10;2019;oct-19;Zapallo;Paine;2a (guarda);$/kilo;400;1.000;888;;;;
+Noviembre;11;2019;nov-19;Zapallo;Camote;1a (guarda);$/kilo;1.000;2.000;1.300;;;;
+Noviembre;11;2019;nov-19;Zapallo;Camote;1a nueva(o);$/kilo;900;1.600;1.151;;;;
+Noviembre;11;2019;nov-19;Zapallo;Camote;2a (guarda);$/kilo;800;1.500;1.069;;;;
+Noviembre;11;2019;nov-19;Zapallo;Camote;2a nueva(o);$/kilo;700;1.000;847;;;;
+Noviembre;11;2019;nov-19;Zapallo;Paine;1a (guarda);$/kilo;700;1.600;1.034;;;;
+Noviembre;11;2019;nov-19;Zapallo;Paine;2a (guarda);$/kilo;800;1.200;933;;;;
+Diciembre;12;2019;dic-19;Zapallo;Camote;1a nueva(o);$/kilo;700;2.000;1.095;;;;
+Diciembre;12;2019;dic-19;Zapallo;Camote;2a nueva(o);$/kilo;600;1.200;859;;;;
+Diciembre;12;2019;dic-19;Zapallo;Paine;1a nueva(o);$/kilo;500;1.000;795;;;;
+Diciembre;12;2019;dic-19;Zapallo;Paine;2a nueva(o);$/kilo;500;800;737;;;;
+Enero;1;2020;ene-20;Zapallo;Camote;1a nueva(o);$/kilo;500;2.000;1.080;;;;
+Enero;1;2020;ene-20;Zapallo;Camote;2a nueva(o);$/kilo;400;1.200;782;;;;
+Enero;1;2020;ene-20;Zapallo;Paine;1a nueva(o);$/kilo;500;1.400;918;;;;
+Enero;1;2020;ene-20;Zapallo;Paine;2a nueva(o);$/kilo;600;1.000;812;;;;
+Febrero;2;2020;feb-20;Zapallo;Camote;1a nueva(o);$/kilo;600;1.600;994;;;;
+Febrero;2;2020;feb-20;Zapallo;Camote;2a nueva(o);$/kilo;500;1.000;670;;;;
+Febrero;2;2020;feb-20;Zapallo;Paine;1a nueva(o);$/kilo;500;1.000;850;;;;
+Febrero;2;2020;feb-20;Zapallo;Paine;2a nueva(o);$/kilo;500;800;725;;;;
+Marzo;3;2020;mar-20;Zapallo;Camote;1a (cosecha);$/kilo;600;1.800;1.018;;;;
+Marzo;3;2020;mar-20;Zapallo;Camote;2a (cosecha);$/kilo;500;800;624;;;;
+Marzo;3;2020;mar-20;Zapallo;Paine;1a (cosecha);$/kilo;800;800;800;;;;
+Marzo;3;2019;mar-19;Zapallo italiano;Sin especificar;Primera;$/unidad;100;700;275;100;513100;7330*caja 70 unidades;6995/caja 70 unidades
+Marzo;3;2019;mar-19;Zapallo italiano;Sin especificar;Segunda;$/unidad;125;450;191;;;;
+Abril;4;2019;abr-19;Zapallo italiano;Sin especificar;Primera;$/unidad;100;400;205;75;383250;5475*caja 70 unidades;5217/caja 70 unidades
+Abril;4;2019;abr-19;Zapallo italiano;Sin especificar;Segunda;$/unidad;80;200;127;;;;
+Mayo;5;2019;may-19;Zapallo italiano;Sin especificar;Primera;$/unidad;150;500;243;114;217700;3110*caja 70 unidades;7950/caja 70 unidades
+Mayo;5;2019;may-19;Zapallo italiano;Sin especificar;Segunda;$/unidad;100;300;171;;;;
+Junio;6;2019;jun-19;Zapallo italiano;Sin especificar;Primera;$/unidad;150;600;335;;;;
+Junio;6;2019;jun-19;Zapallo italiano;Sin especificar;Segunda;$/unidad;100;300;229;;;;
+Julio;7;2019;jul-19;Zapallo italiano;Sin especificar;Primera;$/unidad;150;600;303;;;;
+Julio;7;2019;jul-19;Zapallo italiano;Sin especificar;Segunda;$/unidad;100;350;203;;;;
+Agosto;8;2019;ago-19;Zapallo italiano;Sin especificar;Primera;$/unidad;250;600;432;;;;
+Agosto;8;2019;ago-19;Zapallo italiano;Sin especificar;Segunda;$/unidad;150;400;294;;;;
+Septiembre;9;2019;sept-19;Zapallo italiano;Sin especificar;Primera;$/unidad;250;600;426;;;;
+Septiembre;9;2019;sept-19;Zapallo italiano;Sin especificar;Segunda;$/unidad;200;500;324;;;;
+Octubre;10;2019;oct-19;Zapallo italiano;Sin especificar;Primera;$/unidad;200;700;401;;;;
+Octubre;10;2019;oct-19;Zapallo italiano;Sin especificar;Segunda;$/unidad;100;500;305;;;;
+Noviembre;11;2019;nov-19;Zapallo italiano;Sin especificar;Primera;$/unidad;100;600;204;;;;
+Noviembre;11;2019;nov-19;Zapallo italiano;Sin especificar;Segunda;$/unidad;50;200;127;;;;
+Diciembre;12;2019;dic-19;Zapallo italiano;Sin especificar;Primera;$/unidad;100;400;200;95;28700;410*caja 70 unidades;6634/caja 70 unidades
+Diciembre;12;2019;dic-19;Zapallo italiano;Sin especificar;Segunda;$/unidad;60;200;130;;;;
+Enero;1;2020;ene-20;Zapallo italiano;Sin especificar;Primera;$/unidad;100;600;253;100;179200;2560*caja 70 unidades;6991/caja 70 unidades
+Enero;1;2020;ene-20;Zapallo italiano;Sin especificar;Segunda;$/unidad;100;350;183;48;87000;870*caja 100 unidades;4828/caja 100 unidades
+Febrero;2;2020;feb-20;Zapallo italiano;Sin especificar;Primera;$/unidad;150;500;261;109;336700;4810*caja 70 unidades;7657/caja 70 unidades
+Febrero;2;2020;feb-20;Zapallo italiano;Sin especificar;Segunda;$/unidad;100;300;182;49;231000;2310*caja 100 unidades;4931/caja 100 unidades
+Marzo;3;2020;mar-20;Zapallo italiano;Sin especificar;Primera;$/unidad;150;500;267;112;359100;5130*caja 70 unidades;7850/caja 70 unidades
+Marzo;3;2020;mar-20;Zapallo italiano;Sin especificar;Segunda;$/unidad;100;250;179;53;271000;2710*caja 100 unidades;5328/caja 100 unidades
+Marzo;3;2019;mar-19;Frutilla;Sin especificar;Primera;$/kilo;750;1.500;1.084;759;65240;9320*bandeja 7 kilos;5319/bandeja 7 kilos
+Marzo;3;2019;mar-19;Frutilla;Sin especificar;Segunda;$/kilo;690;1.000;753;482;44030;6290*bandeja 7 kilos;3376/bandeja 7 kilos
+Abril;4;2019;abr-19;Frutilla;Sin especificar;Primera;$/kilo;790;1.600;1.100;817;51240;7320*bandeja 7 kilos;5717/bandeja 7 kilos
+Abril;4;2019;abr-19;Frutilla;Sin especificar;Segunda;$/kilo;600;1.200;787;519;38150;5450*bandeja 7 kilos;3636/bandeja 7 kilos
+Mayo;5;2019;may-19;Frutilla;Sin especificar;Primera;$/kilo;800;1.600;1.168;943;39690;5670*bandeja 7 kilos;6601/bandeja 7 kilos
+Mayo;5;2019;may-19;Frutilla;Sin especificar;Segunda;$/kilo;700;1.200;901;557;20370;2910*bandeja 7 kilos;3900/bandeja 7 kilos
+Octubre;10;2019;oct-19;Frutilla;Sin especificar;Primera;$/kilo;700;2.000;1.160;849;183960;26280*bandeja 7 kilos;5944/bandeja 7 kilos
+Octubre;10;2019;oct-19;Frutilla;Sin especificar;Segunda;$/kilo;600;1.500;836;521;92540;13220*bandeja 7 kilos;3645/bandeja 7 kilos
+Noviembre;11;2019;nov-19;Frutilla;Sin especificar;Primera;$/kilo;900;1.800;1.214;843;126840;18120*bandeja 7 kilos;5901/bandeja 7 kilos
+Noviembre;11;2019;nov-19;Frutilla;Sin especificar;Segunda;$/kilo;650;1.000;856;550;80220;11460*bandeja 7 kilos;3852/bandeja 7 kilos
+Diciembre;12;2019;dic-19;Frutilla;Sin especificar;Primera;$/kilo;800;2.000;1.259;929;134330;19190*bandeja 7 kilos;6502/bandeja 7 kilos
+Diciembre;12;2019;dic-19;Frutilla;Sin especificar;Segunda;$/kilo;700;1.400;960;596;83790;11970*bandeja 7 kilos;4175/bandeja 7 kilos
+Enero;1;2020;ene-20;Frutilla;Sin especificar;Primera;$/kilo;900;2.000;1.336;924;109060;15580*bandeja 7 kilos;6468/bandeja 7 kilos
+Enero;1;2020;ene-20;Frutilla;Sin especificar;Segunda;$/kilo;750;1.400;1.047;567;45885;6555*bandeja 7 kilos;3971/bandeja 7 kilos
+Febrero;2;2020;feb-20;Frutilla;Sin especificar;Primera;$/kilo;1.000;1.900;1.356;1.165;75.950;10850*bandeja 7 kilos;8161/bandeja 7 kilos
+Febrero;2;2020;feb-20;Frutilla;Sin especificar;Segunda;$/kilo;800;1.300;1.088;802;18550;2650*bandeja 7 kilos;5615/bandeja 7 kilos
+Marzo;3;2020;mar-20;Frutilla;Sin especificar;Primera;$/kilo;1.000;2.700;1.530;1.116;71.890;10270*bandeja 7 kilos;7813/bandeja 7 kilos
+Marzo;3;2020;mar-20;Frutilla;Sin especificar;Segunda;$/kilo;890;1.400;1.143;780;37485;5355*bandeja 7 kilos;5457/bandeja 7 kilos

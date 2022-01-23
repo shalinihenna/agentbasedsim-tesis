@@ -40,7 +40,7 @@ global{
 	map<string, file> shpfiles <- [
 		'comunas_shp'::file("../includes/limite-comunal.shp"),
 		'terrenos_shp'::file("../includes/terrenos-agricolas.shp"),
-		'ferias_shp'::file("../includes/ferias-libres.shp"),
+		'ferias_shp'::file("../includes/Ferias Libres (RM) 2.shp"),
 		'floods_shp'::file("../includes/Zonas susceptibles a inundación.shp")
 	];
 	geometry shape <- envelope(shpfiles['comunas_shp']);
@@ -55,11 +55,17 @@ global{
 	string current_month update: months_names[current_date.month]; 
 	list<int> generalRisks <- [];
 	map<string, int> mercadoMayoristaVol <- [];
+	list<string> listadoProducts <- [];
+	//map<string, int> priceFerianteConsumer <- [];
+	map<string, list<int>> priceFerianteConsumer <-[];
+	map<string, int> priceFerianteConsumerPromedio <- [];
+	map<string, int> priceMayoristaFeriante <- [];
+	map<string, int> volumeMayorista_lastyear <- [];
 	
 	//Cantidad de agentes
 	map<string, int> people <- [
 		'number_of_farmers'::4695, //la misma cantidad de terrenos
-		'number_of_feriantes'::20,
+		'number_of_feriantes'::14735, //la misma cantidad que los puestos de verduras en cada feria (sumatoria)
 		'number_of_consumers'::20
 	];
 	
@@ -107,23 +113,25 @@ global{
 		write "Conectando DB";
 		create agentDB;
 		
-		write "Cargando capas de mapas";
+		write "Cargando capas de mapas...";
 		create comunas from: shpfiles['comunas_shp'];
 		create terrenos from: shpfiles['terrenos_shp'] with:[area::float(get("area_ha"))];  //number:2;
-		create ferias from: shpfiles['ferias_shp']; 
+		create ferias from: shpfiles['ferias_shp'] with:[puesto_verduras::int(get("VERDURAS")), dias_puesto::string(get("DIAPOSTU")), puestos_vacios::int(get("VERDURAS"))];
 		/*TODO: Borrar */
 		/*create floods from: shpfiles['floods_shp'] with: [risklevel::string((get("INUNDA2")))]{
 				color <- risklevel = "ALTA (desborde)" ? #blue : #darkblue;
 				border <- risklevel = "ALTA (desborde)" ? #blue : #darkblue;
 		}*/
 		
-		write "Inicializando agentes";
+		write "Inicializando agentes...";
 		list<terrenos> te;
 	 	create farmers number:people['number_of_farmers'];
-		/*create feriantes number:number_of_feriante;
-		create consumer number:number_of_consumer;*/
+	 	write "Agricultores listo";
+		create feriantes number:people['number_of_feriantes'];
+		write "Feriantes listo";
+		/*create consumer number:number_of_consumer;*/
 		
-		write "Inicializando mercado mayorista";
+		write "Inicializando mercado mayorista...";
 		loop d over:products{
 			add 0 at:d[0] to: mercadoMayoristaVol;
 		}
@@ -294,9 +302,27 @@ global{
 		
 	}
 	
-	/*reflex printMM{
-		write "Mercado Mayorista: " + mercadoMayoristaVol;
-	}*/
+	
+	//Para obtener los precios y volúmen de este mes del año pasado (del step)
+	reflex getInfo{
+		list<list> dbdata;
+		ask agentDB{
+			dbdata <- list<unknown> (select(params:POSTGRES, 
+		 											select: "SELECT producto, \"Precio mínimo\", \"Precio máximo\", \"Precio promedio\", \"Precio ponderado mayorista\", \"Volumen mayorista\" 
+															FROM detalle_productos_2 
+															WHERE mes_escrito = ? and anio = ?
+															ORDER BY \"Volumen mayorista\" desc;",
+		 											values: [current_month, current_date.year-1])); 
+		}
+		dbdata <- dbdata[2];
+
+		loop a over: dbdata{
+			add [int(a[1]), int(a[2])] at: a[0] to: priceFerianteConsumer;
+			add int(a[3]) at: a[0] to: priceFerianteConsumerPromedio;
+			add int(a[4]) at: a[0] to: priceMayoristaFeriante;
+			add int(a[5]) at: a[0] to: volumeMayorista_lastyear;
+		}
+	}
 	
 	//predicates for BDI agents
 	//FARMER
@@ -306,8 +332,13 @@ global{
 	predicate empty_land <- new_predicate("empty land");
 	predicate sembrar <- new_predicate("sembrar");
 	predicate cosechar <- new_predicate("cosechar"); 
-	predicate no_vendido <- new_predicate("No vendido");
-	predicate vender <- new_predicate("vender a feriante"); 
+	predicate vender <- new_predicate("vender a mayorista"); 
+	
+	//FERIANTE
+	predicate comprar_mm <- new_predicate("comprar a mercado mayorista");
+	
+	//CONSUMIDOR
+	predicate comprar_feriante <- new_predicate("comprar a feriante");
 
 }
 
@@ -318,6 +349,8 @@ species farmers skills:[moving] control:simple_bdi{
 	terrenos terreno;
 	int non_sold_vegetables;
 	int sold_vegetables;
+	list random_products <- [];
+	list<int> prices <- [];
 	
 	
 	init{
@@ -349,12 +382,20 @@ species farmers skills:[moving] control:simple_bdi{
 			//subdesire 1: Selección de hortaliza según el riesgo de eventos climáticos y el precio/demanda del periodo pasado
 			if(!self.riskLevel){
 				//Dado que NO toma riesgo, toma el producto con mínimo riesgo --> Si hay varios con mínimo riesgo, random entre ellos
+				self.prices <- [];
+				self.random_products <- [];
 				switch(terreno.plagaRisk){
-					match 0 {terreno.producto_seleccionado <- any(minRiskFilteredProducts0);}
-					match 1 {terreno.producto_seleccionado <- any(minRiskFilteredProducts1);}
-					match 2 {terreno.producto_seleccionado <- any(minRiskFilteredProducts2);}
-					match 3 {terreno.producto_seleccionado <- any(minRiskFilteredProducts3);}
+					match 0 {self.random_products <- sample(minRiskFilteredProducts0,3,false);}
+					match 1 {self.random_products <- sample(minRiskFilteredProducts1,3,false);}
+					match 2 {self.random_products <- sample(minRiskFilteredProducts2,3,false);}
+					match 3 {self.random_products <- sample(minRiskFilteredProducts3,3,false);}
 				}
+
+				loop a over: random_products{
+					self.prices <- self.prices + priceFerianteConsumerPromedio[string(a)];
+				}
+				terreno.producto_seleccionado <- random_products[prices index_of(max(prices))];
+				//terreno.producto_seleccionado <- any(minRiskFilteredProducts0 o 1 o 2 o 3);
 			}else{
 				//SI toma riesgo, así que toma cualquier producto --> random entre todos
 				switch(terreno.plagaRisk){
@@ -429,6 +470,39 @@ species farmers skills:[moving] control:simple_bdi{
     }
 }
 
+//Agente feriantes
+species feriantes skills:[moving] control:simple_bdi{
+	rgb my_color <- colors['feriante_color'];
+	ferias feria;
+	int quantity <- rnd(3,8); //Cantidad de productos que vende el feriante
+	map<string, int> selling_products; //Productos con sus volumenes a la venta	
+	
+	init{
+		//Assign feria
+		list<ferias> f <- ferias where (each.puestos_vacios > 0);
+		feria <- one_of(f);
+		feria.puestos_vacios <- feria.puestos_vacios - 1;
+		self.location <- any_location_in(feria);
+		
+		//Assign productos
+		list p <- sample(listadoProducts,quantity,false);
+		loop i over:p{
+			add 0 at:i to: selling_products;
+		}
+		
+		//Deseo inicial y único
+		do add_desire(comprar_mm);
+	}
+	
+	plan compra_a_mayoristas intention: comprar_mm{
+		
+	}
+	
+	aspect base {
+        draw circle(70) color: my_color border: #black;  //depth: gold_sold;
+    }
+}
+
 /*They are not agents, its just for display */
 species terrenos {
 	//Atributos visuales
@@ -455,8 +529,19 @@ species terrenos {
 
 species ferias {
 	rgb color <- #red;
+	int puesto_verduras;
+	int puestos_vacios;
+	string dias_puesto;
+	int days_puesto;
 	aspect base{
 		draw shape color: color;
+	}
+	init{
+		if(contains(dias_puesto,"-")){
+			days_puesto <- 2;
+		}else{
+			days_puesto <- 1;
+		}
 	}
 }
 
@@ -489,6 +574,7 @@ species agentDB skills:[SQLSKILL]{
 				add int(c[4]) at:c[0] to: days_cosecha;
 				add c[19] at:c[0] to: units;
 				add int(c[20]) at:c[0] to: production;
+				listadoProducts <- listadoProducts + c[0];
 			}
 		}else{
 			write "Problemas de conexión con la BD.";
@@ -505,6 +591,7 @@ experiment agriculture_world type: gui {
 		        species terrenos aspect:base;     
 		        species ferias aspect:base; 
 		        species farmers aspect:base;
+		        species feriantes aspect:base;
 		    }
 		    
 		    monitor "Step actual " value: current_month + ' ' + current_date.year ;

@@ -1,0 +1,11 @@
+SELECT producto, "Precio mínimo", "Precio máximo","Precio promedio","Precio ponderado mayorista", "Volumen mayorista"
+FROM public.detalle_productos_2
+where mes_escrito = 'Marzo' and anio = 2019 
+order by "Volumen mayorista" desc;
+
+SELECT producto, mes_escrito, anio, "Precio mínimo", "Precio máximo","Precio promedio","Precio ponderado mayorista", "Volumen mayorista"
+FROM public.detalle_productos_2
+where mes_escrito != 'Marzo' and anio = 2019 and producto not in (SELECT producto
+														FROM public.detalle_productos_2
+													where mes_escrito = 'Marzo' and anio = 2019 )
+order by mes desc;
