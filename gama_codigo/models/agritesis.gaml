@@ -347,7 +347,7 @@ global{
 species scheduler schedules:shuffle(farmers)+shuffle(feriantes);
 
 //Agente agricultores
-species farmers skills:[moving] control:simple_bdi{
+species farmers skills:[moving] control:simple_bdi schedules: []{
 	bool riskLevel <- flip(0.06); 
 	rgb my_color <- colors['farmer_color'];
 	terrenos terreno;
@@ -475,10 +475,10 @@ species farmers skills:[moving] control:simple_bdi{
 }
 
 //Agente feriantes
-species feriantes skills:[moving] control:simple_bdi{
+species feriantes skills:[moving] control:simple_bdi schedules: []{
 	rgb my_color <- colors['feriante_color'];
 	ferias feria;
-	int quantity <- rnd(3,10); //Cantidad de productos que vende el feriante
+	int quantity <- rnd(3,12); //Cantidad de productos que vende el feriante
 	list<string> selling_products_list <- []; //Listado de productos sin sus volumenes
 	map<string, int> selling_products; //Productos con sus volumenes a la venta	
 	
