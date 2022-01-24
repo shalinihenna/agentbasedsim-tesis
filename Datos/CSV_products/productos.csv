@@ -1,34 +1,34 @@
-﻿nombre;tipo;meses_siembra;meses_venta;dias_cosecha;meses_cosecha;valid;heladas_bajo;heladas_medio;heladas_alto;oc_bajo;oc_medio;oc_alto;sequia_baja;sequia_media;sequia_alta;plaga_baja;plaga_media;plaga_alta;unit;unit/ha
-Ajo;Hortaliza;Abril, Mayo, Junio, Julio, Agosto;Todos;180;6;true;1;1;2;;;;;;;;;;unidades;194800
-Alcachofa;Hortaliza;Febrero, Marzo;Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre;90;3;true;1;2;2;;;;;;;;;;unidades;49390
-Apio;Hortaliza;Todos;Todos;70;2,3;true;1;2;2;;;;;;;;;;unidades;37270
-Arveja Verde;Hortaliza;Mayo, Junio, Julio, Agosto;Todos;90;3;true;1;2;2;;;;;;;;;;kilos;6690
-Brócoli;Hortaliza;Todos;Todos;90;3;true;1;2;2;;;;;;;;;;unidades;35000
-Cebolla;Hortaliza;Enero, Febrero, Octubre, Noviembre, Diciembre;Todos;120;4;true;1;1;2;;;;;;;;;;kilos;55360
-Choclo;Hortaliza;Septiembre, Octubre, Noviembre, Diciembre;Todos;120;4;true;1;2;3;;;;;;;;;;unidades;46200
-Coliflor;Hortaliza;Todos;Todos;130;4,3;true;1;2;2;;;;;;;;;;unidades;30000
-Espinaca;Hortaliza;Todos;Todos;90;3;true;1;2;2;;;;;;;;;;kilos;16800
-Haba;Hortaliza;Abril, Mayo, Junio;Enero, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre;90;3;true;1;2;2;;;;;;;;;;kilos;12600
-Lechuga;Hortaliza;Todos;Todos;90;3;true;1;2;2;;;;;;;;;;unidades;44020
-Melón;Hortaliza;Enero, Febrero, Septiembre, Octubre, Noviembre, Diciembre;Enero, Febrero, Marzo, Diciembre;120;4;true;3;3;3;;;;;;;;;;unidades;25190
-Papa;Hortaliza;Agosto, Septiembre, Octubre, Noviembre;Todos;90;3;false;;;;;;;;;;;;;;
-Pepino ensalada;Hortaliza;Septiembre, Octubre, Noviembre, Diciembre;Todos;120;4;true;3;3;3;;;;;;;;;;unidades;119000
-Poroto granado;Hortaliza;Enero, Octubre, Noviembre, Diciembre;Enero, Febrero, Marzo, Abril, Mayo, Diciembre;80;2,6;true;3;3;3;;;;;;;;;;kilos;7440
-Poroto verde;Hortaliza;Enero, Septiembre, Octubre, Noviembre, Diciembre;Todos;80;2,6;true;3;3;3;;;;;;;;;;kilos;7770
-Repollo;Hortaliza;Todos;Todos;100;3,3;true;1;2;2;;;;;;;;;;unidades;24910
-Sandía;Hortaliza;Enero, Febrero, Septiembre, Octubre, Noviembre, Diciembre;Enero, Febrero, Marzo, Diciembre;120;4;true;3;3;3;;;;;;;;;;unidades;9070
-Tomate;Hortaliza;Agosto, Septiembre;Todos;90;3;true;3;3;3;;;;;;;;;;kilos;61870
-Zanahoría;Hortaliza;Todos;Todos;120;4;true;1;2;2;;;;;;;;;;kilos;31390
-Zapallo italiano;Hortaliza;Enero, Septiembre, Octubre, Noviembre, Diciembre;Todos;100;3,3;true;3;3;3;;;;;;;;;;unidades;90000
-Durazno;Fruta;;;;;false;;;;;;;;;;;;;;
-Frambuesa;Fruta;;;;;false;;;;;;;;;;;;;;
-Frutilla;Fruta;Abril, Mayo;Enero, Febrero, Marzo, Abril, Mayo, Octubre, Noviembre, Diciembre;120;4;true;1;2;3;;;;;;;;;;kilos;30000
-Kiwi;Fruta;;;;;false;;;;;;;;;;;;;;
-Limón;Fruta;;;;;false;;;;;;;;;;;;;;
-Mandarina;Fruta;;;;;false;;;;;;;;;;;;;;
-Manzana;Fruta;;;;;false;;;;;;;;;;;;;;
-Naranja;Fruta;;;;;false;;;;;;;;;;;;;;
-Nectarín;Fruta;;;;;false;;;;;;;;;;;;;;
-Palta;Fruta;;;;;false;;;;;;;;;;;;;;
-Pera;Fruta;;;;;false;;;;;;;;;;;;;;
-Uva;Fruta;;;;;false;;;;;;;;;;;;;;
+﻿nombre;tipo;meses_siembra;meses_venta;dias_cosecha;meses_cosecha;valid;heladas_bajo;heladas_medio;heladas_alto;oc_bajo;oc_medio;oc_alto;sequia_baja;sequia_media;sequia_alta;plaga_baja;plaga_media;plaga_alta;unit;unit/ha;volume_oneferiante
+Ajo;Hortaliza;Abril, Mayo, Junio, Julio, Agosto;Todos;180;6;true;1;1;2;;;;;;;;;;unidades;194800;180
+Alcachofa;Hortaliza;Febrero, Marzo;Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre;90;3;true;1;2;2;;;;;;;;;;unidades;49390;300
+Apio;Hortaliza;Todos;Todos;70;2,3;true;1;2;2;;;;;;;;;;unidades;37270;36
+Arveja Verde;Hortaliza;Mayo, Junio, Julio, Agosto;Todos;90;3;true;1;2;2;;;;;;;;;;kilos;6690;15
+Brócoli;Hortaliza;Todos;Todos;90;3;true;1;2;2;;;;;;;;;;unidades;35000;300
+Cebolla;Hortaliza;Enero, Febrero, Octubre, Noviembre, Diciembre;Todos;120;4;true;1;1;2;;;;;;;;;;kilos;55360;75
+Choclo;Hortaliza;Septiembre, Octubre, Noviembre, Diciembre;Todos;120;4;true;1;2;3;;;;;;;;;;unidades;46200;500
+Coliflor;Hortaliza;Todos;Todos;130;4,3;true;1;2;2;;;;;;;;;;unidades;30000;100
+Espinaca;Hortaliza;Todos;Todos;90;3;true;1;2;2;;;;;;;;;;kilos;16800;51
+Haba;Hortaliza;Abril, Mayo, Junio;Enero, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre;90;3;true;1;2;2;;;;;;;;;;kilos;12600;20
+Lechuga;Hortaliza;Todos;Todos;90;3;true;1;2;2;;;;;;;;;;unidades;44020;48
+Melón;Hortaliza;Enero, Febrero, Septiembre, Octubre, Noviembre, Diciembre;Enero, Febrero, Marzo, Diciembre;120;4;true;3;3;3;;;;;;;;;;unidades;25190;1000
+Papa;Hortaliza;Agosto, Septiembre, Octubre, Noviembre;Todos;90;3;false;;;;;;;;;;;;;;;
+Pepino ensalada;Hortaliza;Septiembre, Octubre, Noviembre, Diciembre;Todos;120;4;true;3;3;3;;;;;;;;;;unidades;119000;120
+Poroto granado;Hortaliza;Enero, Octubre, Noviembre, Diciembre;Enero, Febrero, Marzo, Abril, Mayo, Diciembre;80;2,6;true;3;3;3;;;;;;;;;;kilos;7440;66
+Poroto verde;Hortaliza;Enero, Septiembre, Octubre, Noviembre, Diciembre;Todos;80;2,6;true;3;3;3;;;;;;;;;;kilos;7770;44
+Repollo;Hortaliza;Todos;Todos;100;3,3;true;1;2;2;;;;;;;;;;unidades;24910;66
+Sandía;Hortaliza;Enero, Febrero, Septiembre, Octubre, Noviembre, Diciembre;Enero, Febrero, Marzo, Diciembre;120;4;true;3;3;3;;;;;;;;;;unidades;9070;50
+Tomate;Hortaliza;Agosto, Septiembre;Todos;90;3;true;3;3;3;;;;;;;;;;kilos;61870;1800
+Zanahoría;Hortaliza;Todos;Todos;120;4;true;1;2;2;;;;;;;;;;kilos;31390;102
+Zapallo italiano;Hortaliza;Enero, Septiembre, Octubre, Noviembre, Diciembre;Todos;100;3,3;true;3;3;3;;;;;;;;;;unidades;90000;180
+Durazno;Fruta;;;;;false;;;;;;;;;;;;;;;
+Frambuesa;Fruta;;;;;false;;;;;;;;;;;;;;;
+Frutilla;Fruta;Abril, Mayo;Enero, Febrero, Marzo, Abril, Mayo, Octubre, Noviembre, Diciembre;120;4;true;1;2;3;;;;;;;;;;kilos;30000;1050
+Kiwi;Fruta;;;;;false;;;;;;;;;;;;;;;
+Limón;Fruta;;;;;false;;;;;;;;;;;;;;;
+Mandarina;Fruta;;;;;false;;;;;;;;;;;;;;;
+Manzana;Fruta;;;;;false;;;;;;;;;;;;;;;
+Naranja;Fruta;;;;;false;;;;;;;;;;;;;;;
+Nectarín;Fruta;;;;;false;;;;;;;;;;;;;;;
+Palta;Fruta;;;;;false;;;;;;;;;;;;;;;
+Pera;Fruta;;;;;false;;;;;;;;;;;;;;;
+Uva;Fruta;;;;;false;;;;;;;;;;;;;;;

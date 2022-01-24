@@ -56,11 +56,13 @@ global{
 	list<int> generalRisks <- [];
 	map<string, int> mercadoMayoristaVol <- [];
 	list<string> listadoProducts <- [];
+	map<string, string> months_venta <- []; 
 	//map<string, int> priceFerianteConsumer <- [];
 	map<string, list<int>> priceFerianteConsumer <-[];
 	map<string, int> priceFerianteConsumerPromedio <- [];
 	map<string, int> priceMayoristaFeriante <- [];
 	map<string, int> volumeMayorista_lastyear <- [];
+	map<string, int> volumeOneFeriante <- [];
 	
 	//Cantidad de agentes
 	map<string, int> people <- [
@@ -342,6 +344,8 @@ global{
 
 }
 
+species scheduler schedules:shuffle(farmers)+shuffle(feriantes);
+
 //Agente agricultores
 species farmers skills:[moving] control:simple_bdi{
 	bool riskLevel <- flip(0.06); 
@@ -474,7 +478,8 @@ species farmers skills:[moving] control:simple_bdi{
 species feriantes skills:[moving] control:simple_bdi{
 	rgb my_color <- colors['feriante_color'];
 	ferias feria;
-	int quantity <- rnd(3,8); //Cantidad de productos que vende el feriante
+	int quantity <- rnd(3,10); //Cantidad de productos que vende el feriante
+	list<string> selling_products_list <- []; //Listado de productos sin sus volumenes
 	map<string, int> selling_products; //Productos con sus volumenes a la venta	
 	
 	init{
@@ -488,14 +493,49 @@ species feriantes skills:[moving] control:simple_bdi{
 		list p <- sample(listadoProducts,quantity,false);
 		loop i over:p{
 			add 0 at:i to: selling_products;
+			selling_products_list <- selling_products_list + i;
 		}
 		
 		//Deseo inicial y único
 		do add_desire(comprar_mm);
 	}
 	
+	reflex monthlyReset{
+		loop i over: selling_products_list{
+			selling_products[i] <- 0;
+		}
+	}
+	
 	plan compra_a_mayoristas intention: comprar_mm{
-		
+		int initialVol;
+		loop times: feria.days_puesto*4{
+			loop a over:selling_products_list{
+				if(months_venta[a] != '' and (contains(months_venta[a], current_month) or contains(months_venta[a], 'Todos')) and mercadoMayoristaVol[a] > 0){
+					if(volumeMayorista_lastyear[a] != nil and volumeMayorista_lastyear[a] > 0){
+						//Hace la proporcion con la hortaliza/fruta con mayor volumen del año pasado
+						int mayoristaVol <- first(volumeMayorista_lastyear); //mayor volumen del año pasado
+						string biggestProd <- volumeMayorista_lastyear index_of(mayoristaVol); //producto con mayor vol
+						initialVol <- int((volumeMayorista_lastyear[a] * volumeOneFeriante[biggestProd])/mayoristaVol);  
+						if(mercadoMayoristaVol[a] < initialVol){
+							selling_products[a] <- selling_products[a] + mercadoMayoristaVol[a];
+							mercadoMayoristaVol[a] <- 0;
+						}else{	
+							selling_products[a] <- selling_products[a] + initialVol;
+							mercadoMayoristaVol[a] <- mercadoMayoristaVol[a] - initialVol;
+						}
+					}else{
+						//Obtiene desde el volume_oneFeriante
+						if(mercadoMayoristaVol[a] < volumeOneFeriante[a]){
+							selling_products[a] <- selling_products[a] + mercadoMayoristaVol[a];
+							mercadoMayoristaVol[a] <- 0;
+						}else{	
+							selling_products[a] <- selling_products[a] + volumeOneFeriante[a];
+							mercadoMayoristaVol[a] <- mercadoMayoristaVol[a] - volumeOneFeriante[a];
+						}
+					}
+				}
+			}
+		}
 	}
 	
 	aspect base {
@@ -575,6 +615,8 @@ species agentDB skills:[SQLSKILL]{
 				add c[19] at:c[0] to: units;
 				add int(c[20]) at:c[0] to: production;
 				listadoProducts <- listadoProducts + c[0];
+				add c[3] at: c[0] to: months_venta;
+				add int(c[21]) at: c[0] to: volumeOneFeriante;
 			}
 		}else{
 			write "Problemas de conexión con la BD.";
