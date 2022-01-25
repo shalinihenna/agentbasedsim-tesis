@@ -40,8 +40,7 @@ global{
 	map<string, file> shpfiles <- [
 		'comunas_shp'::file("../includes/limite-comunal.shp"),
 		'terrenos_shp'::file("../includes/terrenos-agricolas.shp"),
-		'ferias_shp'::file("../includes/Ferias Libres (RM) 2.shp"),
-		'floods_shp'::file("../includes/Zonas susceptibles a inundación.shp")
+		'ferias_shp'::file("../includes/Ferias Libres (RM) 2.shp")
 	];
 	geometry shape <- envelope(shpfiles['comunas_shp']);
 		
@@ -63,12 +62,13 @@ global{
 	map<string, int> priceMayoristaFeriante <- [];
 	map<string, int> volumeMayorista_lastyear <- [];
 	map<string, int> volumeOneFeriante <- [];
+	list<string> available_products <- [];
 	
 	//Cantidad de agentes
 	map<string, int> people <- [
 		'number_of_farmers'::4695, //la misma cantidad de terrenos
 		'number_of_feriantes'::14735, //la misma cantidad que los puestos de verduras en cada feria (sumatoria)
-		'number_of_consumers'::20
+		'number_of_consumers'::20000 //cantidad de hogares en RM aprox reducido porque no aguanta 2millones de agentes
 	];
 	
 	//Colores de los agentes
@@ -119,11 +119,6 @@ global{
 		create comunas from: shpfiles['comunas_shp'];
 		create terrenos from: shpfiles['terrenos_shp'] with:[area::float(get("area_ha"))];  //number:2;
 		create ferias from: shpfiles['ferias_shp'] with:[puesto_verduras::int(get("VERDURAS")), dias_puesto::string(get("DIAPOSTU")), puestos_vacios::int(get("VERDURAS"))];
-		/*TODO: Borrar */
-		/*create floods from: shpfiles['floods_shp'] with: [risklevel::string((get("INUNDA2")))]{
-				color <- risklevel = "ALTA (desborde)" ? #blue : #darkblue;
-				border <- risklevel = "ALTA (desborde)" ? #blue : #darkblue;
-		}*/
 		
 		write "Inicializando agentes...";
 		list<terrenos> te;
@@ -131,7 +126,8 @@ global{
 	 	write "Agricultores listo";
 		create feriantes number:people['number_of_feriantes'];
 		write "Feriantes listo";
-		/*create consumer number:number_of_consumer;*/
+		create consumers number:people['number_of_consumers'];
+		write "Consumidores listo";
 		
 		write "Inicializando mercado mayorista...";
 		loop d over:products{
@@ -140,6 +136,16 @@ global{
 
 		write "Fin";
 		
+	}
+	
+	reflex getAvailableProducts{
+		ask(agentDB){
+			list<list> prods <- list<list> (select(params:POSTGRES,
+													select: "SELECT productos FROM meses_de_venta where mes = ? ;",
+													values: [current_month]));
+			list<string> prods2 <- list<string>(prods[2][0]);
+			available_products <- string(prods2[0]) split_with ',';  
+		}
 	}
 	
 	reflex climateRisks{
@@ -344,7 +350,7 @@ global{
 
 }
 
-species scheduler schedules:shuffle(farmers)+shuffle(feriantes);
+species scheduler schedules:shuffle(farmers)+shuffle(feriantes)+shuffle(consumers);
 
 //Agente agricultores
 species farmers skills:[moving] control:simple_bdi schedules: []{
@@ -543,6 +549,54 @@ species feriantes skills:[moving] control:simple_bdi schedules: []{
     }
 }
 
+species consumers control:simple_bdi schedules:[]{
+	rgb my_color <-  colors['consumer_color'];
+	ferias feria;
+	list<feriantes> puestos_de_feria;
+	int presupuesto;
+	//int kilos_comprados <- 0; //puede no ser necesario 
+	list<string> products_a_comprar;
+	
+	init{
+		//Assign feria (permanente)
+		/*list<ferias> f <- ferias where(each.personas > 0);
+		feria <- one_of(f);
+		feria.personas <- feria.personas - 1;*/
+		
+		//Assign inicialmente 10 o menos feriantes random
+		//list<feriantes> fer <- feriantes where(each.feria = feria);
+		/*list<feriantes> fer <- feriantes of_generic_species feriantes;
+		puestos_de_feria <- sample(fer, 10, false);
+		
+		//Assign productos a la venta de ese mes que quiere comprar
+		products_a_comprar <- sample(available_products,10, false);
+		*/
+		//Deseo inicial y único
+		do add_desire(comprar_feriante);
+	}
+	
+	reflex monthlyReset{
+		//Reset presupuesto
+		presupuesto <- rnd(25000,45000,1000);
+		
+		//Reset puestos de feria
+		list<feriantes> fer <- feriantes of_generic_species feriantes;
+		puestos_de_feria <- sample(fer, 10, false);
+		
+		//Reset productos
+		products_a_comprar <- sample(available_products,10, false);
+	}
+	
+	plan compra_a_feriantes intention: comprar_feriante{
+		
+	}
+	
+	aspect base {
+        draw circle(70) color: my_color border: #black;  //depth: gold_sold;
+    }
+	
+}
+
 /*They are not agents, its just for display */
 species terrenos {
 	//Atributos visuales
@@ -571,6 +625,7 @@ species ferias {
 	rgb color <- #red;
 	int puesto_verduras;
 	int puestos_vacios;
+	int personas; 
 	string dias_puesto;
 	int days_puesto;
 	aspect base{
@@ -582,6 +637,7 @@ species ferias {
 		}else{
 			days_puesto <- 1;
 		}
+		personas <- puesto_verduras*2;
 	}
 }
 
@@ -591,16 +647,6 @@ species comunas {
 	aspect base {
 		draw shape color: color border: border;
 	}
-}
-
-species floods {
-	string risklevel;
-	rgb color <- #darkblue;
-	rgb border <- #darkblue;
-	aspect base {
-		draw shape color: color border: border;
-	}
-	
 }
 
 /*Agente conector a la base de datos PostgreSQL */
@@ -634,6 +680,7 @@ experiment agriculture_world type: gui {
 		        species ferias aspect:base; 
 		        species farmers aspect:base;
 		        species feriantes aspect:base;
+		        species consumers aspect:base;
 		    }
 		    
 		    monitor "Step actual " value: current_month + ' ' + current_date.year ;

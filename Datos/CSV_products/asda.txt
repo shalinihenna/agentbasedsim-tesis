@@ -1,0 +1,13 @@
+mes;productos
+Enero;Ajo,Apio,Arveja Verde,Brócoli,Cebolla,Choclo,Coliflor,Espinaca,Haba,Lechuga,Melón,Pepino ensalada,Poroto granado,Poroto verde,Repollo,Sandía,Tomate,Zanahoría,Zapallo italiano,Frutilla
+Febrero;Ajo,Apio,Arveja Verde,Brócoli,Cebolla,Choclo,Coliflor,Espinaca,Lechuga,Melón,Pepino ensalada,Poroto granado,Poroto verde,Repollo,Sandía,Tomate,Zanahoría,Zapallo italiano,Frutilla
+Marzo;Ajo,Apio,Arveja Verde,Brócoli,Cebolla,Choclo,Coliflor,Espinaca,Lechuga,Melón,Pepino ensalada,Poroto granado,Poroto verde,Repollo,Sandía,Tomate,Zanahoría,Zapallo italiano,Frutilla
+Abril;Ajo,Apio,Arveja Verde,Brócoli,Cebolla,Choclo,Coliflor,Espinaca,Lechuga,Pepino ensalada,Poroto granado,Poroto verde,Repollo,Tomate,Zanahoría,Zapallo italiano,Frutilla
+Mayo;Ajo,Alcachofa,Apio,Arveja Verde,Brócoli,Cebolla,Choclo,Coliflor,Espinaca,Haba,Lechuga,Pepino ensalada,Poroto granado,Poroto verde,Repollo,Tomate,Zanahoría,Zapallo italiano,Frutilla
+Junio;Ajo,Alcachofa,Apio,Arveja Verde,Brócoli,Cebolla,Choclo,Coliflor,Espinaca,Haba,Lechuga,Pepino ensalada,Poroto verde,Repollo,Tomate,Zanahoría,Zapallo italiano
+Julio;Ajo,Alcachofa,Apio,Arveja Verde,Brócoli,Cebolla,Choclo,Coliflor,Espinaca,Haba,Lechuga,Pepino ensalada,Poroto verde,Repollo,Tomate,Zanahoría,Zapallo italiano
+Agosto;Ajo,Alcachofa,Apio,Arveja Verde,Brócoli,Cebolla,Choclo,Coliflor,Espinaca,Haba,Lechuga,Pepino ensalada,Poroto verde,Repollo,Tomate,Zanahoría,Zapallo italiano
+Septiembre;Ajo,Alcachofa,Apio,Arveja Verde,Brócoli,Cebolla,Choclo,Coliflor,Espinaca,Haba,Lechuga,Pepino ensalada,Poroto verde,Repollo,Tomate,Zanahoría,Zapallo italiano
+Octubre;Ajo,Alcachofa,Apio,Arveja Verde,Brócoli,Cebolla,Choclo,Coliflor,Espinaca,Haba,Lechuga,Pepino ensalada,Poroto verde,Repollo,Tomate,Zanahoría,Zapallo italiano,Frutilla
+Noviembre;Ajo,Alcachofa,Apio,Arveja Verde,Brócoli,Cebolla,Choclo,Coliflor,Espinaca,Haba,Lechuga,Pepino ensalada,Poroto verde,Repollo,Tomate,Zanahoría,Zapallo italiano,Frutilla
+Diciembre;Ajo,Apio,Arveja Verde,Brócoli,Cebolla,Choclo,Coliflor,Espinaca,Haba,Lechuga,Melón,Pepino ensalada,Poroto granado,Poroto verde,Repollo,Sandía,Tomate,Zanahoría,Zapallo italiano,Frutilla
