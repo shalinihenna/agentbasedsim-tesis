@@ -56,19 +56,22 @@ global{
 	map<string, int> mercadoMayoristaVol <- [];
 	list<string> listadoProducts <- [];
 	map<string, string> months_venta <- []; 
-	//map<string, int> priceFerianteConsumer <- [];
 	map<string, list<int>> priceFerianteConsumer <-[];
 	map<string, int> priceFerianteConsumerPromedio <- [];
 	map<string, int> priceMayoristaFeriante <- [];
 	map<string, int> volumeMayorista_lastyear <- [];
 	map<string, int> volumeOneFeriante <- [];
+	map<string, int> volumeOneConsumer <- [];
 	list<string> available_products <- [];
+	
+	//Variables totales para los gráficos
+	map<string, int> mercadoMayoristaVolumenTotal <- []; 
 	
 	//Cantidad de agentes
 	map<string, int> people <- [
 		'number_of_farmers'::4695, //la misma cantidad de terrenos
-		'number_of_feriantes'::14735, //la misma cantidad que los puestos de verduras en cada feria (sumatoria)
-		'number_of_consumers'::20000 //cantidad de hogares en RM aprox reducido porque no aguanta 2millones de agentes
+		'number_of_feriantes':: 2, //la misma cantidad que los puestos de verduras en cada feria (sumatoria)14735
+		'number_of_consumers':: 2 //cantidad de hogares en RM aprox reducido porque no aguanta 2millones de agentes 20000
 	];
 	
 	//Colores de los agentes
@@ -132,6 +135,7 @@ global{
 		write "Inicializando mercado mayorista...";
 		loop d over:products{
 			add 0 at:d[0] to: mercadoMayoristaVol;
+			add 0 at:d[0] to: mercadoMayoristaVolumenTotal;
 		}
 
 		write "Fin";
@@ -313,6 +317,10 @@ global{
 	
 	//Para obtener los precios y volúmen de este mes del año pasado (del step)
 	reflex getInfo{
+		priceFerianteConsumer <- [];
+		priceFerianteConsumerPromedio <- [];
+		priceMayoristaFeriante <- [];
+		volumeMayorista_lastyear <- [];
 		list<list> dbdata;
 		ask agentDB{
 			dbdata <- list<unknown> (select(params:POSTGRES, 
@@ -322,6 +330,8 @@ global{
 															ORDER BY \"Volumen mayorista\" desc;",
 		 											values: [current_month, current_date.year-1])); 
 		}
+		write "currentMonth: " + current_month;
+		write "last year: " +  int(current_date.year-1);
 		dbdata <- dbdata[2];
 
 		loop a over: dbdata{
@@ -329,7 +339,7 @@ global{
 			add int(a[3]) at: a[0] to: priceFerianteConsumerPromedio;
 			add int(a[4]) at: a[0] to: priceMayoristaFeriante;
 			add int(a[5]) at: a[0] to: volumeMayorista_lastyear;
-		}
+		}		
 	}
 	
 	//predicates for BDI agents
@@ -471,6 +481,7 @@ species farmers skills:[moving] control:simple_bdi schedules: []{
 	
 	plan venta_a_mm intention: vender instantaneous: true{
 		mercadoMayoristaVol[last(terreno.historial_productos)] <- mercadoMayoristaVol[last(terreno.historial_productos)] + self.non_sold_vegetables;
+		mercadoMayoristaVolumenTotal[last(terreno.historial_productos)] <- mercadoMayoristaVolumenTotal[last(terreno.historial_productos)] + self.non_sold_vegetables;
 		self.non_sold_vegetables <- 0;
 		do remove_intention(vender, true);
 	}
@@ -551,13 +562,15 @@ species feriantes skills:[moving] control:simple_bdi schedules: []{
 
 species consumers control:simple_bdi schedules:[]{
 	rgb my_color <-  colors['consumer_color'];
-	ferias feria;
+	//ferias feria;
 	list<feriantes> puestos_de_feria;
 	int presupuesto;
 	//int kilos_comprados <- 0; //puede no ser necesario 
 	list<string> products_a_comprar;
+	map<string,int> productos_comprados <- [];
 	
 	init{
+		self.location <- {92455.63984443404, 57339.11668546737, 0.0};
 		//Assign feria (permanente)
 		/*list<ferias> f <- ferias where(each.personas > 0);
 		feria <- one_of(f);
@@ -585,14 +598,37 @@ species consumers control:simple_bdi schedules:[]{
 		
 		//Reset productos
 		products_a_comprar <- sample(available_products,10, false);
+		productos_comprados <- [];
+		loop prod over:products_a_comprar{
+			add 0 at:prod to: productos_comprados;
+		}
 	}
 	
 	plan compra_a_feriantes intention: comprar_feriante{
-		
+		loop a over:puestos_de_feria{
+			loop b over:products_a_comprar{
+				if(presupuesto <= 0){
+					break;
+				}
+				/*Que no se haya comprado ese producto, que el feriante lo venda y que al feriante le quede stock de ese producto */
+				if(productos_comprados[b] = 0 and (a.selling_products_list contains b) and (a.selling_products[b] > 0)){ 
+					if(a.selling_products[b] < volumeOneConsumer[b]){
+						productos_comprados[b] <- a.selling_products[b];
+						a.selling_products[b] <- 0; 
+					}else{
+						productos_comprados[b] <- volumeOneConsumer[b];
+						a.selling_products[b] <- a.selling_products[b] - volumeOneConsumer[b];
+					}
+				}
+			}
+			if(presupuesto <= 0){
+				break;
+			}
+		}
 	}
 	
 	aspect base {
-        draw circle(70) color: my_color border: #black;  //depth: gold_sold;
+        draw circle(170) color: my_color border: #black;  //depth: gold_sold;
     }
 	
 }
@@ -663,7 +699,15 @@ species agentDB skills:[SQLSKILL]{
 				listadoProducts <- listadoProducts + c[0];
 				add c[3] at: c[0] to: months_venta;
 				add int(c[21]) at: c[0] to: volumeOneFeriante;
+				add int(c[22]) at: c[0] to: volumeOneConsumer;
 			}
+			/*write "days cosecha: " + days_cosecha;  
+			write "units: " + units;
+			write "production: " + production;
+			write "listadoProducts: " + listadoProducts;
+			write "months_venta: " + months_venta;
+			write "volumeOneFeriante: " + volumeOneFeriante;
+			write "volumeOneConsumer: " + volumeOneConsumer;*/
 		}else{
 			write "Problemas de conexión con la BD.";
 		}
@@ -688,13 +732,14 @@ experiment agriculture_world type: gui {
 		    monitor "Riesgo Ola de calor" value: risk_scale[generalRisks[1]] ;
 		    monitor "Riesgo Sequía" value:risk_scale[generalRisks[2]] ;
 		    monitor "MM" value: mercadoMayoristaVol;
+		    monitor "MM Total" value: mercadoMayoristaVolumenTotal;
 		    
-		    /*monitor "Peso de afectación Helada" value: affect_weight['Peso de afectación Helada'];
-		    monitor "Peso de afectación Ola de calor" value:  affect_weight['Peso de afectación Ola de calor'] ;
-		    monitor "Peso de afectación Sequía" value: affect_weight['Peso de afectación Sequía'] ;
-		    monitor "Peso de afectación Plaga" value: affect_weight['Peso de afectación Plaga'];
-		    monitor "Peso de afectación Helada" value: affect_weight['Peso de afectación Helada'];*/
-		    
+			display "graficos" refresh: every(1#cycles){
+				chart "prueba" type: histogram{
+					datalist legend: listadoProducts value: mercadoMayoristaVolumenTotal collect (each);
+				}
+			}
+		   
 		    //para chart display: every 12 cycles
 	   	} /*https://gama-platform.github.io/wiki/LuneraysFlu_step3 VER ESTE EJEMPLOOOOO (chart_display para gráficos) */
 	   	/*https://gama-platform.org/wiki/Statements#permanent ejemplo para chart,
