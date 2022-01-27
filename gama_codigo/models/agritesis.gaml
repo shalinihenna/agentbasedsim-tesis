@@ -70,8 +70,8 @@ global{
 	//Cantidad de agentes
 	map<string, int> people <- [
 		'number_of_farmers'::4695, //la misma cantidad de terrenos
-		'number_of_feriantes':: 2, //la misma cantidad que los puestos de verduras en cada feria (sumatoria)14735
-		'number_of_consumers':: 2 //cantidad de hogares en RM aprox reducido porque no aguanta 2millones de agentes 20000
+		'number_of_feriantes':: 14735, //la misma cantidad que los puestos de verduras en cada feria (sumatoria)
+		'number_of_consumers':: 20000 //cantidad de hogares en RM aprox reducido porque no aguanta 2millones de agentes 
 	];
 	
 	//Colores de los agentes
@@ -108,7 +108,7 @@ global{
 	 map<string, unknown> affect_weight <- user_input([
 	 	enter("Peso de afectación Helada",0.0),
 		enter("Peso de afectación Ola de calor",0.0), 
-		enter("Peso de afectación Sequía",0.0), 
+		enter("Peso de afectación Sequia",0.0), 
 		enter("Peso de afectación Plaga",0.0)
 	]); 
 	
@@ -330,8 +330,6 @@ global{
 															ORDER BY \"Volumen mayorista\" desc;",
 		 											values: [current_month, current_date.year-1])); 
 		}
-		write "currentMonth: " + current_month;
-		write "last year: " +  int(current_date.year-1);
 		dbdata <- dbdata[2];
 
 		loop a over: dbdata{
@@ -463,7 +461,7 @@ species farmers skills:[moving] control:simple_bdi schedules: []{
 		terreno.days_left <- int((terreno.end_date - current_date) / 86400);
 
 		//Resetear todo sobre terreno
-		terreno.plagaRisk <- rnd_choice([0.7, 0.1, 0.1, 0.1]);
+		terreno.plagaRisk <- rnd_choice([0.85, 0.05, 0.05, 0.05]);
 		terreno.historial_productos <- terreno.historial_productos + terreno.producto_seleccionado; 
 		terreno.producto_seleccionado <- nil;
 		terreno.start_date <- nil;
@@ -646,7 +644,7 @@ species terrenos {
 	//Atributos del terreno en sí
 	int estado <- 0; //0 --> sin agricultor, 1 --> vacío, 2 --> cultivando, 3 --> cosecha lista.
 	list<string> historial_productos <- [];
-	int plagaRisk <- rnd_choice([0.7, 0.1, 0.1, 0.1]);
+	int plagaRisk <- rnd_choice([0.85, 0.05, 0.05, 0.05]);
 	float area;
 	int days_left <- 0;
 	date start_date;
@@ -734,11 +732,28 @@ experiment agriculture_world type: gui {
 		    monitor "MM" value: mercadoMayoristaVol;
 		    monitor "MM Total" value: mercadoMayoristaVolumenTotal;
 		    
-			display "graficos" refresh: every(1#cycles){
-				chart "prueba" type: histogram{
+			display "graficos1" refresh: every(1#cycles){
+				chart "Mercado Mayorista Total" type: histogram{
 					datalist legend: listadoProducts value: mercadoMayoristaVolumenTotal collect (each);
 				}
 			}
+			
+			display "graficos2" refresh: every(1#cycles){
+				chart "Mercado Mayorista" type: histogram{
+					datalist legend: listadoProducts value: mercadoMayoristaVol collect (each);
+				}
+			}
+			
+			/*display "graficos3" refresh: every(1#cycles){
+				chart "Compra feriantes acumulada" type: histogram{
+					loop i from: 0 to: 20 step: 1 {
+					 	data string(listadoProducts[i]) value: feriantes collect ((each.selling_products_list contains listadoProducts[i]) ? each.selling_products[listadoProducts[i]] : 0);
+					}
+					//datalist legend: feriantes collect (each.selling_products_list) value: feriantes collect (each.selling_products);
+				}
+			}*/
+			
+			
 		   
 		    //para chart display: every 12 cycles
 	   	} /*https://gama-platform.github.io/wiki/LuneraysFlu_step3 VER ESTE EJEMPLOOOOO (chart_display para gráficos) */
