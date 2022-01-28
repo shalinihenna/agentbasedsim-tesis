@@ -324,11 +324,23 @@ global{
 		list<list> dbdata;
 		ask agentDB{
 			dbdata <- list<unknown> (select(params:POSTGRES, 
-		 											select: "SELECT producto, \"Precio mínimo\", \"Precio máximo\", \"Precio promedio\", \"Precio ponderado mayorista\", \"Volumen mayorista\" 
+													select: "SELECT producto, \"Precio mínimo\", \"Precio máximo\", \"Precio promedio\", \"Precio ponderado mayorista\", \"Volumen mayorista\" 
 															FROM detalle_productos_2 
 															WHERE mes_escrito = ? and anio = ?
-															ORDER BY \"Volumen mayorista\" desc;",
-		 											values: [current_month, current_date.year-1])); 
+															union
+															select dp.producto, dp.\"Precio mínimo\", dp.\"Precio máximo\",dp.\"Precio promedio\",dp.\"Precio ponderado mayorista\", dp.\"Volumen mayorista\" 
+															from public.detalle_productos_2 dp
+															where (dp.producto, dp.mes) in (
+																SELECT producto, max(mes) as mes
+																FROM public.detalle_productos_2
+																where producto not in (SELECT producto
+																						FROM public.detalle_productos_2
+																						WHERE mes_escrito = ? and anio = ? )
+																group by producto
+															)
+															order by \"Volumen mayorista\" desc;",
+													values: [current_month, current_date.year-1,current_month, current_date.year-1])); 
+		 											
 		}
 		dbdata <- dbdata[2];
 
