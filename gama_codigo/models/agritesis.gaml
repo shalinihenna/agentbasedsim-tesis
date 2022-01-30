@@ -66,6 +66,8 @@ global{
 	
 	//Variables totales para los gráficos
 	map<string, int> mercadoMayoristaVolumenTotal <- []; 
+	map<string, int> feriantesVolumenTotal <- [];
+	map<string, int> consumersVolumenTotal <- [];
 	
 	//Cantidad de agentes
 	map<string, int> people <- [
@@ -136,6 +138,8 @@ global{
 		loop d over:products{
 			add 0 at:d[0] to: mercadoMayoristaVol;
 			add 0 at:d[0] to: mercadoMayoristaVolumenTotal;
+			add 0 at:d[0] to: feriantesVolumenTotal;
+			add 0 at:d[0] to: consumersVolumenTotal;
 		}
 
 		write "Fin";
@@ -546,22 +550,29 @@ species feriantes skills:[moving] control:simple_bdi schedules: []{
 						if(mercadoMayoristaVol[a] < initialVol){
 							selling_products[a] <- selling_products[a] + mercadoMayoristaVol[a];
 							mercadoMayoristaVol[a] <- 0;
+							//feriantesVolumenTotal[a] <- feriantesVolumenTotal[a] + selling_products[a];
 						}else{	
 							selling_products[a] <- selling_products[a] + initialVol;
 							mercadoMayoristaVol[a] <- mercadoMayoristaVol[a] - initialVol;
+							//feriantesVolumenTotal[a] <- feriantesVolumenTotal[a] + selling_products[a];
 						}
 					}else{
 						//Obtiene desde el volume_oneFeriante
 						if(mercadoMayoristaVol[a] < volumeOneFeriante[a]){
 							selling_products[a] <- selling_products[a] + mercadoMayoristaVol[a];
 							mercadoMayoristaVol[a] <- 0;
+							//feriantesVolumenTotal[a] <- feriantesVolumenTotal[a] + selling_products[a];
 						}else{	
 							selling_products[a] <- selling_products[a] + volumeOneFeriante[a];
 							mercadoMayoristaVol[a] <- mercadoMayoristaVol[a] - volumeOneFeriante[a];
+							//feriantesVolumenTotal[a] <- feriantesVolumenTotal[a] + selling_products[a];
 						}
 					}
 				}
 			}
+		}
+		loop c over: selling_products_list{
+			feriantesVolumenTotal[c] <- feriantesVolumenTotal[c] + selling_products[c];
 		}
 	}
 	
@@ -625,15 +636,20 @@ species consumers control:simple_bdi schedules:[]{
 					if(a.selling_products[b] < volumeOneConsumer[b]){
 						productos_comprados[b] <- a.selling_products[b];
 						a.selling_products[b] <- 0; 
+						//consumersVolumenTotal[b] <- consumersVolumenTotal[b] + productos_comprados[b];
 					}else{
 						productos_comprados[b] <- volumeOneConsumer[b];
 						a.selling_products[b] <- a.selling_products[b] - volumeOneConsumer[b];
+						//consumersVolumenTotal[b] <- consumersVolumenTotal[b] + productos_comprados[b];
 					}
 				}
 			}
 			if(presupuesto <= 0){
 				break;
 			}
+		}
+		loop c over:products_a_comprar{
+			consumersVolumenTotal[c] <- consumersVolumenTotal[c] + productos_comprados[c];
 		}
 	}
 	
@@ -743,6 +759,8 @@ experiment agriculture_world type: gui {
 		    monitor "Riesgo Sequía" value:risk_scale[generalRisks[2]] ;
 		    monitor "MM" value: mercadoMayoristaVol;
 		    monitor "MM Total" value: mercadoMayoristaVolumenTotal;
+		    monitor "FerianteTotal" value: feriantesVolumenTotal;
+		    monitor "ConsumerTotal" value: consumersVolumenTotal;
 		    
 			display "graficos1" refresh: every(1#cycles){
 				chart "Mercado Mayorista Total" type: histogram{
@@ -750,13 +768,13 @@ experiment agriculture_world type: gui {
 				}
 			}
 			
-			display "graficos2" refresh: every(1#cycles){
+			/*display "graficos2" refresh: every(1#cycles){
 				chart "Mercado Mayorista" type: histogram{
 					datalist legend: listadoProducts value: mercadoMayoristaVol collect (each);
 				}
 			}
 			
-			/*display "graficos3" refresh: every(1#cycles){
+			display "graficos3" refresh: every(1#cycles){
 				chart "Compra feriantes acumulada" type: histogram{
 					loop i from: 0 to: 20 step: 1 {
 					 	data string(listadoProducts[i]) value: feriantes collect ((each.selling_products_list contains listadoProducts[i]) ? each.selling_products[listadoProducts[i]] : 0);
