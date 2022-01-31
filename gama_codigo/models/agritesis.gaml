@@ -139,7 +139,6 @@ global{
 		write "Feriantes listo";
 		create consumers number:people['number_of_consumers'];
 		write "Consumidores listo";
-		create insertDB number:1;
 		
 		write "Inicializando mercado mayorista...";
 		loop d over:products{
@@ -427,7 +426,7 @@ global{
 
 }
 
-species scheduler schedules:shuffle(farmers)+shuffle(feriantes)+shuffle(consumers)+insertDB;
+species scheduler schedules:shuffle(farmers)+shuffle(feriantes)+shuffle(consumers);
 
 //Agente agricultores
 species farmers skills:[moving] control:simple_bdi schedules: []{
@@ -608,7 +607,7 @@ species feriantes skills:[moving] control:simple_bdi schedules: []{
 						//Hace la proporcion con la hortaliza/fruta con mayor volumen del año pasado
 						int mayoristaVol <- first(volumeMayorista_lastyear); //mayor volumen del año pasado
 						string biggestProd <- volumeMayorista_lastyear index_of(mayoristaVol); //producto con mayor vol
-						initialVol <- int((volumeMayorista_lastyear[a] * volumeOneFeriante[biggestProd])/mayoristaVol);  
+						initialVol <- int((volumeMayorista_lastyear[a] * volumeOneFeriante[biggestProd])/mayoristaVol);
 						if(mercadoMayoristaVol[a] < initialVol){
 							selling_products[a] <- selling_products[a] + mercadoMayoristaVol[a];
 							mercadoMayoristaVol[a] <- 0;
@@ -771,12 +770,6 @@ species comunas {
 	}
 }
 
-species insertDB {
-	reflex getInfoFeriantes{
-		write "se ejecuto el reflex";
-	}
-}
-
 /*Agente conector a la base de datos PostgreSQL */
 species agentDB skills:[SQLSKILL]{
 	
@@ -818,7 +811,6 @@ experiment agriculture_world type: gui {
 		        species farmers aspect:base;
 		        species feriantes aspect:base;
 		        species consumers aspect:base;
-		        species insertDB;
 		    }
 		    
 		    monitor "Step actual " value: current_month + ' ' + current_date.year ;

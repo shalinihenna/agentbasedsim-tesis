@@ -16,9 +16,9 @@ Pepino ensalada;Hortaliza;Septiembre, Octubre, Noviembre, Diciembre;Todos;120;4;
 Poroto granado;Hortaliza;Enero, Octubre, Noviembre, Diciembre;Enero, Febrero, Marzo, Abril, Mayo, Diciembre;80;2,6;true;3;3;3;1;2;3;1;2;3;1;2;3;kilos;7440;66;1
 Poroto verde;Hortaliza;Enero, Septiembre, Octubre, Noviembre, Diciembre;Todos;80;2,6;true;3;3;3;1;2;3;1;2;3;1;2;3;kilos;7770;44;1
 Repollo;Hortaliza;Todos;Todos;100;3,3;true;1;2;2;1;2;3;2;3;3;2;2;3;unidades;24910;66;1
-Sandía;Hortaliza;Enero, Febrero, Septiembre, Octubre, Noviembre, Diciembre;Enero, Febrero, Marzo, Diciembre;120;4;true;3;3;3;1;2;3;2;3;3;1;2;3;unidades;9070;50;2
+Sandia;Hortaliza;Enero, Febrero, Septiembre, Octubre, Noviembre, Diciembre;Enero, Febrero, Marzo, Diciembre;120;4;true;3;3;3;1;2;3;2;3;3;1;2;3;unidades;9070;50;2
 Tomate;Hortaliza;Agosto, Septiembre;Todos;90;3;true;3;3;3;1;2;3;2;3;3;2;2;3;kilos;61870;1800;6
-Zanahoría;Hortaliza;Todos;Todos;120;4;true;1;2;2;1;2;3;2;2;3;2;2;3;kilos;31390;102;2
+Zanahoria;Hortaliza;Todos;Todos;120;4;true;1;2;2;1;2;3;2;2;3;2;2;3;kilos;31390;102;2
 Zapallo italiano;Hortaliza;Enero, Septiembre, Octubre, Noviembre, Diciembre;Todos;100;3,3;true;3;3;3;1;2;3;2;2;3;1;2;3;unidades;90000;180;4
 Durazno;Fruta;;;;;false;;;;;;;;;;;;;;;;
 Frambuesa;Fruta;;;;;false;;;;;;;;;;;;;;;;
