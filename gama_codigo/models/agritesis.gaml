@@ -67,6 +67,7 @@ global{
 	map<int, int> months_sequia <- [];
 	map<int, int> months_helada <- [];
 	map<string, int> actualPrices <- [];
+	int totalFerianteValues;
 	
 	
 	//Variables totales para los gráficos
@@ -365,7 +366,7 @@ global{
 		}
 	}
 	
-	reflex pricesInfo when: after(starting_date + 2#months){
+	reflex pricesInfo when: after(starting_date + 1#months){
 		//Asignación de nuevos precios por producto dependiendo de la cantidad de producción hasta ese mes, comparandolo con la producción del año pasado.
 		used_products <- [];
 		
@@ -392,7 +393,7 @@ global{
 			match_one [[1,2],[2,1]] { increasePrice <- rnd(5,10); }
 			match_one [[1,3],[3,1]] { increasePrice <- rnd(10,15); }
 			match_one [[2,3],[3,2]] { increasePrice <- rnd(15,20); }
-			match [2,2] { increasePrice <- rnd(10,20); }
+			match_one [[2,2],[3,0],[0,3]] { increasePrice <- rnd(10,20); }
 			match [3,3] { increasePrice <- rnd(20,30); }
 		}
 		
@@ -406,9 +407,6 @@ global{
 				actualPrices[a] <- priceFerianteConsumerPromedio[a];
 			}	
 		}
-		
-		write "actualPrices: " + actualPrices;
-		
 	}
 	
 	//predicates for BDI agents
@@ -570,6 +568,7 @@ species feriantes skills:[moving] control:simple_bdi schedules: []{
 	int quantity <- rnd(3,12); //Cantidad de productos que vende el feriante
 	list<string> selling_products_list <- []; //Listado de productos sin sus volumenes
 	map<string, int> selling_products; //Productos con sus volumenes a la venta	
+	map<int, int> ganancias; //primer int es el mes y el segundo int son las ganancias en CLP
 	
 	init{
 		//Assign feria
@@ -583,6 +582,11 @@ species feriantes skills:[moving] control:simple_bdi schedules: []{
 		loop i over:p{
 			add 0 at:i to: selling_products;
 			selling_products_list <- selling_products_list + i;
+		}
+		
+		//Inicializar ganancias por mes
+		loop i from: 1  to: 12 step:1{
+			add 0 at:i to:ganancias;
 		}
 		
 		//Deseo inicial y único
@@ -682,6 +686,7 @@ species consumers control:simple_bdi schedules:[]{
 	plan compra_a_feriantes intention: comprar_feriante{
 		loop a over:puestos_de_feria{
 			loop b over:products_a_comprar{
+				int priceToPay <- 0;
 				if(presupuesto <= 0){
 					break;
 				}
@@ -694,6 +699,9 @@ species consumers control:simple_bdi schedules:[]{
 						productos_comprados[b] <- volumeOneConsumer[b];
 						a.selling_products[b] <- a.selling_products[b] - volumeOneConsumer[b];
 					}
+					priceToPay <- productos_comprados[b]*actualPrices[b];
+					a.ganancias[current_date.month] <- a.ganancias[current_date.month] + priceToPay;
+					presupuesto <- presupuesto - priceToPay;
 				}
 			}
 			if(presupuesto <= 0){
@@ -764,8 +772,8 @@ species comunas {
 }
 
 species insertDB {
-	reflex addDB{
-		
+	reflex getInfoFeriantes{
+		write "se ejecuto el reflex";
 	}
 }
 
@@ -792,6 +800,7 @@ species agentDB skills:[SQLSKILL]{
 			write "months_venta: " + months_venta;
 			write "volumeOneFeriante: " + volumeOneFeriante;
 			write "volumeOneConsumer: " + volumeOneConsumer;*/
+			
 		}else{
 			write "Problemas de conexión con la BD.";
 		}
@@ -809,6 +818,7 @@ experiment agriculture_world type: gui {
 		        species farmers aspect:base;
 		        species feriantes aspect:base;
 		        species consumers aspect:base;
+		        species insertDB;
 		    }
 		    
 		    monitor "Step actual " value: current_month + ' ' + current_date.year ;
