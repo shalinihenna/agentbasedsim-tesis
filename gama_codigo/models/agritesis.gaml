@@ -63,6 +63,11 @@ global{
 	map<string, int> volumeOneFeriante <- [];
 	map<string, int> volumeOneConsumer <- [];
 	list<string> available_products <- [];
+	list<string> used_products <- [];
+	map<int, int> months_sequia <- [];
+	map<int, int> months_helada <- [];
+	map<string, int> actualPrices <- [];
+	
 	
 	//Variables totales para los gráficos
 	map<string, int> mercadoMayoristaVolumenTotal <- []; 
@@ -133,6 +138,7 @@ global{
 		write "Feriantes listo";
 		create consumers number:people['number_of_consumers'];
 		write "Consumidores listo";
+		create insertDB number:1;
 		
 		write "Inicializando mercado mayorista...";
 		loop d over:products{
@@ -140,6 +146,7 @@ global{
 			add 0 at:d[0] to: mercadoMayoristaVolumenTotal;
 			add 0 at:d[0] to: feriantesVolumenTotal;
 			add 0 at:d[0] to: consumersVolumenTotal;
+			add 0 at:d[0] to: actualPrices;
 		}
 
 		write "Fin";
@@ -216,6 +223,8 @@ global{
 		 	}
 		 }
 		generalRisks <- [int(frostRisk), heatwaveRisk, droughtRisk, 0];
+		add int(frostRisk) at: current_date.month to: months_helada;
+		add droughtRisk at: current_date.month to: months_sequia;
 
 	}
 	
@@ -353,7 +362,53 @@ global{
 			add int(a[3]) at: a[0] to: priceFerianteConsumerPromedio;
 			add int(a[4]) at: a[0] to: priceMayoristaFeriante;
 			add int(a[5]) at: a[0] to: volumeMayorista_lastyear;
-		}		
+		}
+	}
+	
+	reflex pricesInfo when: after(starting_date + 2#months){
+		//Asignación de nuevos precios por producto dependiendo de la cantidad de producción hasta ese mes, comparandolo con la producción del año pasado.
+		used_products <- [];
+		
+		//obtener la mediana de la sequía y heladas de los últimos tres meses
+		list<int> lastheladas <- [];
+		list<int> lastsequias <- [];
+		list<int> medians;
+	
+		if(current_date.month = 1){
+			lastheladas <- [months_helada[11], months_helada[12], months_helada[current_date.month]];
+			lastsequias <- [months_sequia[11], months_sequia[12], months_sequia[current_date.month]];
+		}else if(current_date.month = 2){
+			lastheladas <- [months_helada[12], months_helada[current_date.month-1], months_helada[current_date.month]];
+			lastsequias <- [months_sequia[12], months_sequia[current_date.month-1], months_sequia[current_date.month]];
+		}else{
+			lastheladas <- [months_helada[current_date.month-2], months_helada[current_date.month-1], months_helada[current_date.month]];
+			lastsequias <- [months_sequia[current_date.month-2], months_sequia[current_date.month-1], months_sequia[current_date.month]];
+		}
+		medians <- [median(lastheladas), median(lastsequias)];
+		
+		//switch con todos los rangos
+		int increasePrice;
+		switch medians{
+			match_one [[1,2],[2,1]] { increasePrice <- rnd(5,10); }
+			match_one [[1,3],[3,1]] { increasePrice <- rnd(10,15); }
+			match_one [[2,3],[3,2]] { increasePrice <- rnd(15,20); }
+			match [2,2] { increasePrice <- rnd(10,20); }
+			match [3,3] { increasePrice <- rnd(20,30); }
+		}
+		
+		//subir o mantener el precio y asignarlo a todos los productos.
+		if(increasePrice > 0){
+			loop a over: listadoProducts{
+				actualPrices[a] <- ((100 + increasePrice)/100)*priceFerianteConsumerPromedio[a];
+			}	
+		}else{
+			loop a over: listadoProducts{
+				actualPrices[a] <- priceFerianteConsumerPromedio[a];
+			}	
+		}
+		
+		write "actualPrices: " + actualPrices;
+		
 	}
 	
 	//predicates for BDI agents
@@ -374,7 +429,7 @@ global{
 
 }
 
-species scheduler schedules:shuffle(farmers)+shuffle(feriantes)+shuffle(consumers);
+species scheduler schedules:shuffle(farmers)+shuffle(feriantes)+shuffle(consumers)+insertDB;
 
 //Agente agricultores
 species farmers skills:[moving] control:simple_bdi schedules: []{
@@ -479,6 +534,9 @@ species farmers skills:[moving] control:simple_bdi schedules: []{
 		//Resetear todo sobre terreno
 		terreno.plagaRisk <- rnd_choice([0.85, 0.05, 0.05, 0.05]);
 		terreno.historial_productos <- terreno.historial_productos + terreno.producto_seleccionado; 
+		if(not(used_products contains terreno.producto_seleccionado)){
+			used_products <- used_products + terreno.producto_seleccionado;
+		}
 		terreno.producto_seleccionado <- nil;
 		terreno.start_date <- nil;
 		terreno.end_date <- nil;  
@@ -550,22 +608,18 @@ species feriantes skills:[moving] control:simple_bdi schedules: []{
 						if(mercadoMayoristaVol[a] < initialVol){
 							selling_products[a] <- selling_products[a] + mercadoMayoristaVol[a];
 							mercadoMayoristaVol[a] <- 0;
-							//feriantesVolumenTotal[a] <- feriantesVolumenTotal[a] + selling_products[a];
 						}else{	
 							selling_products[a] <- selling_products[a] + initialVol;
 							mercadoMayoristaVol[a] <- mercadoMayoristaVol[a] - initialVol;
-							//feriantesVolumenTotal[a] <- feriantesVolumenTotal[a] + selling_products[a];
 						}
 					}else{
 						//Obtiene desde el volume_oneFeriante
 						if(mercadoMayoristaVol[a] < volumeOneFeriante[a]){
 							selling_products[a] <- selling_products[a] + mercadoMayoristaVol[a];
 							mercadoMayoristaVol[a] <- 0;
-							//feriantesVolumenTotal[a] <- feriantesVolumenTotal[a] + selling_products[a];
 						}else{	
 							selling_products[a] <- selling_products[a] + volumeOneFeriante[a];
 							mercadoMayoristaVol[a] <- mercadoMayoristaVol[a] - volumeOneFeriante[a];
-							//feriantesVolumenTotal[a] <- feriantesVolumenTotal[a] + selling_products[a];
 						}
 					}
 				}
@@ -636,11 +690,9 @@ species consumers control:simple_bdi schedules:[]{
 					if(a.selling_products[b] < volumeOneConsumer[b]){
 						productos_comprados[b] <- a.selling_products[b];
 						a.selling_products[b] <- 0; 
-						//consumersVolumenTotal[b] <- consumersVolumenTotal[b] + productos_comprados[b];
 					}else{
 						productos_comprados[b] <- volumeOneConsumer[b];
 						a.selling_products[b] <- a.selling_products[b] - volumeOneConsumer[b];
-						//consumersVolumenTotal[b] <- consumersVolumenTotal[b] + productos_comprados[b];
 					}
 				}
 			}
@@ -708,6 +760,12 @@ species comunas {
 	rgb color <- #transparent;
 	aspect base {
 		draw shape color: color border: border;
+	}
+}
+
+species insertDB {
+	reflex addDB{
+		
 	}
 }
 
@@ -783,8 +841,8 @@ experiment agriculture_world type: gui {
 				}
 			}*/
 			
-			
-		   
+			//TODO:
+		   //To save data in a csv file: https://gama-platform.org/wiki/DefiningExportFiles
 		    //para chart display: every 12 cycles
 	   	} /*https://gama-platform.github.io/wiki/LuneraysFlu_step3 VER ESTE EJEMPLOOOOO (chart_display para gráficos) */
 	   	/*https://gama-platform.org/wiki/Statements#permanent ejemplo para chart,
