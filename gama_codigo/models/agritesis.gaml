@@ -66,6 +66,7 @@ global{
 	list<string> used_products <- [];
 	map<int, int> months_sequia <- [];
 	map<int, int> months_helada <- [];
+	map<int, int> months_oladecalor <- [];
 	map<string, int> actualPrices <- [];
 	int totalFerianteValues;
 	
@@ -225,7 +226,7 @@ global{
 		generalRisks <- [int(frostRisk), heatwaveRisk, droughtRisk, 0];
 		add int(frostRisk) at: current_date.month to: months_helada;
 		add droughtRisk at: current_date.month to: months_sequia;
-
+		add heatwaveRisk at: current_date.month to:months_oladecalor;
 	}
 	
 	list<string> finalRisksProduct0; //Riesgo de Plaga 0
@@ -406,6 +407,14 @@ global{
 				actualPrices[a] <- priceFerianteConsumerPromedio[a];
 			}	
 		}
+	}
+	map<int, float> avg_feriantes;
+	reflex generateCSVs when: every(1#cycles){
+		save [mercadoMayoristaVolumenTotal] to: "Mercado_Mayorista_total.csv" type: "csv";
+		loop mes from: 1 to: 12 step: 1 {
+			add feriantes mean_of each.ganancias[mes] at: mes to: avg_feriantes;
+		}
+		save [avg_feriantes] to: "Avg_Feriante.csv" type: "csv";
 	}
 	
 	//predicates for BDI agents
@@ -821,12 +830,21 @@ experiment agriculture_world type: gui {
 		    monitor "MM Total" value: mercadoMayoristaVolumenTotal;
 		    monitor "FerianteTotal" value: feriantesVolumenTotal;
 		    monitor "ConsumerTotal" value: consumersVolumenTotal;
+		    monitor "Heladas" value: months_helada;
+		    monitor "Sequias" value: months_sequia;
+		    monitor "Olas de calor" value: months_oladecalor;
+		    monitor "prueba" value: feriantes mean_of(each.ganancias);
 		    
-			display "graficos1" refresh: every(1#cycles){
+			/*display "graficos1" refresh: every(1#cycles){
 				chart "Mercado Mayorista Total" type: histogram{
 					datalist legend: listadoProducts value: mercadoMayoristaVolumenTotal collect (each);
 				}
 			}
+			display "graficos2" refresh: every(1#cycles){
+				chart "Avg feriante" type: series{
+					data "average ganancias" value: feriantes mean_of each.ganancias color: #green;
+				}
+			}*/
 			
 			/*display "graficos2" refresh: every(1#cycles){
 				chart "Mercado Mayorista" type: histogram{
@@ -842,11 +860,5 @@ experiment agriculture_world type: gui {
 					//datalist legend: feriantes collect (each.selling_products_list) value: feriantes collect (each.selling_products);
 				}
 			}*/
-			
-			//TODO:
-		   //To save data in a csv file: https://gama-platform.org/wiki/DefiningExportFiles
-		    //para chart display: every 12 cycles
-	   	} /*https://gama-platform.github.io/wiki/LuneraysFlu_step3 VER ESTE EJEMPLOOOOO (chart_display para gráficos) */
-	   	/*https://gama-platform.org/wiki/Statements#permanent ejemplo para chart,
-	   	 * https://gama-platform.org/wiki/Statements#data */
+	   	} 
 }  
