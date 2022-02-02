@@ -68,6 +68,7 @@ global{
 	map<int, int> months_helada <- [];
 	map<int, int> months_oladecalor <- [];
 	map<string, int> actualPrices <- [];
+	map<string, int> percentPrices <- [];
 	int totalFerianteValues;
 	
 	
@@ -407,14 +408,21 @@ global{
 				actualPrices[a] <- priceFerianteConsumerPromedio[a];
 			}	
 		}
+		add increasePrice at: current_month to: percentPrices;
 	}
 	map<int, float> avg_feriantes;
 	reflex generateCSVs when: every(1#cycles){
-		save [mercadoMayoristaVolumenTotal] to: "Mercado_Mayorista_total.csv" type: "csv";
 		loop mes from: 1 to: 12 step: 1 {
 			add feriantes mean_of each.ganancias[mes] at: mes to: avg_feriantes;
 		}
-		save [avg_feriantes] to: "Avg_Feriante.csv" type: "csv";
+		save [avg_feriantes] to: "/resultados/experimento1/"+current_month+current_date.year+"/Avg_ganancias_Feriante_"+current_month+current_date.year+".csv" type: "csv";
+		save [mercadoMayoristaVolumenTotal] to: "/resultados/experimento1/"+current_month+current_date.year+"/Mercado_Mayorista_total_"+current_month+current_date.year+".csv" type: "csv";
+		save [feriantesVolumenTotal] to: "/resultados/experimento1/"+current_month+current_date.year+"/Feriantes_total_"+current_month+current_date.year+".csv" type: "csv";
+		save [consumersVolumenTotal] to: "/resultados/experimento1/"+current_month+current_date.year+"/Consumidores_total_"+current_month+current_date.year+".csv" type: "csv";
+		save [percentPrices] to: "/resultados/experimento1/"+current_month+current_date.year+"/Subida_precios_"+current_month+current_date.year+".csv" type: "csv";
+		save [months_helada] to: "/resultados/experimento1/"+current_month+current_date.year+"/MesesHeladas_"+current_month+current_date.year+".csv" type: "csv";
+		save [months_sequia] to: "/resultados/experimento1/"+current_month+current_date.year+"/MesesSequia_"+current_month+current_date.year+".csv" type: "csv";
+		save [months_oladecalor] to: "/resultados/experimento1/"+current_month+current_date.year+"/MesesOlaCalor_"+current_month+current_date.year+".csv" type: "csv";
 	}
 	
 	//predicates for BDI agents
@@ -833,32 +841,12 @@ experiment agriculture_world type: gui {
 		    monitor "Heladas" value: months_helada;
 		    monitor "Sequias" value: months_sequia;
 		    monitor "Olas de calor" value: months_oladecalor;
-		    monitor "prueba" value: feriantes mean_of(each.ganancias);
-		    
-			/*display "graficos1" refresh: every(1#cycles){
+			monitor "Subida de precios" value: percentPrices;
+			
+			display "graficos1" refresh: every(1#cycles){
 				chart "Mercado Mayorista Total" type: histogram{
 					datalist legend: listadoProducts value: mercadoMayoristaVolumenTotal collect (each);
 				}
-			}
-			display "graficos2" refresh: every(1#cycles){
-				chart "Avg feriante" type: series{
-					data "average ganancias" value: feriantes mean_of each.ganancias color: #green;
-				}
-			}*/
-			
-			/*display "graficos2" refresh: every(1#cycles){
-				chart "Mercado Mayorista" type: histogram{
-					datalist legend: listadoProducts value: mercadoMayoristaVol collect (each);
-				}
-			}
-			
-			display "graficos3" refresh: every(1#cycles){
-				chart "Compra feriantes acumulada" type: histogram{
-					loop i from: 0 to: 20 step: 1 {
-					 	data string(listadoProducts[i]) value: feriantes collect ((each.selling_products_list contains listadoProducts[i]) ? each.selling_products[listadoProducts[i]] : 0);
-					}
-					//datalist legend: feriantes collect (each.selling_products_list) value: feriantes collect (each.selling_products);
-				}
-			}*/
+			}	
 	   	} 
 }  

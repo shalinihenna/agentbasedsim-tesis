@@ -3,14 +3,7 @@ library(tidyr)
 library(ggplot2)
 
 #Lectura del csv
-mercadoMayoristaTotal <- read.csv('C:/Users/shali/OneDrive/Escritorio/GAMA_1.8.1/tesis/gama_codigo/models/Mercado_Mayorista_total.csv', sep=";")
-
-#Sección para procesar el archivo y convertirlo en dataframe
-#hola <- strsplit(mercadoMayoristaTotal[[1]], split="\:\:")
-#mercadoMayoristaTotal[1] %>% unnest_wider(mercadoMayoristaTotal[1])
-#map\\(\\[|\\]\\)|\\::|\\,
-
-
+mercadoMayoristaTotal <- read.csv('C:/Users/shali/OneDrive/Escritorio/GAMA_1.8.1/tesis/gama_codigo/models/Mercado_Mayorista_total_prueba.csv', sep=";")
 
 #División de unidades y kilos para generar dos graficos
 unidades <- c("Ajo", "Alcachofa","Apio","BrÃ³coli","Brócoli","Choclo","Coliflor","Lechuga","MelÃ³n","Melón","Pepino ensalada","Repollo","Sandia","Zapallo italiano")
