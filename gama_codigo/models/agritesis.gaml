@@ -169,28 +169,28 @@ global{
 		'Febrero'::0,
 		'Marzo'::0,
 		'Abril'::0,
-		'Mayo'::1,
-		'Junio'::1,
-		'Julio'::1,
-		'Agosto'::1,
+		'Mayo'::3,
+		'Junio'::3,
+		'Julio'::3,
+		'Agosto'::3,
 		'Septiembre'::0,
 		'Octubre'::0,
 		'Noviembre'::0,
 		'Diciembre'::0
 	];
 	map<string, int> list_droughtRisks <- [
-		'Enero'::2,
-		'Febrero'::3,
-		'Marzo'::2,
-		'Abril'::1,
-		'Mayo'::1,
+		'Enero'::1,
+		'Febrero'::2,
+		'Marzo'::1,
+		'Abril'::0,
+		'Mayo'::0,
 		'Junio'::0,
-		'Julio'::2,
-		'Agosto'::1,
-		'Septiembre'::2,
-		'Octubre'::2,
-		'Noviembre'::3,
-		'Diciembre'::3
+		'Julio'::0,
+		'Agosto'::0,
+		'Septiembre'::0,
+		'Octubre'::1,
+		'Noviembre'::1,
+		'Diciembre'::1
 	];
 	
 	reflex climateRisks{
@@ -446,14 +446,14 @@ global{
 		loop mes from: 1 to: 12 step: 1 {
 			add feriantes mean_of each.ganancias[mes] at: mes to: avg_feriantes;
 		}
-		save [avg_feriantes] to: "/resultados/experimento2/"+current_month+current_date.year+"/Avg_ganancias_Feriante_"+current_month+current_date.year+".csv" type: "csv";
-		save [mercadoMayoristaVolumenTotal] to: "/resultados/experimento2/"+current_month+current_date.year+"/Mercado_Mayorista_total_"+current_month+current_date.year+".csv" type: "csv";
-		save [feriantesVolumenTotal] to: "/resultados/experimento2/"+current_month+current_date.year+"/Feriantes_total_"+current_month+current_date.year+".csv" type: "csv";
-		save [consumersVolumenTotal] to: "/resultados/experimento2/"+current_month+current_date.year+"/Consumidores_total_"+current_month+current_date.year+".csv" type: "csv";
-		save [percentPrices] to: "/resultados/experimento2/"+current_month+current_date.year+"/Subida_precios_"+current_month+current_date.year+".csv" type: "csv";
-		save [months_helada] to: "/resultados/experimento2/"+current_month+current_date.year+"/MesesHeladas_"+current_month+current_date.year+".csv" type: "csv";
-		save [months_sequia] to: "/resultados/experimento2/"+current_month+current_date.year+"/MesesSequia_"+current_month+current_date.year+".csv" type: "csv";
-		save [months_oladecalor] to: "/resultados/experimento2/"+current_month+current_date.year+"/MesesOlaCalor_"+current_month+current_date.year+".csv" type: "csv";
+		save [avg_feriantes] to: "/resultados/experimento3/"+current_month+current_date.year+"/Avg_ganancias_Feriante_"+current_month+current_date.year+".csv" type: "csv";
+		save [mercadoMayoristaVolumenTotal] to: "/resultados/experimento3/"+current_month+current_date.year+"/Mercado_Mayorista_total_"+current_month+current_date.year+".csv" type: "csv";
+		save [feriantesVolumenTotal] to: "/resultados/experimento3/"+current_month+current_date.year+"/Feriantes_total_"+current_month+current_date.year+".csv" type: "csv";
+		save [consumersVolumenTotal] to: "/resultados/experimento3/"+current_month+current_date.year+"/Consumidores_total_"+current_month+current_date.year+".csv" type: "csv";
+		save [percentPrices] to: "/resultados/experimento3/"+current_month+current_date.year+"/Subida_precios_"+current_month+current_date.year+".csv" type: "csv";
+		save [months_helada] to: "/resultados/experimento3/"+current_month+current_date.year+"/MesesHeladas_"+current_month+current_date.year+".csv" type: "csv";
+		save [months_sequia] to: "/resultados/experimento3/"+current_month+current_date.year+"/MesesSequia_"+current_month+current_date.year+".csv" type: "csv";
+		save [months_oladecalor] to: "/resultados/experimento3/"+current_month+current_date.year+"/MesesOlaCalor_"+current_month+current_date.year+".csv" type: "csv";
 	}
 	
 	//predicates for BDI agents
