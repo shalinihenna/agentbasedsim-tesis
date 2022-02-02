@@ -391,7 +391,7 @@ global{
 		//switch con todos los rangos
 		int increasePrice;
 		switch medians{
-			match_one [[1,2],[2,1]] { increasePrice <- rnd(5,10); }
+			match_one [[1,2],[2,1],[2,0],[0,2]] { increasePrice <- rnd(5,10); }
 			match_one [[1,3],[3,1]] { increasePrice <- rnd(10,15); }
 			match_one [[2,3],[3,2]] { increasePrice <- rnd(15,20); }
 			match_one [[2,2],[3,0],[0,3]] { increasePrice <- rnd(10,20); }
