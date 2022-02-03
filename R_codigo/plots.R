@@ -52,5 +52,20 @@ for (expe in c(1,2,3,4)){
 }
 
 
+for (expe in c(1,2,3,4)){
+  avg_fer <- read.csv(paste0('C:/Users/shali/OneDrive/Escritorio/GAMA_1.8.1/tesis/gama_codigo/models/resultados/finales/exp',expe,'-finales/Avg_ganancias_Feriante_Mayo2021.csv'), sep=";")
+  prices <- read.csv(paste0('C:/Users/shali/OneDrive/Escritorio/GAMA_1.8.1/tesis/gama_codigo/models/resultados/finales/exp',expe,'-finales/Subida_precios_Abril2021.csv'), sep=";")
+  
+  prices$Mes <- factor(prices$Mes, levels=prices$Mes)
+  avg_fer$Mes <- factor(avg_fer$Mes, levels=avg_fer$Mes)
+  
+  ggplot(prices, aes(x=Mes,y=percentPrices, group = 1)) + geom_line(color="red") + geom_point() + xlab("Mes") + ylab("Porcentaje de subida de precios [%]")
+  ggsave(paste0('C:/Users/shali/OneDrive/Escritorio/GAMA_1.8.1/tesis/gama_codigo/models/resultados/finales/exp',expe,'-finales/prices.png'), width = 9, height = 7)
+  ggplot(avg_fer, aes(x=Mes, y=avg_feriantes, group = 1)) + geom_line(color="blue") + geom_point() + xlab("Mes") + ylab("Precios [CLP]")
+  ggsave(paste0('C:/Users/shali/OneDrive/Escritorio/GAMA_1.8.1/tesis/gama_codigo/models/resultados/finales/exp',expe,'-finales/avg_ganancias_feriantes.png'), width = 9, height = 7)
+}
+
+
+
 
 
