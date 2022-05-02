@@ -71,6 +71,9 @@ global{
 	map<string, int> percentPrices <- [];
 	int totalFerianteValues;
 	
+	//nuevas variables para consumidor
+	map<string, float> volumeConsumer <- []; 
+	map<string, float> probabilityToConsume <- [];
 	
 	//Variables totales para los gráficos
 	map<string, int> mercadoMayoristaVolumenTotal <- []; 
@@ -139,7 +142,8 @@ global{
 	 	write "Agricultores listo";
 		create feriantes number:people['number_of_feriantes'];
 		write "Feriantes listo";
-		create consumers number:people['number_of_consumers'];
+		//create consumers number:people['number_of_consumers'];
+		create consumers number: 1;
 		write "Consumidores listo";
 		create calculateTime number:1;
 		
@@ -704,6 +708,7 @@ species consumers control:simple_bdi schedules:[]{
 	//int kilos_comprados <- 0; //puede no ser necesario 
 	list<string> products_a_comprar;
 	map<string,int> productos_comprados <- [];
+	int integrantes;
 	
 	init{
 		self.location <- {92455.63984443404, 57339.11668546737, 0.0};
@@ -712,14 +717,14 @@ species consumers control:simple_bdi schedules:[]{
 		feria <- one_of(f);
 		feria.personas <- feria.personas - 1;
 		
-		//Assign inicialmente 10 o menos feriantes random
+		//Assign inicialmente 10 o menos feriantes random dentro de la misma feria a la cual fue asignado el consumidor
 		//list<feriantes> fer <- feriantes where(each.feria = feria);
-		puestos_de_feria <- sample(feria.feriantes, 10, false);
-		/*list<feriantes> fer <- feriantes of_generic_species feriantes;
+		//list<feriantes> fer <- feriantes of_generic_species feriantes;
+		puestos_de_feria <- sample(feria.feriantes, 10, false); //TODO: variar este valor a 20
 		
-		//Assign productos a la venta de ese mes que quiere comprar
-		products_a_comprar <- sample(available_products,10, false);
-		*/
+		//Definir tipo de hogar -- cantidad de integrantes
+		integrantes <- rnd_choice([1::0.16, 2::0.27, 3::0.24, 4::0.19, 5::0.14]);
+		
 		//Deseo inicial y único
 		do add_desire(comprar_feriante);
 	}
@@ -735,7 +740,16 @@ species consumers control:simple_bdi schedules:[]{
 		
 		//Reset productos
 		//TODO: Linea a cambiar para probabilidad de productos
-		products_a_comprar <- sample(available_products,10, false);
+		
+		//hacer un for de los available_products y dentro preguntar por la probabilidad obtenida desde la bd si se lo lleva o no
+		loop p over:available_products{
+			bool prob <- flip(probabilityToConsume[p]);
+			if prob{
+				//agregar a la lista de productos a comprar
+				products_a_comprar <- products_a_comprar + p;
+			}
+		} 
+		//products_a_comprar <- sample(available_products,10, false);
 		productos_comprados <- [];
 		loop prod over:products_a_comprar{
 			add 0 at:prod to: productos_comprados;
@@ -846,6 +860,9 @@ species agentDB skills:[SQLSKILL]{
 				add c[3] at: c[0] to: months_venta;
 				add int(c[21]) at: c[0] to: volumeOneFeriante;
 				add int(c[22]) at: c[0] to: volumeOneConsumer;
+				add float(c[23]) with_precision 2 at: c[0] to: probabilityToConsume;
+				add float(c[24]) with_precision 1 at: c[0] to: volumeConsumer;
+				
 			}
 			/*write "days cosecha: " + days_cosecha;  
 			write "units: " + units;
@@ -853,7 +870,9 @@ species agentDB skills:[SQLSKILL]{
 			write "listadoProducts: " + listadoProducts;
 			write "months_venta: " + months_venta;
 			write "volumeOneFeriante: " + volumeOneFeriante;
-			write "volumeOneConsumer: " + volumeOneConsumer;*/
+			write "volumeOneConsumer: " + volumeOneConsumer;
+			write "volumeConsumer: " + volumeConsumer;
+			write "probability: " + probabilityToConsume;*/
 			
 		}else{
 			write "Problemas de conexión con la BD.";
@@ -892,5 +911,12 @@ experiment agriculture_world type: gui {
 					datalist legend: listadoProducts value: mercadoMayoristaVolumenTotal collect (each);
 				}
 			}	
+			
+			/*display "histograma"{
+				chart "Integrantes de familia" type: histogram{
+					 datalist (distribution_of(consumers collect each.integrantes) at "legend") 
+			            value:(distribution_of(consumers collect each.integrantes) at "values");      
+				}
+			}*/	
 	   	} 
 }  
