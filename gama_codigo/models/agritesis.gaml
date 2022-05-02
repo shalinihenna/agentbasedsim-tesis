@@ -165,33 +165,34 @@ global{
 			available_products <- string(prods2[0]) split_with ',';  
 		}
 	}
+	//Heladas y Sequía: valores del experimento 1 
 	map<string, int> list_frostRisks <- [
 		'Enero'::0,
 		'Febrero'::0,
 		'Marzo'::0,
 		'Abril'::0,
-		'Mayo'::3,
-		'Junio'::3,
-		'Julio'::3,
-		'Agosto'::3,
+		'Mayo'::0,
+		'Junio'::1,
+		'Julio'::1,
+		'Agosto'::0,
 		'Septiembre'::0,
 		'Octubre'::0,
 		'Noviembre'::0,
 		'Diciembre'::0
 	];
 	map<string, int> list_droughtRisks <- [
-		'Enero'::2,
-		'Febrero'::3,
-		'Marzo'::2,
-		'Abril'::1,
-		'Mayo'::1,
+		'Enero'::0,
+		'Febrero'::0,
+		'Marzo'::0,
+		'Abril'::0,
+		'Mayo'::2,
 		'Junio'::0,
-		'Julio'::2,
-		'Agosto'::1,
-		'Septiembre'::2,
-		'Octubre'::2,
-		'Noviembre'::3,
-		'Diciembre'::3
+		'Julio'::0,
+		'Agosto'::2,
+		'Septiembre'::3,
+		'Octubre'::1,
+		'Noviembre'::1,
+		'Diciembre'::0
 	];
 	float timenow;
 	reflex climateRisks{
@@ -448,14 +449,15 @@ global{
 		loop mes from: 1 to: 12 step: 1 {
 			add feriantes mean_of each.ganancias[mes] at: mes to: avg_feriantes;
 		}
-		save [avg_feriantes] to: "/resultados/experimento5/"+current_month+current_date.year+"/Avg_ganancias_Feriante_"+current_month+current_date.year+".csv" type: "csv";
-		save [mercadoMayoristaVolumenTotal] to: "/resultados/experimento5/"+current_month+current_date.year+"/Mercado_Mayorista_total_"+current_month+current_date.year+".csv" type: "csv";
-		save [feriantesVolumenTotal] to: "/resultados/experimento5/"+current_month+current_date.year+"/Feriantes_total_"+current_month+current_date.year+".csv" type: "csv";
-		save [consumersVolumenTotal] to: "/resultados/experimento5/"+current_month+current_date.year+"/Consumidores_total_"+current_month+current_date.year+".csv" type: "csv";
-		save [percentPrices] to: "/resultados/experimento5/"+current_month+current_date.year+"/Subida_precios_"+current_month+current_date.year+".csv" type: "csv";
-		save [months_helada] to: "/resultados/experimento5/"+current_month+current_date.year+"/MesesHeladas_"+current_month+current_date.year+".csv" type: "csv";
-		save [months_sequia] to: "/resultados/experimento5/"+current_month+current_date.year+"/MesesSequia_"+current_month+current_date.year+".csv" type: "csv";
-		save [months_oladecalor] to: "/resultados/experimento5/"+current_month+current_date.year+"/MesesOlaCalor_"+current_month+current_date.year+".csv" type: "csv";
+		/*save [avg_feriantes] to: "/resultados/resultados-nuevos/"+current_month+current_date.year+"/Avg_ganancias_Feriante_"+current_month+current_date.year+".csv" type: "csv";
+		save [mercadoMayoristaVolumenTotal] to: "/resultados/resultados-nuevos/"+current_month+current_date.year+"/Mercado_Mayorista_total_"+current_month+current_date.year+".csv" type: "csv";
+		save [feriantesVolumenTotal] to: "/resultados/resultados-nuevos/"+current_month+current_date.year+"/Feriantes_total_"+current_month+current_date.year+".csv" type: "csv";
+		save [consumersVolumenTotal] to: "/resultados/resultados-nuevos/"+current_month+current_date.year+"/Consumidores_total_"+current_month+current_date.year+".csv" type: "csv";
+		save [percentPrices] to: "/resultados/resultados-nuevos/"+current_month+current_date.year+"/Subida_precios_"+current_month+current_date.year+".csv" type: "csv";
+		save [months_helada] to: "/resultados/resultados-nuevos/"+current_month+current_date.year+"/MesesHeladas_"+current_month+current_date.year+".csv" type: "csv";
+		save [months_sequia] to: "/resultados/resultados-nuevos/"+current_month+current_date.year+"/MesesSequia_"+current_month+current_date.year+".csv" type: "csv";
+		save [months_oladecalor] to: "/resultados/resultados-nuevos/"+current_month+current_date.year+"/MesesOlaCalor_"+current_month+current_date.year+".csv" type: "csv";
+	*/
 	}
 	
 	//predicates for BDI agents
@@ -629,6 +631,7 @@ species feriantes skills:[moving] control:simple_bdi schedules: []{
 		list<ferias> f <- ferias where (each.puestos_vacios > 0);
 		feria <- one_of(f);
 		feria.puestos_vacios <- feria.puestos_vacios - 1;
+		feria.feriantes <- feria.feriantes + self;
 		self.location <- any_location_in(feria);
 		
 		//Assign productos
@@ -695,7 +698,7 @@ species feriantes skills:[moving] control:simple_bdi schedules: []{
 
 species consumers control:simple_bdi schedules:[]{
 	rgb my_color <-  colors['consumer_color'];
-	//ferias feria;
+	ferias feria;
 	list<feriantes> puestos_de_feria;
 	int presupuesto;
 	//int kilos_comprados <- 0; //puede no ser necesario 
@@ -705,14 +708,14 @@ species consumers control:simple_bdi schedules:[]{
 	init{
 		self.location <- {92455.63984443404, 57339.11668546737, 0.0};
 		//Assign feria (permanente)
-		/*list<ferias> f <- ferias where(each.personas > 0);
+		list<ferias> f <- ferias where(each.personas > 0);
 		feria <- one_of(f);
-		feria.personas <- feria.personas - 1;*/
+		feria.personas <- feria.personas - 1;
 		
 		//Assign inicialmente 10 o menos feriantes random
 		//list<feriantes> fer <- feriantes where(each.feria = feria);
+		puestos_de_feria <- sample(feria.feriantes, 10, false);
 		/*list<feriantes> fer <- feriantes of_generic_species feriantes;
-		puestos_de_feria <- sample(fer, 10, false);
 		
 		//Assign productos a la venta de ese mes que quiere comprar
 		products_a_comprar <- sample(available_products,10, false);
@@ -726,10 +729,12 @@ species consumers control:simple_bdi schedules:[]{
 		presupuesto <- rnd(25000,45000,1000);
 		
 		//Reset puestos de feria
-		list<feriantes> fer <- feriantes of_generic_species feriantes;
-		puestos_de_feria <- sample(fer, 10, false);
+		//list<feriantes> fer <- feriantes of_generic_species feriantes;
+		//puestos_de_feria <- sample(fer, 10, false);
+		puestos_de_feria <- sample(feria.feriantes, 10, false);
 		
 		//Reset productos
+		//TODO: Linea a cambiar para probabilidad de productos
 		products_a_comprar <- sample(available_products,10, false);
 		productos_comprados <- [];
 		loop prod over:products_a_comprar{
@@ -804,6 +809,7 @@ species ferias {
 	int personas; 
 	string dias_puesto;
 	int days_puesto;
+	list<feriantes> feriantes;
 	aspect base{
 		draw shape color: color;
 	}
