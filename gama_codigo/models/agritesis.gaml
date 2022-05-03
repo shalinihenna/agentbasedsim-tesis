@@ -78,7 +78,7 @@ global{
 	//Variables totales para los gráficos
 	map<string, int> mercadoMayoristaVolumenTotal <- []; 
 	map<string, int> feriantesVolumenTotal <- [];
-	map<string, int> consumersVolumenTotal <- [];
+	map<string, float> consumersVolumenTotal <- [];
 	
 	//Cantidad de agentes
 	map<string, int> people <- [
@@ -704,10 +704,10 @@ species consumers control:simple_bdi schedules:[]{
 	rgb my_color <-  colors['consumer_color'];
 	ferias feria;
 	list<feriantes> puestos_de_feria;
-	int presupuesto;
+	float presupuesto;
 	//int kilos_comprados <- 0; //puede no ser necesario 
 	list<string> products_a_comprar;
-	map<string,int> productos_comprados <- [];
+	map<string,float> productos_comprados <- [];
 	int integrantes;
 	
 	init{
@@ -720,7 +720,7 @@ species consumers control:simple_bdi schedules:[]{
 		//Assign inicialmente 10 o menos feriantes random dentro de la misma feria a la cual fue asignado el consumidor
 		//list<feriantes> fer <- feriantes where(each.feria = feria);
 		//list<feriantes> fer <- feriantes of_generic_species feriantes;
-		puestos_de_feria <- sample(feria.feriantes, 10, false); //TODO: variar este valor a 20
+		puestos_de_feria <- sample(feria.feriantes, 20, false); //TODO: variar este valor a 20
 		
 		//Definir tipo de hogar -- cantidad de integrantes
 		integrantes <- rnd_choice([1::0.16, 2::0.27, 3::0.24, 4::0.19, 5::0.14]);
@@ -731,7 +731,7 @@ species consumers control:simple_bdi schedules:[]{
 	
 	reflex monthlyReset{
 		//Reset presupuesto
-		presupuesto <- rnd(25000,45000,1000);
+		presupuesto <- rnd(25000.0,45000.0,1000.0);
 		
 		//Reset puestos de feria
 		//list<feriantes> fer <- feriantes of_generic_species feriantes;
@@ -739,9 +739,8 @@ species consumers control:simple_bdi schedules:[]{
 		puestos_de_feria <- sample(feria.feriantes, 10, false);
 		
 		//Reset productos
-		//TODO: Linea a cambiar para probabilidad de productos
-		
 		//hacer un for de los available_products y dentro preguntar por la probabilidad obtenida desde la bd si se lo lleva o no
+		products_a_comprar <- [];
 		loop p over:available_products{
 			bool prob <- flip(probabilityToConsume[p]);
 			if prob{
@@ -759,22 +758,29 @@ species consumers control:simple_bdi schedules:[]{
 	plan compra_a_feriantes intention: comprar_feriante{
 		loop a over:puestos_de_feria{
 			loop b over:products_a_comprar{
-				int priceToPay <- 0;
+				float priceToPay <- 0.0;
 				if(presupuesto <= 0){
 					break;
 				}
 				/*Que no se haya comprado ese producto, que el feriante lo venda y que al feriante le quede stock de ese producto */
+				float volumeToBuy;
 				if(productos_comprados[b] = 0 and (a.selling_products_list contains b) and (a.selling_products[b] > 0)){ 
-					if(a.selling_products[b] < volumeOneConsumer[b]){
+					volumeToBuy <- volumeConsumer[b] * integrantes;
+					if (units[b] = "unidades"){
+						volumeToBuy <- ceil(volumeToBuy);
+					}
+					write "volumeToBuy: " + b + " -- " + volumeToBuy;
+					if(a.selling_products[b] < volumeToBuy){
 						productos_comprados[b] <- a.selling_products[b];
 						a.selling_products[b] <- 0; 
 					}else{
-						productos_comprados[b] <- volumeOneConsumer[b];
-						a.selling_products[b] <- a.selling_products[b] - volumeOneConsumer[b];
+						productos_comprados[b] <- volumeToBuy;
+						a.selling_products[b] <- a.selling_products[b] - volumeToBuy;
 					}
+
 					priceToPay <- productos_comprados[b]*actualPrices[b];
-					a.ganancias[current_date.month] <- a.ganancias[current_date.month] + priceToPay;
-					presupuesto <- presupuesto - priceToPay;
+					a.ganancias[current_date.month] <- a.ganancias[current_date.month] + round(priceToPay);
+					presupuesto <- presupuesto - round(priceToPay);
 				}
 			}
 			if(presupuesto <= 0){
