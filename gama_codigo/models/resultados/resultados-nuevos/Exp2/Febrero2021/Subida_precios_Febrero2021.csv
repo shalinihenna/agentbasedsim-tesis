@@ -1,0 +1,2 @@
+percentPrices
+map(['Abril'::0,'Mayo'::0,'Junio'::0,'Julio'::0,'Agosto'::0,'Septiembre'::10,'Octubre'::7,'Noviembre'::8,'Diciembre'::10,'Enero'::17,'Febrero'::14])
