@@ -142,8 +142,7 @@ global{
 	 	write "Agricultores listo";
 		create feriantes number:people['number_of_feriantes'];
 		write "Feriantes listo";
-		//create consumers number:people['number_of_consumers'];
-		create consumers number: 1;
+		create consumers number:people['number_of_consumers'];
 		write "Consumidores listo";
 		create calculateTime number:1;
 		
@@ -175,28 +174,28 @@ global{
 		'Febrero'::0,
 		'Marzo'::0,
 		'Abril'::0,
-		'Mayo'::0,
-		'Junio'::1,
-		'Julio'::1,
-		'Agosto'::0,
+		'Mayo'::3,
+		'Junio'::3,
+		'Julio'::3,
+		'Agosto'::3,
 		'Septiembre'::0,
 		'Octubre'::0,
 		'Noviembre'::0,
 		'Diciembre'::0
 	];
 	map<string, int> list_droughtRisks <- [
-		'Enero'::0,
-		'Febrero'::0,
-		'Marzo'::0,
-		'Abril'::0,
-		'Mayo'::2,
+		'Enero'::2,
+		'Febrero'::3,
+		'Marzo'::2,
+		'Abril'::1,
+		'Mayo'::1,
 		'Junio'::0,
-		'Julio'::0,
-		'Agosto'::2,
-		'Septiembre'::3,
-		'Octubre'::1,
-		'Noviembre'::1,
-		'Diciembre'::0
+		'Julio'::2,
+		'Agosto'::1,
+		'Septiembre'::2,
+		'Octubre'::2,
+		'Noviembre'::3,
+		'Diciembre'::3
 	];
 	float timenow;
 	reflex climateRisks{
@@ -453,15 +452,14 @@ global{
 		loop mes from: 1 to: 12 step: 1 {
 			add feriantes mean_of each.ganancias[mes] at: mes to: avg_feriantes;
 		}
-		/*save [avg_feriantes] to: "/resultados/resultados-nuevos/"+current_month+current_date.year+"/Avg_ganancias_Feriante_"+current_month+current_date.year+".csv" type: "csv";
-		save [mercadoMayoristaVolumenTotal] to: "/resultados/resultados-nuevos/"+current_month+current_date.year+"/Mercado_Mayorista_total_"+current_month+current_date.year+".csv" type: "csv";
-		save [feriantesVolumenTotal] to: "/resultados/resultados-nuevos/"+current_month+current_date.year+"/Feriantes_total_"+current_month+current_date.year+".csv" type: "csv";
-		save [consumersVolumenTotal] to: "/resultados/resultados-nuevos/"+current_month+current_date.year+"/Consumidores_total_"+current_month+current_date.year+".csv" type: "csv";
-		save [percentPrices] to: "/resultados/resultados-nuevos/"+current_month+current_date.year+"/Subida_precios_"+current_month+current_date.year+".csv" type: "csv";
-		save [months_helada] to: "/resultados/resultados-nuevos/"+current_month+current_date.year+"/MesesHeladas_"+current_month+current_date.year+".csv" type: "csv";
-		save [months_sequia] to: "/resultados/resultados-nuevos/"+current_month+current_date.year+"/MesesSequia_"+current_month+current_date.year+".csv" type: "csv";
-		save [months_oladecalor] to: "/resultados/resultados-nuevos/"+current_month+current_date.year+"/MesesOlaCalor_"+current_month+current_date.year+".csv" type: "csv";
-	*/
+		save [avg_feriantes] to: "/resultados/resultados-nuevos/Exp4/"+current_month+current_date.year+"/Avg_ganancias_Feriante_"+current_month+current_date.year+".csv" type: "csv";
+		save [mercadoMayoristaVolumenTotal] to: "/resultados/resultados-nuevos/Exp4/"+current_month+current_date.year+"/Mercado_Mayorista_total_"+current_month+current_date.year+".csv" type: "csv";
+		save [feriantesVolumenTotal] to: "/resultados/resultados-nuevos/Exp4/"+current_month+current_date.year+"/Feriantes_total_"+current_month+current_date.year+".csv" type: "csv";
+		save [consumersVolumenTotal] to: "/resultados/resultados-nuevos/Exp4/"+current_month+current_date.year+"/Consumidores_total_"+current_month+current_date.year+".csv" type: "csv";
+		save [percentPrices] to: "/resultados/resultados-nuevos/Exp4/"+current_month+current_date.year+"/Subida_precios_"+current_month+current_date.year+".csv" type: "csv";
+		save [months_helada] to: "/resultados/resultados-nuevos/Exp4/"+current_month+current_date.year+"/MesesHeladas_"+current_month+current_date.year+".csv" type: "csv";
+		save [months_sequia] to: "/resultados/resultados-nuevos/Exp4/"+current_month+current_date.year+"/MesesSequia_"+current_month+current_date.year+".csv" type: "csv";
+		save [months_oladecalor] to: "/resultados/resultados-nuevos/Exp4/"+current_month+current_date.year+"/MesesOlaCalor_"+current_month+current_date.year+".csv" type: "csv";
 	}
 	
 	//predicates for BDI agents
@@ -736,7 +734,7 @@ species consumers control:simple_bdi schedules:[]{
 		//Reset puestos de feria
 		//list<feriantes> fer <- feriantes of_generic_species feriantes;
 		//puestos_de_feria <- sample(fer, 10, false);
-		puestos_de_feria <- sample(feria.feriantes, 10, false);
+		puestos_de_feria <- sample(feria.feriantes, 20, false);
 		
 		//Reset productos
 		//hacer un for de los available_products y dentro preguntar por la probabilidad obtenida desde la bd si se lo lleva o no
@@ -769,7 +767,7 @@ species consumers control:simple_bdi schedules:[]{
 					if (units[b] = "unidades"){
 						volumeToBuy <- ceil(volumeToBuy);
 					}
-					write "volumeToBuy: " + b + " -- " + volumeToBuy;
+
 					if(a.selling_products[b] < volumeToBuy){
 						productos_comprados[b] <- a.selling_products[b];
 						a.selling_products[b] <- 0; 
@@ -918,11 +916,11 @@ experiment agriculture_world type: gui {
 				}
 			}	
 			
-			/*display "histograma"{
+			display "histograma"{
 				chart "Integrantes de familia" type: histogram{
 					 datalist (distribution_of(consumers collect each.integrantes) at "legend") 
 			            value:(distribution_of(consumers collect each.integrantes) at "values");      
 				}
-			}*/	
+			}	
 	   	} 
 }  
