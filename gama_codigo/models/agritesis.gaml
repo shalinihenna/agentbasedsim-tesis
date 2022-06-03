@@ -11,7 +11,7 @@ model agritesis
 
 /*Características del mundo */
 global{
-	/*Connection to postgres database */
+	//Parámetros para conexión a la base de datos
 	map<string, string>  POSTGRES <- [
 	     'host'::'localhost',
 	     'dbtype'::'postgres',
@@ -36,49 +36,51 @@ global{
 		12::'Diciembre'
 	];
 	
-	//shp files
+	//Listado de shapefiles a cargar
 	map<string, file> shpfiles <- [
 		'comunas_shp'::file("../includes/limite-comunal.shp"),
 		'terrenos_shp'::file("../includes/terrenos-agricolas.shp"),
 		'ferias_shp'::file("../includes/Ferias Libres (RM) 2.shp")
 	];
+	//Shapefile de fondo, el que se utiliza de base
 	geometry shape <- envelope(shpfiles['comunas_shp']);
 		
-	list<list> products <- [];
-	map<string, int> days_cosecha <- [];
-	map<string, string> units <- [];
-	map<string, int> production <- [];
-	date starting_date <- date([2020,3]);
-	date current_date <- date([2020,3]);
-	float step update: 1 #month;
-	string current_month update: months_names[current_date.month]; 
-	list<int> generalRisks <- [];
-	map<string, int> mercadoMayoristaVol <- [];
-	list<string> listadoProducts <- [];
-	map<string, string> months_venta <- []; 
-	map<string, list<int>> priceFerianteConsumer <-[];
-	map<string, int> priceFerianteConsumerPromedio <- [];
-	map<string, int> priceMayoristaFeriante <- [];
-	map<string, int> volumeMayorista_lastyear <- [];
-	map<string, int> volumeOneFeriante <- [];
-	map<string, int> volumeOneConsumer <- [];
-	list<string> available_products <- [];
-	list<string> used_products <- [];
-	map<int, int> months_sequia <- [];
-	map<int, int> months_helada <- [];
-	map<int, int> months_oladecalor <- [];
-	map<string, int> actualPrices <- [];
-	map<string, int> percentPrices <- [];
-	int totalFerianteValues;
+	//Declaración de variables globales	
+	list<list> products <- []; 						//Listado de TODOS los productos
+	map<string, int> days_cosecha <- [];			//Días que se demora en cosechar para cada producto
+	map<string, string> units <- []; 				//Unidades para cada producto (kilo o unidad)
+	map<string, int> production <- []; 				//Rendimiento de terreno por cada producto (kilo o unidad/Ha)
+	date starting_date <- date([2020,3]);			//Mes y año de inicio de simulación
+	date current_date <- date([2020,3]);			//Mes y año de la fecha actual de simulación (irá cambiando)
+	float step update: 1 #month;					//Definición de step: mensual
+	string current_month update: months_names[current_date.month]; //Mes Actual formato string
+	list<int> generalRisks <- [];					//Listado de los niveles de amenaza --> posición 1: nivel de helada, 2: nivel de sequía, 3: nivel de ola de calor
+	map<string, int> mercadoMayoristaVol <- [];		//Volumen recopilado por cada fruta y verdura por el mercado mayorista
+	list<string> listadoProducts <- [];				
+	map<string, string> months_venta <- []; 		//Meses de venta por cada fruta y verdura
+	map<string, list<int>> priceFerianteConsumer <-[]; //Precio del año anterior de feriante a consumidor por cada fruta y verdura
+	map<string, int> priceFerianteConsumerPromedio <- []; //Precio en promedio del año anterior de feriante a consumidor por cada fruta y verdura
+	map<string, int> priceMayoristaFeriante <- [];  //Precio del año anterior de mayorista a feriante por cada fruta y verdura
+	map<string, int> volumeMayorista_lastyear <- [];  //Volumen total del año anterior que se recopiló en el mercado mayorista
+	map<string, int> volumeOneFeriante <- []; 		//Volumen que compra un feriante
+	map<string, int> volumeOneConsumer <- [];		//Volumen que compra un consumidor
+	list<string> available_products <- [];			
+	list<string> used_products <- [];				
+	map<int, int> months_sequia <- [];				//Valores de amenaza de sequía por mes
+	map<int, int> months_helada <- [];				//Valores de amenaza de heladas por mes
+	map<int, int> months_oladecalor <- [];			//Valores de amenaza de olas de calor por mes
+	map<string, int> actualPrices <- [];			//Precios actuales (los que son calculados y ocupados en la simulación)
+	map<string, int> percentPrices <- [];			//Porcentaje de subida de precios por mes
+	int totalFerianteValues; 						//No se ocupa-
 	
 	//nuevas variables para consumidor
-	map<string, float> volumeConsumer <- []; 
-	map<string, float> probabilityToConsume <- [];
+	map<string, float> volumeConsumer <- []; 		//Este valor reemplaza a la variable volumeOneConsumer
+	map<string, float> probabilityToConsume <- [];	//Probabilidad de consumo por cada fruta y verdura
 	
 	//Variables totales para los gráficos
-	map<string, int> mercadoMayoristaVolumenTotal <- []; 
-	map<string, int> feriantesVolumenTotal <- [];
-	map<string, float> consumersVolumenTotal <- [];
+	map<string, int> mercadoMayoristaVolumenTotal <- [];	//Volumen total (suma) recopilado por cada fruta y verdura por el mercado mayorista
+	map<string, int> feriantesVolumenTotal <- [];			//Volumen total (suma) comprado por los feriantes por cada fruta y verdura
+	map<string, float> consumersVolumenTotal <- [];			//Volumen total (suma) consumido por los consumidores por cada fruta y verdura
 	
 	//Cantidad de agentes
 	map<string, int> people <- [
@@ -95,29 +97,29 @@ global{
 	];
 	
 	//Variables estáticas para cálculos de riesgo (Amenazas x vulnerabilidad, GRD)
-	list<string> threats <- ["Helada", "Ola de calor", "Sequia","Plaga"];
-	map<string, list<int>> result_risk_scale <- [
+	list<string> threats <- ["Helada", "Ola de calor", "Sequia","Plaga"]; //Listado de las amenazas
+	map<string, list<int>> result_risk_scale <- [ //No se ocupa
 		"Baja"::[1,2],
 		"Media"::[3,4,5],
 		"Alta"::[6,7,8],
 		"Muy Alta"::[9]	
 	];
 	
-	map<int,string> risk_scale <- [
+	map<int,string> risk_scale <- [ //Escala de amenaza traducido a string
 		0::"Nulo",
 		1::"Baja",
 		2::"Media",
 		3::"Alta"	
 	];
 	
-	map<int, string> land_state <- [ 
+	map<int, string> land_state <- [  //Estados del terreno
 		0::"Sin Agricultor",
 		1::"Vacío",
 		2::"Sembrado. En proceso de cultivo",
 		3::"Cosecha Lista"
 	];
 	
-	//Input de user
+	//Input de usuario: pesos de afectación de las amenazas
 	 map<string, unknown> affect_weight <- user_input([
 	 	enter("Peso de afectación Helada",0.0),
 		enter("Peso de afectación Ola de calor",0.0), 
@@ -147,6 +149,7 @@ global{
 		create calculateTime number:1;
 		
 		write "Inicializando mercado mayorista...";
+		//Se inicializan todas las variables en 0 para cada fruta y verdura
 		loop d over:products{
 			add 0 at:d[0] to: mercadoMayoristaVol;
 			add 0 at:d[0] to: mercadoMayoristaVolumenTotal;
@@ -168,7 +171,7 @@ global{
 			available_products <- string(prods2[0]) split_with ',';  
 		}
 	}
-	//Heladas y Sequía: valores del experimento 1 
+	//Heladas y Sequía: valores estáticos
 	map<string, int> list_frostRisks <- [
 		'Enero'::0,
 		'Febrero'::0,
@@ -198,6 +201,7 @@ global{
 		'Diciembre'::3
 	];
 	float timenow;
+	//Reflex que se encarga de realizar cálculo de los riesgos climáticos 
 	reflex climateRisks{
 		timenow <- machine_time;
 		write "Step " + current_month + ' ' + current_date.year;
@@ -267,6 +271,7 @@ global{
 		add heatwaveRisk at: current_date.month to:months_oladecalor;
 	}
 	
+	//Se guardan los productos con los valores de los riesgos respectivos 
 	list<string> finalRisksProduct0; //Riesgo de Plaga 0
 	list<float> finalRisksValue0;
 	list<string> finalRisksProduct1; //Riesgo de Plaga 1
@@ -448,6 +453,7 @@ global{
 		add increasePrice at: current_month to: percentPrices;
 	}
 	map<int, float> avg_feriantes;
+	//Reflex para guardar los datos obtenidos en un archivo .csv
 	reflex generateCSVs when: every(1#cycles){
 		loop mes from: 1 to: 12 step: 1 {
 			add feriantes mean_of each.ganancias[mes] at: mes to: avg_feriantes;
@@ -462,7 +468,7 @@ global{
 		save [months_oladecalor] to: "/resultados/resultados-nuevos/Exp4/"+current_month+current_date.year+"/MesesOlaCalor_"+current_month+current_date.year+".csv" type: "csv";
 	}
 	
-	//predicates for BDI agents
+	//predicados para los agentes BDI
 	//FARMER
 	predicate esperar <- new_predicate("esperar");
 	predicate cosecha_lista <- new_predicate("cosecha lista", true);
@@ -524,7 +530,7 @@ species farmers skills:[moving] control:simple_bdi schedules: []{
 	plan proceso_siembra intention: sembrar{
 		
 		if(terreno.estado = 1){
-			//subdesire 1: Selección de hortaliza según el riesgo de eventos climáticos y el precio/demanda del periodo pasado
+			//Selección de hortaliza según el riesgo de eventos climáticos y el precio/demanda del periodo pasado
 			if(!self.riskLevel){
 				//Dado que NO toma riesgo, toma el producto con mínimo riesgo --> Si hay varios con mínimo riesgo, random entre ellos
 				self.prices <- [];
@@ -540,7 +546,6 @@ species farmers skills:[moving] control:simple_bdi schedules: []{
 					self.prices <- self.prices + priceFerianteConsumerPromedio[string(a)];
 				}
 				terreno.producto_seleccionado <- random_products[prices index_of(max(prices))];
-				//terreno.producto_seleccionado <- any(minRiskFilteredProducts0 o 1 o 2 o 3);
 			}else{
 				//SI toma riesgo, así que toma cualquier producto --> random entre todos
 				switch(terreno.plagaRisk){
@@ -581,14 +586,14 @@ species farmers skills:[moving] control:simple_bdi schedules: []{
 		//Cambio de estado del terreno (último estado)
 		terreno.estado <- 3;
 		
-		//Extraer la cosecha (modificar la siguiente línea) 
+		//Extraer la cosecha
 		self.non_sold_vegetables <- int(floor(terreno.area*production[terreno.producto_seleccionado])); //lo que se saca en una ha multiplicado por el área
 		
 		//Recalcular cuantos días han pasado desde la fecha actual hasta la fecha de cosecha
 		terreno.days_left <- int((terreno.end_date - current_date) / 86400);
 
 		//Resetear todo sobre terreno
-		terreno.plagaRisk <- rnd_choice([0.85, 0.05, 0.05, 0.05]);
+		terreno.plagaRisk <- rnd_choice([0.85, 0.05, 0.05, 0.05]); //
 		terreno.historial_productos <- terreno.historial_productos + terreno.producto_seleccionado; 
 		if(not(used_products contains terreno.producto_seleccionado)){
 			used_products <- used_products + terreno.producto_seleccionado;
@@ -615,7 +620,7 @@ species farmers skills:[moving] control:simple_bdi schedules: []{
 	}
 	
 	aspect base {
-        draw circle(70) color: my_color border: #black;  //depth: gold_sold;
+        draw circle(70) color: my_color border: #black;  
     }
 }
 
@@ -732,8 +737,6 @@ species consumers control:simple_bdi schedules:[]{
 		presupuesto <- rnd(25000.0,45000.0,1000.0);
 		
 		//Reset puestos de feria
-		//list<feriantes> fer <- feriantes of_generic_species feriantes;
-		//puestos_de_feria <- sample(fer, 10, false);
 		puestos_de_feria <- sample(feria.feriantes, 20, false);
 		
 		//Reset productos
@@ -746,7 +749,6 @@ species consumers control:simple_bdi schedules:[]{
 				products_a_comprar <- products_a_comprar + p;
 			}
 		} 
-		//products_a_comprar <- sample(available_products,10, false);
 		productos_comprados <- [];
 		loop prod over:products_a_comprar{
 			add 0 at:prod to: productos_comprados;
